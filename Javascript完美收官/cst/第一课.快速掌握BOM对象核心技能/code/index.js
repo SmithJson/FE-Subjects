@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-09-19 23:32:39
  * @LastEditors: zhangl
- * @LastEditTime: 2019-09-20 01:12:14
+ * @LastEditTime: 2019-09-20 08:26:08
  * @Description: 快速掌握BOM对象核心技能
  */
 
@@ -24,3 +24,10 @@ function check(_id) {
 window.onscroll = function () {
     check('demo');
 };
+
+// open：url，name，feature
+// var newWindow = window.open('http://www.baidu.com', 'zhangl', 'width=300, height=300');
+// var newWindow = window.open('https://www.baidu.com', 'width=300, height=300');
+
+// cookieEnabled
+console.log(navigator.cookieEnabled);
