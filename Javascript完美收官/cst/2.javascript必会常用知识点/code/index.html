@@ -19,6 +19,7 @@
     </p> -->
 
     <div id="img-box"></div>
+    <ul id="demo-box"></ul>
     <script>
         // 图片预加载
         var imgBox = document.getElementById('img-box');
@@ -35,6 +36,16 @@
         // 24 * [0, 1) => [0, 24)
         // [0, 24) + 12 => [12, 36)
         console.log(Math.random() * 24 + 12);
+
+        var op = document.createDocumentFragment();
+        var demo = document.getElementById('demo-box');
+        for (var i = 0; i < 1000; i++) {
+            var li = document.createElement('li');
+            li.innerText = i;
+            // demo.appendChild(li);
+            op.appendChild(li);
+        }
+        demo.appendChild(op);
     </script>
 </body>
 </html>

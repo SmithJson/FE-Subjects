@@ -63,7 +63,7 @@ jQ的`prop`操作对象是特性，`attr`操作对象是属性
 
 document.createDocumentFrame
 
-优点：优化元素多次插入导致的重排
+优点：优化元素多次插入，导致的重排
 
 ## 断点调试
 
