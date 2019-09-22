@@ -6,13 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<style>
+    #img-box {
+        width: 300px;
+        height: 200px;
+    }
+</style>
 <body>
-    <p>
+    <!-- <p>
         <label for="demo">username</label>
         <input type="text" id="demo" value="aaa" data="duyi">
-    </p>
+    </p> -->
+
+    <div id="img-box"></div>
     <script>
-        console.log(document.compatMode)
+        // 图片预加载
+        var imgBox = document.getElementById('img-box');
+        var img = new Image();
+        img.onload = function () {
+            imgBox.appendChild(this);
+        };
+        img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrDhrmffRcRyRAA-zzbzOh7Bdv6xLPgrRYMsPiwQljimzPHwlE';
+
+
+
+        // Math.random
+        // 36 - 12 = 24
+        // 24 * [0, 1) => [0, 24)
+        // [0, 24) + 12 => [12, 36)
+        console.log(Math.random() * 24 + 12);
     </script>
 </body>
 </html>
