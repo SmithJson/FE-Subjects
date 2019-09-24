@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .demo {
+        width: 100px;
+        height: 50px;
+        background-color: red;
+        margin-bottom: 50px;
+    }
+</style>
+<body>
+    <div class="demo"></div>
+    <div class="demo"></div>
+    <div class="demo"></div>
+    <div class="demo"></div>
+    <script>
+        var demoArr = document.getElementsByClassName('demo');
+
+        for (var i = 0; i < demoArr.length; i++) {
+            demoArr[i].onmouseenter = function () {
+                    startMove(this, 'width', 300);
+                };
+            demoArr[i].onmouseleave = function () {
+                    startMove(this, 'width', 100);
+                };
+        }
+
+        function getStyle(dom, attr) {
+            if (window.getComputedStyle) {
+                return window.getComputedStyle(dom, null)[attr];
+            } else {
+                return dom.currentStyle[attr];
+            }
+        }
+
+        function startMove(dom, attr, target, step = 7) {
+            var iCur = null;
+            var iSpeed = null;
+
+            clearInterval(dom.timer);
+            dom.timer = setInterval(function () {
+                iCur = parseInt(getStyle(dom, attr));
+                iSpeed = (target - iCur) / step;
+                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+                console.log(iSpeed)
+
+                if (iCur === target) {
+                    clearInterval(dom.timer)
+                } else {
+                    dom.style[attr] = iCur + iSpeed + 'px';
+                }
+            }, 30);
+        }
+    </script>
+</body>
+</html>
