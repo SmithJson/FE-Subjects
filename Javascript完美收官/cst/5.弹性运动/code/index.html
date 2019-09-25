@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .demo {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100px;
+        height: 100px;
+        background-color: rgba(255, 0, 255, .5);
+    }
+    .marker {
+        position: absolute;
+        left: 300px;
+        top: 0;
+        height: 100px;
+        border: .5px solid;
+    }
+    .btn {
+        margin-top: 150px;
+    }
+</style>
+<body>
+    <div class="demo"></div>
+    <div class="marker"></div>
+    <button class="btn">点击</button>
+    <script>
+        // 获取所需元素
+        var demo = document.getElementsByClassName('demo')[0];
+        var marker = document.getElementsByClassName('marker')[0];
+        var btn = document.getElementsByClassName('btn')[0];
+        var timer = null;
+
+        btn.onclick = function () {
+            startMove(demo, marker.offsetLeft);
+        };
+
+        // 弹性运动函数
+        function startMove(dom, target) {
+            var iSpeed = 0; // 速度
+            var a = 3; // 加速度
+            var u =0.8; // 摩擦力（运动中的能力损耗）
+
+            timer  = setInterval(function () {
+                // 加速度随着距离目标近减少；距离目标远增加
+                a = (target - dom.offsetLeft) / 5;
+                iSpeed += a;
+                iSpeed *= u;
+                if (Math.abs(iSpeed) < 1 && Math.abs(target - dom.offsetLeft) < 1) { // 当速度为0，并且当前位达到目标点时，运动停止
+                    clearInterval(timer);
+                    dom.style.left = target + 'px';
+                } else {
+                    dom.style.left = dom.offsetLeft + iSpeed + 'px';
+                }
+            }, 30);
+        }
+    </script>
+</body>
+</html>
