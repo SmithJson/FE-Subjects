@@ -10,6 +10,7 @@ function startMove(dom, target) {
     var u =0.8; // 摩擦力（运动中的能量损耗）
 
     timer  = setInterval(function () {
+        clearInterval(timer);
         // 加速度随着距离目标近减少；距离目标远增加
         a = (target - dom.offsetLeft) / 5;
         iSpeed += a;

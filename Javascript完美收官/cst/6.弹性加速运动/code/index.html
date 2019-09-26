@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    :root, body {
+        height: 100%;
+    }
+
+    ul {
+        position: relative;
+        left: calc(50% - 400px);
+        top: calc(50% - 75px);
+        width: 800px;
+        height: 100px;
+        background-color: orange;
+    }
+
+    ul .ele {
+        float: left;
+        width: 198px;
+        height: 98px;
+        border: 1px solid;
+        text-align: center;
+        line-height: 98px;
+    }
+
+    .bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 200px;
+        height: 100px;
+        background: deeppink;
+        opacity: .5;
+    }
+</style>
+<body>
+    <ul>
+        <li class="ele">cst</li>
+        <li class="ele">zl</li>
+        <li class="ele">gc</li>
+        <li class="ele">wc</li>
+        <li class="bg"></li>
+    </ul>
+    <script>
+        var timer = null;
+        var eleArr = document.getElementsByClassName('ele');
+        var bg = document.getElementsByClassName('bg')[0];
+
+        for (var i = 0; i < eleArr.length; i++) {
+            eleArr[i].onmouseenter = function () {
+                startMove(bg, this.offsetLeft);
+            };
+        }
+
+        // 加速运动
+        function startMove(dom, target) {
+            var a = 3;
+            var iSpeed = 0;
+            var u = 0.8;
+
+            clearInterval(timer);
+            timer = setInterval(function () {
+                a = (target - dom.offsetLeft) / 7;
+                iSpeed += a;
+                iSpeed *= u;
+                if (Math.abs(iSpeed) < 1 && Math.abs(target - dom.offsetLeft) < 1) {
+                    clearInterval(timer);
+                    dom.style.left = target + 'px';
+                } else {
+                    dom.style.left = dom.offsetLeft + iSpeed + 'px';
+                }
+            }, 30);
+        }
+    </script>
+</body>
+</html>
