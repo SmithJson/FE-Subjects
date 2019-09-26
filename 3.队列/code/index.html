@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    击鼓传花
+    <script src="./index.js"></script>
+    <script>
+        // 击鼓传花
+        (function () {
+            var names = ['a', 'b', 'c', 'd', 'e', 'f'];
+            var number = 3; // 规则：每三次，淘汰一人，最终只有一位胜利者
+
+            function drumming(names, number) {
+                var queue = new Queue();
+
+                // 入队操作
+                for (var i = 0; i < names.length; i++) {
+                    queue.enqueue(names[i]);
+                }
+
+                while(queue.size() > 1) {
+                    for (var j = 0; j < number - 1; j++) {
+                        queue.enqueue(queue.dequeue());
+                    }
+                    var eliminate = queue.dequeue(); // 淘汰人
+                    console.log('淘汰了-----' + eliminate);
+                }
+
+                return queue.dequeue(); // 最终胜利者
+            }
+
+        console.log( '胜利者：' + drumming(names, number));
+        })();
+
+        (function () { // 飞机优先登记（优先队列）
+            var pq = new PriorityQueue();
+
+            pq.enqueue('章磊', 20);
+            pq.enqueue('张三', 12);
+            pq.enqueue('李四', 25);
+            pq.enqueue('王五', 30);
+
+            console.log(pq.getItems());
+        })();
+    </script>
+</body>
+</html>

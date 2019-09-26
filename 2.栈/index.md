@@ -76,7 +76,7 @@ var Stack = function () {
 };
 ```
 
-## 栈实战：十进制转二进制
+## 栈案例：十进制转二进制
 
 ```javascript
  function decimal2Binary(number) {
