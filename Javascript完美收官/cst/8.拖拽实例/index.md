@@ -77,7 +77,7 @@ function startMove(dom, iSpeedX, iSpeedY) {
         if (Math.abs(iSpeedY) < 1) {
             iSpeedY = 0;
         }
-        if (iSpeedX === 0 && iSpeedY === 0 && newTop === MAX_TOP) { // 速度为0，并且物体落地，说明此时是静止状态
+        if (iSpeedX === 0 && iSpeedY === 0 && newTop === MAX_TOP) { // 速度为0，并且物体落地，说明此时是静止状态的
             clearInterval(dom.timer);
         } else { // 运动中
             dom.style.left = newLeft + 'px';
