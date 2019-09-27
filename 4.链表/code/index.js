@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-09-27 11:01:01
  * @LastEditors: zhangl
- * @LastEditTime: 2019-09-27 12:48:37
+ * @LastEditTime: 2019-09-27 12:55:40
  * @Description: 链表模拟
  */
 var LikedList = function () {
@@ -22,14 +22,14 @@ var LikedList = function () {
 
         if (head == null) { // 链表为空
             head = node;
-        } else { // 链表不为空，节点插入链表尾
+        } else { // 链表不为空，链表尾插入节点
             while(current.head) {
                 current = current.next;
             }
             // 循环结束current为最后一个节点
             current.next = node;
-            length++;
         }
+        length++;
     };
 
     // getHead
