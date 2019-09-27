@@ -20,7 +20,7 @@
 | dequeue | 出队 |
 | front | 查看队列头 |
 | isEmpty | 检查队列是否为空 |
-| size | 获取队列长度 |
+| size | 获取队列长度
 
 ```javascript
 var Queue = function () {
