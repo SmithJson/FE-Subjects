@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .wrapper {
+        position: relative;
+        margin: 100px auto 0;
+        width: 400px;
+        height: 250px;
+        overflow: hidden;
+    }
+
+    .wrapper .sliderPage {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 250px;
+        width: 2000px;
+    }
+
+    .wrapper .sliderPage li {
+        width: 400px;
+        height: 250px;
+        float: left;
+    }
+
+    .wrapper .sliderPage li img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .wrapper .btn {
+        position: absolute;
+        top: 50%;
+        margin-top: -20px;
+        width: 40px;
+        height: 40px;
+        color:  #fff;
+        background-color: #000;
+        text-align: center;
+        line-height: 40px;
+        opacity: .2;
+        cursor: pointer;
+    }
+
+    .wrapper:hover .btn {
+        opacity: .7;
+    }
+
+    .wrapper .leftBtn {
+        left: 15px;
+    }
+
+    .wrapper .rightBtn {
+        right: 15px;
+    }
+
+    .wrapper .sliderIndex {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        height: 15px;
+        text-align: center;
+    }
+
+    .wrapper .sliderIndex span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background-color: #fff;
+        border-radius: 50%;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+
+    .wrapper .sliderIndex .active {
+        background-color: red;
+    }
+</style>
+<body>
+    <div class="wrapper">
+        <!-- 轮播图 -->
+        <ul class="sliderPage">
+            <li>
+                <img src="./img/banner1.jpg" alt="banner1">
+            </li>
+            <li>
+                <img src="./img/banner2.jpg" alt="banner2">
+            </li>
+            <li>
+                <img src="./img/banner3.jpg" alt="banner3">
+            </li>
+            <li>
+                <img src="./img/banner4.jpg" alt="banner4">
+            </li>
+            <li>
+                <img src="./img/banner1.jpg" alt="banner1">
+            </li>
+        </ul>
+        <!-- 按钮组 -->
+        <div class="btn leftBtn">&lt;</div>
+        <div class="btn rightBtn">&gt;</div>
+        <!-- 索引小圆点 -->
+        <div class="sliderIndex">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <script src="./move.js"></script>
+    <script>
+        var sliderPage = document.getElementsByClassName('sliderPage')[0];
+        var num = sliderPage.children.length - 1; // 图片索引
+        var imgWidth = sliderPage.children[0].offsetWidth;
+        var oSliderSpanArr = document.getElementsByClassName('sliderIndex')[0].getElementsByTagName('span');
+        var leftBtn = document.getElementsByClassName('leftBtn')[0];
+        var rightBtn = document.getElementsByClassName('rightBtn')[0];
+        var index = 0;
+        var timer = null;
+        var lock = true;
+
+        for (var i = 0; i < oSliderSpanArr.length; i++) {
+            (function (myIndex) {
+                oSliderSpanArr[myIndex].onclick = function () {
+                    lock = false;
+                    clearTimeout(timer);
+                    index = myIndex;
+                    startMove(sliderPage, { left: -index * imgWidth }, function () {
+                        timer = setTimeout(autoMove, 1500);
+                        lock = true;
+                        changeIndex(index);
+                    });
+                };
+            })(i);
+        }
+
+        // 自动播放函数
+        // 默认（点击right按钮）：left -> right
+        // 点击left按钮：right -> left
+        function autoMove(direction) {
+            if (lock) {
+                lock = false;
+                clearTimeout(timer)
+            if (direction === 'left -> right' || !direction) { // 点击right按钮
+                index++;
+                startMove(sliderPage, { left: sliderPage.offsetLeft - imgWidth }, function () {
+                    if (sliderPage.offsetLeft === -num * imgWidth) {
+                        sliderPage.style.left = '0px';
+                        index = 0;
+                    }
+                    timer = setTimeout(autoMove, 1500);
+                    lock = true;
+                    changeIndex(index);
+                });
+            } else if ('right -> left') { // 点击left按钮
+                if (sliderPage.offsetLeft === 0) {
+                    sliderPage.style.left = -num * imgWidth + 'px';
+                    index = oSliderSpanArr.length;
+                }
+                index--;
+                startMove(sliderPage, { left: sliderPage.offsetLeft + imgWidth }, function () {
+                    timer = setTimeout(autoMove, 1500);
+                    lock = true;
+                    changeIndex(index);
+                });
+            }
+            }
+        }
+
+        function changeIndex(_index) {
+            for (var i = 0; i < oSliderSpanArr.length; i++) {
+                oSliderSpanArr[i].className = '';
+            }
+            oSliderSpanArr[_index].className = 'active';
+        }
+
+        timer = setTimeout(autoMove, 0);
+        rightBtn.onclick = function () {
+            autoMove('left -> right');
+        };
+        leftBtn.onclick = function () {
+            autoMove('right -> left');
+        };
+    </script>
+</body>
+</html>
