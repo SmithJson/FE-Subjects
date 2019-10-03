@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-10-03 22:07:55
  * @LastEditors: zhangl
- * @LastEditTime: 2019-10-04 01:00:10
+ * @LastEditTime: 2019-10-04 01:06:02
  * @Description: 筛选器
  */
 var personArr = [
@@ -96,6 +96,6 @@ function changeActive(currentActiveBtn) {
 //     } else {
 //         return data.filter(function (ele, index, self) {
 //             return ele.sex === sex;
-//         });
+//         })
 //     }
 // }
