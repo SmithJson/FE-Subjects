@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-09-26 18:16:57
  * @LastEditors: zhangl
- * @LastEditTime: 2019-09-26 19:39:15
+ * @LastEditTime: 2019-10-05 00:46:56
  * @Description: 队列模拟
  */
 var Queue = function () {
