@@ -77,11 +77,33 @@ var Set2 = function () {
         return values;
     };
 
-    // 
-
     // getItems
     this.getItems = function () {
         return items;
     };
 };
 ```
+
+## ES6内置新数据结构
+
+| Set方法 | 说明 |
+| -- | -- |
+| add | 添加元素 |
+| clear | 清空全部元素 |
+| delete | 删除 |
+| entire | 获取迭代器 |
+| forEach | 遍历方法 |
+| has | 检测元素是否存在 |
+| size | 获取集合大小 |
+| values | 获取全部值 |
+
+| WeakSet方法 | 说明 |
+| -- | -- |
+| add | 添加元素 |
+| delete | 删除元素 |
+| has | 检测元素是否存在 |
+
+Set与WeakSet的区别
+
+1. Set传参可以是任何数据；WeakSet传参只能是Object类型数据
+2. Set对于与Object数据是强引用；WeakSet是弱引用，当不使用是会被JS垃圾回收机制自动回收
