@@ -52,6 +52,7 @@ dl dt {
 
 dl dd {
     padding-left: 30px;
+    cursor: pointer;
 }
 
 dl dd:hover {
@@ -104,7 +105,11 @@ dl dd.active {
     color: #354457;
 }
 
-.add-student-form {
+.add-student {
+    display: none;
+}
+
+.student-list {
     display: none;
 }
 
@@ -164,4 +169,38 @@ table button.btn.del {
 
 table button.btn.del:hover {
     background-color: #c9302c;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.modal .modal-content {
+    background-color: #fff;
+    position: absolute;
+    width: 500px;
+    height: 450px;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -225px;
+    padding: 20px;
 }

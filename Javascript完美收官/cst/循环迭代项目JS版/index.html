@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>学生管理系统</title>
     <link rel="stylesheet" href="./css/index.css">
 </head>
+
 <body>
     <div class="wrapper">
         <div class="header">
@@ -16,15 +18,15 @@
             </div>
         </div>
         <div class="left-menu">
-            <dl>
+            <dl class="menu">
                 <dt>学生管理</dt>
-                <dd>学生列表</dd>
-                <dd class="active">新增学生</dd>
+                <dd data-id="student-list" class="active">学生列表</dd>
+                <dd data-id="add-student">新增学生</dd>
             </dl>
         </div>
         <div class="right-content">
             <!-- 学生列表 -->
-            <div class="student-list">
+            <div class="student-list content">
                 <table>
                     <thead>
                         <tr>
@@ -38,8 +40,8 @@
                             <th>操作</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="student-body">
+                        <!-- <tr>
                             <td>1222</td>
                             <td>dm1</td>
                             <td>男</td>
@@ -51,12 +53,55 @@
                                 <button class="btn edit">编辑</button>
                                 <button class="btn del">删除</button>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
+                <div class="modal">
+                    <div class="mask"></div>
+                    <div class="modal-content">
+                        <h2>编辑信息</h2>
+                        <form action="" class="add-student-form" id="edit-student-form">
+                            <div>
+                                <label>姓名</label>
+                                <input type="text" name="name">
+                            </div>
+                            <div>
+                                <label>性别</label>
+                                <input type="radio" name="sex" checked value="0"><span>男</span>
+                                <input type="radio" name="sex" value="1"><span>女</span>
+                            </div>
+                            <div>
+                                <label>学号</label>
+                                <input type="text" name="sNo">
+                            </div>
+                            <div>
+                                <label>邮箱</label>
+                                <input type="text" name="email">
+                            </div>
+                            <div>
+                                <label>出生年</label>
+                                <input type="text" name="birth">
+                            </div>
+                            <div>
+                                <label>手机号</label>
+                                <input type="text" name="phone">
+                            </div>
+                            <div>
+                                <label>住址</label>
+                                <input type="text" name="address">
+                            </div>
+                            <div class="btn-group">
+                                <label for=""></label>
+                                <input class="btn" type="submit" id="edit-submit" value="提交">
+                                <input class="btn" type="reset" value="重置">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="add-student-form">
-                <form action="#">
+            <!-- 添加学生 -->
+            <div class="add-student content" id="add-student">
+                <form action="#" class="add-student-form">
                     <div>
                         <label for="name">姓名</label>
                         <input type="text" id="name" name="name">
@@ -95,5 +140,7 @@
             </div>
         </div>
     </div>
+    <script src="./js/index.js"></script>
 </body>
+
 </html>
