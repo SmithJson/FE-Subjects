@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li class="duyi" data="duyi">1</li>
+        <li class="duyi" data="duyi">2</li>
+        <li class="duyi" data="duyi">3</li>
+        <li class="duyi"><span>4</span></li>
+        <li class="duyi">5</li>
+        <li class="duyi">6</li>
+    </ul>
+    <div id="demo">1231</div>
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="./mJquery.js"></script>
+    <script>
+        $('#demo')
+            .css({
+                width: '30px',
+                height: '30px',
+                backgroundColor: '#000',
+                color: '#fff',
+            })
+            .css({
+                fontSize: '20px',
+                textAlign: 'center',
+                lineHeight: '30px',
+            })
+
+// ======================== 下面是jQuery ========================
+        // css selector
+        // $('ul li').css({
+        //     'color': 'pink'
+        // });
+
+        // jquery unique selector
+        // $('ul li:first').css({
+        //     'color': 'red'
+        // });
+        // $('ul li:last').css({
+        //     'color': 'red'
+        // });
+        // $('ul li:eq(0)').css({
+        //     'color': 'red'
+        // });
+        // $('ul li[data="duyi"]').css({
+        //     'color': 'blue'
+        // });
+
+        // $('ul li').each(function (index, ele) {
+        //     // ele是原生DOM，可以通过$(dom)转换为jQ对象
+        //     $(ele)
+        //         .find('span')
+        //         .css({ color: 'red' })
+        // });
+
+        // window.onload = function () {
+        //     console.log('window.onload');
+        // };
+        // $(function () {
+        //     console.log('DOMContentLoaded');
+        // });
+        // $(document).ready(function () {
+        //     console.log('DOMContentLoaded');
+        // });
+    </script>
+</body>
+</html>
