@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-10-12 19:48:55
  * @LastEditors: zhangl
- * @LastEditTime: 2019-10-12 20:05:01
+ * @LastEditTime: 2019-10-12 23:30:21
  * @Description: 模拟event模块
  */
 function eventEmitter() {
@@ -21,11 +21,11 @@ eventEmitter.prototype.on = function (eventName, cb) {
 // 事件执行函数
 eventEmitter.prototype.emit = function (eventName) {
     var self = this;
-    var args = [].slice.call(arguments, 1);
+    var arg = [].slice.call(arguments, 1);
     var cbArr = self.eventList[eventName];
 
     (cbArr || []).forEach(function (event) {
-        event.apply(self, args);
+        event.apply(self, arg);
     });
 };
 

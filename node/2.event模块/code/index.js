@@ -2,11 +2,11 @@
  * @Author: zhangl
  * @Date: 2019-10-12 19:21:49
  * @LastEditors: zhangl
- * @LastEditTime: 2019-10-12 20:04:19
+ * @LastEditTime: 2019-10-12 23:40:49
  * @Description: event模块
  */
-// var event = require('events');
-var event = require('./eventEmitter');
+var event = require('events');
+// var event = require('./eventEmitter');
 
 var event = new event();
 
@@ -25,6 +25,19 @@ event.prependListener('call', function (name, age) {
 //     console.log('show');
 // });
 
+var show = function () {
+    console.log('show');
+};
+
+event.on('show', show);
+
+// 解除事件
+event.removeListener('show', show);
+
+event.on('show', function () {
+    console.log('show1');
+});
+
 // 执行事件
 // event.emit('call');
 // event.emit('call');
@@ -34,3 +47,4 @@ event.prependListener('call', function (name, age) {
 
 // 参数传递
 event.emit('call', 'zhangl', 18);
+event.emit('show');
