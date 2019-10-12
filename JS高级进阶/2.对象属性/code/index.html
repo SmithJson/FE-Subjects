@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var formData = new FormData();
+
+        formData.append('username', 'zhangl');
+        formData.append('account', 12312312);
+
+        var onePerson = {
+            age: '20',
+            sleep: function () {
+                console.log(this.age);
+            }
+        };
+
+        // 属性访问
+        onePerson.age // 点运算符
+        onePerson['age'] // [变量名]
+
+        // 属性设置
+        onePerson.age = 22;
+        onePerson['age'] = 23;
+
+        Object.defineProperty(onePerson, 'name', {
+            value: 'zhangl', // 属性值
+            writable: true, // 是否可写
+            enumerable: true, // 是否可枚举
+            configurable: false, // 是否可删除
+        });
+
+        function Father() {}
+
+        // 继承
+        var p1 = Object.create(onePerson);
+        // p1.__proto__ = onePerson
+        // p1继承了onePerson属性
+        var p2 = Object.create(onePerson, {
+            foo: {
+                value: 12
+            },
+            constructor: {
+                value: Father,
+                writable: true,
+                enumerable: false,
+                configurable: false,
+            }
+        });
+
+        p2.name = 1231;
+
+        // 属性删除
+        // delete只能删除自有属性，并不能删除继承属性
+        console.log(delete p2.name); // true
+        console.log(delete p2.foo); // false -> configurable: false
+
+        // 判断对象是否含有某个属性
+        console.log('name' in p2, 1);
+        console.log(p2.hasOwnProperty('constructor'), 2);
+
+        // 遍历属性
+        for (var key in p2) {
+            console.log(key + ':' + p2[key]);
+        }
+        Object.keys(p2).forEach(function (key) {
+        });
+
+        // 对象序列化
+        var man = {
+            name: 'zhangl',
+            age: 18,
+            color: 'red',
+        };
+
+                                            // 被转换对象，要转换的数据，格式化
+        var person1 = JSON.stringify(man, ['name', 'color'], '\t'); // 对象序列化
+        var person2 = JSON.parse(person1); // 对象还原
+    </script>
+</body>
+</html>
