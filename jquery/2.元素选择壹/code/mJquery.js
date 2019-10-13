@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-10-11 23:57:42
  * @LastEditors: zhangl
- * @LastEditTime: 2019-10-12 00:23:16
+ * @LastEditTime: 2019-10-13 23:39:16
  * @Description: jQuery仿写
  */
 ;(function (w) {
@@ -14,14 +14,18 @@
     jQuery.prototype.init = function (selector) {
         this.length = 0;
 
-        if (selector.indexOf('.') !== -1) { // 类选择器
+        if (selector == null) {
+            return this;
+        }
+
+        if (typeof selector === 'string' && selector.indexOf('.') !== -1) { // 类选择器
             var dom = document.getElementsByClassName(selector.slice(1));
-        } else if (selector.indexOf('#') !== -1) { // ID选择器
+        } else if (typeof selector === 'string' && selector.indexOf('#') !== -1) { // ID选择器
             var dom = document.getElementById(selector.slice(1));
         }
 
-        if (dom.length == undefined) { // 不存在length，selector为ID选择器
-            this[0] = dom;
+        if (selector instanceof Element || dom.length == undefined) { // 不存在length，selector为ID选择器
+            this[0] = dom || selector;
             this.length++
         } else { // 存在length, selector为类选择器
             for (var i = 0; i < dom.length; i++) {
@@ -40,6 +44,22 @@
         }
 
         return this;
+    };
+
+    // 获取指定DOM元素
+    jQuery.prototype.get = function (number) {
+        return number != null ?
+                number >= 0 ? this[number] : this[number + this.length]
+                : [].slice.call(this);
+    };
+
+    // 获取指定jQ元素
+    jQuery.prototype.eq = function (number) {
+        var dom = number != null ?
+                    number >= 0 ? this[number] : this[number + this.length]
+                    : null;
+
+        return jQuery(dom);
     };
 
     // 将jQuery函数的原型赋值给构造函数原型，让通过init函数创建的对象，能够使用jQuery的方法
