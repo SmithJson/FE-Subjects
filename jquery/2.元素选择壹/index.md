@@ -1,4 +1,4 @@
-# jQuery实例方法 - DOM操作 {ignore=true}
+# jQuery实例方法 - DOM操作一 {ignore=true}
 
 [toc]
 
@@ -29,19 +29,3 @@ $('.demo').eq(0)
 $('.demo').eq(-1)
 $('.demo').eq()
 ```
-
-## .find()
-
-## .not()
-
-## .is()
-
-## .has()
-
-## and()
-
-集中操作
-
-## .end()
-
-回退操作
