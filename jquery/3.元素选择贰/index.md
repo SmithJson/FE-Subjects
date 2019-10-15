@@ -64,13 +64,3 @@ $('li')
     .has('ul')
     .css({ backgroundColor: 'red' })
 ```
-
-## .not()
-
-## and()
-
-集中操作
-
-## .end()
-
-回退操作

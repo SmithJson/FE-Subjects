@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="demo">1</div>
+        <div class="demo">2</div>
+        <div class="demo">3</div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="./mJquery.js"></script> -->
+    <script>
+        // $('.wrapper')
+        //     .add('.demo')
+        //     .css({ backgroundColor: 'red' });
+        console.log($('.demo').not('li'))
+        $('.wrapper')
+            .css({ position: 'relative' })
+            .add('.demo')
+            .eq(0)
+            .css({ position: 'absolute' })
+            .end()
+            .css({ backgroundColor: 'red', width: '500px', height: '100px' })
+    </script>
+</body>
+</html>
