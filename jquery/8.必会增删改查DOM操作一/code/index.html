@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="#">
+        <input type="text" name="name" value="zhangl">
+        <input type="radio" name="gender" value="male" checked>男
+        <input type="radio" name="gender" value="female">女
+        <textarea name="text" cols="30" rows="10">happy programmer</textarea>
+    </form>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 获取带有name属性的表单元素value值
+        // $('form').serialize();
+        // 获取name
+        // console.log($('input[name="name"]').val())
+
+        // 设置name
+        $('input[name="name"]').val(function (index, oldValue) {
+            return oldValue + index;
+        });
+    </script>
+</body>
+
+</html>
