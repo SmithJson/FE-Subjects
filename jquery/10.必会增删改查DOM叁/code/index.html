@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div class="wrapper">
+        <p>篮球</p>
+        <p>足球</p>
+        <p>羽毛球</p>
+        <p>乒乓球</p>
+        <p>皮球</p>
+    </div> -->
+
+    <div class="wrapper">
+        <ul class="box-1">
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li class="current">Odio laborum enim molestiae sapiente.</li>
+            <li>Deleniti repellat nihil inventore modi!</li>
+            <li>Perferendis, illum. Sit, facilis reprehenderit.</li>
+        </ul>
+        <ul class="box-2">
+            <li>Tenetur deserunt distinctio aliquid assumenda!</li>
+            <li>Obcaecati provident hic consequatur doloremque?</li>
+            <li>Maxime, hic. Rerum, a deleniti?</li>
+            <li>Excepturi quisquam inventore numquam illo!</li>
+        </ul>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // siblings
+        // $('.wrapper p')
+        //     .eq(1)
+        //     .css({ color: 'red' })
+        //     .siblings()
+        //     .css({ color: 'green' });
+
+
+        // parent
+        // console.log($('.current').parent('.box-1'))
+
+        // parents
+        // console.log($('.current').parents());
+
+        // closest
+        // console.log($('.current').closest('li'));
+
+        // offsetParent
+        // console.log($('.current').offsetParent());
+
+        // slice
+        console.log($('.box-1 li').slice(-4, 3).text())
+    </script>
+</body>
+</html>
