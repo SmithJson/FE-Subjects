@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .wrapper {
+        width: 200px;
+        border: 1px solid;
+        text-align: center;
+    }
+
+    .box1, .box2, .box3 {
+        width: 150px;
+        height: 200px;
+    }
+
+    .box1 {
+        background: red;
+        margin: 5px auto;
+    }
+
+    .box2 {
+        background: royalblue;
+        margin: 5px auto;
+    }
+
+    .box3 {
+        background: salmon;
+    }
+</style>
+<body>
+    <div class="wrapper">
+        <div class="box1"></div>
+        <div class="box2"></div>
+    </div>
+    <div class="box3"></div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // appendTo & append
+        // console.log($('.box3').appendTo('.wrapper'))
+        // console.log($('.wrapper').append($('.box3')))
+
+        // insertBefore & before
+        // $('.box3').insertBefore('.box1')
+        // $('.box1').before($('.box3'))
+
+        // insertAfter & after
+        // $('.box3').insertAfter('.box1')
+        // $('.box1').after($('.box3'))
+
+        // prependTo & prepend
+        // $('.box3').prependTo('.wrapper');
+        // $('.wrapper').prepend($('.box3'));
+
+        $('.box1').click(function () {
+            alert(1);
+        })
+
+        // remove & detach
+        // $('.box1')
+        //     .remove()
+        //     .prependTo($('.wrapper'));
+
+        $('.box1')
+            .detach()
+            .prependTo($('.wrapper'));
+    </script>
+</body>
+</html>
