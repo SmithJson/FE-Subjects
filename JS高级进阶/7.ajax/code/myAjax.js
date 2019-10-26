@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-10-25 23:07:29
  * @LastEditors: zhangl
- * @LastEditTime: 2019-10-26 01:21:04
+ * @LastEditTime: 2019-10-26 20:17:35
  * @Description: 介绍
  */
 function xmlAjax(options) {
@@ -49,15 +49,11 @@ function xmlAjax(options) {
             }
         };
 
-        if (isGet) {
-            xhr.send(null);
+        if (newOptions.data) {
+            var dataParam = JSON.stringify(newOptions.data);
+            xhr.send(dataParam);
         } else {
-            if (newOptions.data) {
-                var dataParam = JSON.stringify(newOptions.data);
-                xhr.send(dataParam);
-            } else {
-                xhr.send(null);
-            }
+            xhr.send(null);
         }
     });
 }
