@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div class="wrapper">
+        <div class="demo"></div>
+    </div>
+    <div class="other-wrapper"></div> -->
+
+    <span></span>
+    <div class="wrapper">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="wrapper">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // wrap
+        // $('.wrapper').wrap('<div class="wrapper-p"></div>')
+        // $('.wrapper').wrap($('.other-wrapper'));
+        // $('.wrapper').wrap('.other-wrapper');
+        // $('.wrapper').wrap(function (index) {
+        //     return '<div></div>';
+        // });
+
+        // wrapInner
+        // $('.wrapper').wrapInner('<div></div>');
+
+        // wrapAll
+        // $('span').wrapAll('<div class="wrapper2"></div>');
+
+        $('span').unwrap($('.wrapper'));
+    </script>
+</body>
+</html>
