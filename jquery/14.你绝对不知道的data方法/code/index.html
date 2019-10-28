@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .tpl {
+        display: none;
+    }
+</style>
+<body>
+    <div class="wrapper">
+        <div class="tpl">
+            <p></p>
+            <span></span>
+            <button>add</button>
+        </div>
+
+        <div class="show">
+            <span>sum</span>
+            <span class="sum">0</span>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        var shopArr = [
+            {
+                name: 'james solider',
+                shopName: 'nike',
+                price: 110,
+                id: '1001',
+            },
+            {
+                name: 'Rose crazyLight',
+                shopName: 'adidas',
+                price: 90,
+                id: '2002',
+            },
+            {
+                name: 'curry one',
+                shopName: 'Under Armour',
+                price: 120,
+                id: '3003',
+            }
+        ];
+
+        shopArr.forEach(function (ele) {
+            var cloneDom = $('.tpl').clone().removeClass('tpl');
+
+            cloneDom
+                .data({
+                    name: ele.name,
+                    price: ele.price,
+                    id: ele.id,
+                })
+                .find('p')
+                .text(ele.name)
+                .next()
+                .text(ele.price)
+                .next()
+                .click(function () {
+                    var parent = $(this).parent();
+
+                    $('.sum').text(+$('.sum').text() + parent.data('price'));
+                });
+            cloneDom.insertBefore($('.show'));
+        });
+    </script>
+</body>
+</html>
