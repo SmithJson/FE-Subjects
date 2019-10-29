@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function clickOne() {
+            console.log('click one');
+        }
+
+        function clickTwo() {
+            console.log('click two');
+        }
+
+        function mouseoverOne() {
+            console.log('mouseover one');
+        }
+
+        function mouseoverTwo () {
+            console.log('mouseover two');
+        }
+
+        $('ul').on('click', 'li', clickOne);
+        $('ul').on('click', 'li', clickTwo);
+
+        $('ul').on('mouseover', 'li', mouseoverOne);
+        $('ul').on('mouseover', 'li', mouseoverTwo);
+
+        // 删除所有事件
+        // $('ul').off();
+
+        // 删除某一类型事件
+        // $('ul').off('click', 'li');
+
+        // 删除指定事件
+        $('ul').off('click', 'li', clickTwo);
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-# jQuery实例方法-事件
+# jQuery实例方法-事件 {ignore=true}
 
 [toc]
 
