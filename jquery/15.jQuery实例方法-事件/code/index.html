@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <!-- <a href="http://www.baidu.com" target="_blank">百度</a> -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // one
+        // $('a').one('click', { name: 'zhangl' }, function (e) {
+        //     console.log('one', e.data);
+
+        //     // jQ 中阻止事件冒泡和阻止默认事件的通用法法
+        //     return false;
+        // });
+
+        // on
+        // $('li').on('click', function () {
+        //     alert($(this).text());
+        // });
+
+        // $('ul').on('click', { name: 'zhang', age: 12 }, function (e) {
+        //     // 通过 e.data 获取绑定在 on 方法上的数据
+        //     console.log(e.data);
+        //     alert($(this).text());
+        // });
+
+        // 不要在 data 出现 data 为字符串，并且 第二个参数是 selector 不写的情况
+        // $('ul').on('click', 'li', { name: 'zhang', age: 12 }, function (e) {
+        //     // 通过 e.data 获取绑定在 on 方法上的数据
+        //     console.log(e.data);
+        //     alert($(this).text());
+        // });
+
+        $('ul').on({
+            'click': function (e) {
+                console.log('click', $(this).text(), e.data);
+            },
+            'mouseover': function (e) {
+                console.log('mouseover', $(this).text(), e.data);
+            },
+        }, 'li', {name: 'zhangl'});
+    </script>
+</body>
+
+</html>
