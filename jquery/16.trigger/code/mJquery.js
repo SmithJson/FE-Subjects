@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-10-11 23:57:42
  * @LastEditors: zhangl
- * @LastEditTime: 2019-10-16 00:15:30
+ * @LastEditTime: 2019-11-01 00:49:04
  * @Description: jQuery仿写
  */
 ;(function (w) {
@@ -94,6 +94,36 @@
         dom.prevObj = this;
 
         return dom;
+    };
+
+    // 事件绑定
+    jQuery.prototype.myOn = function (type, handle) {
+        for (var i = 0; i < this.length; i++) {
+            if (!this[i].cacheEvent) { // 判断jQ 元素第一次使用 on 绑定事件
+                this[i].cacheEvent = {};
+            }
+
+            if (!this[i].cacheEvent[type]) { // 判断 jQ 元素是绑定过 type 类型的事件
+                this[i].cacheEvent[type] = [handle];
+            } else {
+                this[i].cacheEvent[type].push(handle);
+            }
+        }
+    };
+
+    // 事件触发
+    jQuery.prototype.myTrigger = function (type) {
+        var params = arguments.length > 1 ? [].slice.call(arguments, 1) : [];
+        var _self = this;
+
+        // 遍历执行每个 jQ 元素的事件
+        for (var i = 0; i < this.length; i++) {
+            if (this[i].cacheEvent) {
+                this[i].cacheEvent[type].forEach(function (ele, index) {
+                    ele.apply(_self, params);
+                });
+            }
+        }
     };
 
     // 将jQuery函数的原型赋值给构造函数原型，让通过init函数创建的对象，能够使用jQuery的方法
