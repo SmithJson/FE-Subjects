@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            name: 'zhangl',
+            age: 18,
+            gender: 'male',
+            friends: {
+                1: 'aa',
+                2: 'bb',
+                3: 'cc',
+            },
+            hobbies: [
+                '吃饭',
+                '睡觉',
+            ],
+            sayHello: function () {
+                console.log('hello world');
+            },
+            date: new Date(),
+        }
+
+
+        /**
+         * @description: 递归深拷贝
+         * @param {object} 拷贝对象
+         * @return: target
+         */
+        function extendDeep(source) {
+            var target = Array.isArray(target) ? [] : {};
+
+            if (typeof source !== 'object') { // 原始数据类型
+                return source;
+            }
+
+            for (var key in source) {
+                if (source[key] && typeof source[key] === 'object') { // object, array
+                    target[key] = extendDeep(source[key]);
+                } else { // function
+                    target[key] = source[key];
+                }
+            }
+
+            return target;
+        }
+
+        var newObj = extendDeep(obj);
+        newObj.hobbies[1] = 'aaaa';
+        newObj;
+        obj;
+
+
+        // var newObj = {};
+
+        // for (var key in obj) {
+        //     if (obj[key] && typeof obj[key] === 'object') {
+        //         newObj[key] = extendDeep(obj[key]);
+        //     } else {
+        //         newObj[key] = obj[key];
+        //     }
+        // }
+    </script>
+</body>
+</html>

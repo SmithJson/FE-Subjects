@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>点击</button>
+    <script>
+        // var createElement = function () {
+        //     var div;
+
+        //     return function () {
+        //         if (div) return div;
+
+        //         div = document.createElement('div');
+        //         div.innerHTML = '单例模式';
+        //         div.style.display = 'none';
+        //         document.body.appendChild(div);
+
+        //         return div;
+        //     }
+        // }
+
+        // var fun01 = createElement();
+        // document.getElementsByTagName('button')[0].onclick = function () {
+        //     var el = fun01();
+
+        //     el.style.display = 'block';
+        // }
+
+        // 把变的部分封装，不变的隔离
+        function createWindow(dom) {
+            var newDom = document.createElement(dom);
+
+            newDom.innerHTML = '单例模式';
+            newDom.style.display = 'none';
+            document.body.appendChild(newDom);
+
+            return newDom;
+        };
+
+        function createElement(fn) {
+            var ele;
+
+            return function () {
+                if (!ele) {
+                    ele = fn.apply(this, arguments);
+                };
+
+                return ele;
+            }
+        }
+
+
+        var fun01 = createElement(createWindow);
+
+        document.getElementsByTagName('button')[0].onclick = function () {
+            var el = fun01('p');
+
+            el.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

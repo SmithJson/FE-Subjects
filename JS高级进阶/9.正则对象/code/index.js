@@ -1,9 +1,10 @@
 /*
  * @Author: zhangl
+ * @GitHub: https://github.com/SmithJson
  * @Date: 2019-10-30 11:16:25
  * @LastEditors: zhangl
- * @LastEditTime: 2019-10-31 08:17:36
- * @Description: 介绍
+ * @LastEditTime: 2019-10-31 12:11:03
+ * @Description: 你好
  */
 // $&
 // var re = /hi/g;

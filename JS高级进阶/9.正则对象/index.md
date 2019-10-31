@@ -4,7 +4,7 @@
 
 ## \$n
 
-获取第 n 个`()`里正则匹配的
+获取第 n 个`()`里正则匹配的内容
 
 ```javascript
 var re = /(\w+)\s(\w)/;
@@ -35,7 +35,7 @@ console.log(RegExp.$_); // 匹配成功 'hi world'
 
 ## \$&
 
-获取最后匹配到的字符串
+获取最后匹配的内容
 
 ```javascript
 var re = /hi/g;
@@ -49,7 +49,7 @@ console.log(
 
 ## \$+
 
-获取最后匹配到的`子`串
+获取最后一个 `()` 匹配到的`子串`
 
 ```javascript
 var re = /(hi)/g;
