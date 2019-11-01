@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .wrapper {
+        width: 300px;
+        border: 2px solid;
+    }
+
+    .wrapper p {
+        font-size: 32px;
+    }
+
+    .wrapper ul {
+        display: none;
+    }
+</style>
+<body>
+    <div class="wrapper">
+        <p>Show</p>
+        <ul>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Perferendis explicabo impedit illum sapiente?</li>
+            <li>Quos magnam exercitationem assumenda aliquid?</li>
+        </ul>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $('p').click(function () {
+            $(this)
+                .next()
+                .slideToggle(300, 'linear', function () {
+                    console.log('slideToggle');
+                });
+        })
+
+        // $('p').hover(function () {
+        //     $(this)
+        //         .next()
+        //         .slideDown(300, 'swing');
+        // }, function () {
+        //     $(this)
+        //         .next()
+        //         .slideUp(300, 'linear');
+        // })
+
+
+        // $('p').click(function () {
+        //     $(this)
+        //         .next()
+        //         .fadeTo(300, 0.5, 'linear', function () {
+        //             console.log('fadeTo');
+        //         });
+        // });
+
+        // $('p').hover(function () {
+        //     $(this)
+        //         .next()
+        //         .show(300, 'swing');
+        // }, function () {
+        //     $(this)
+        //         .next()
+        //         .hide(300, 'linear');
+        // })
+
+        // $('p').hover(function () {
+        //     $(this)
+        //         .next()
+        //         .fadeIn(300, 'swing', function () {
+        //             console.log('fadeIn');
+        //         });
+        // }, function () {
+        //     $(this)
+        //         .next()
+        //         .fadeOut(300, 'linear', function () {
+        //             console.log('fadeIn');
+        //         });
+        // });
+
+
+
+
+
+
+        // show hide toggle
+        // $('p').click(function () {
+        //     $(this)
+        //         .next()
+        //         .toggle(300);
+        // });
+
+        // $('p').hover(function () {
+        //     $(this)
+        //         .next()
+        //         .show(300, 'swing');
+        // }, function () {
+        //     $(this)
+        //         .next()
+        //         .hide(300, 'linear');
+        // });
+    </script>
+</body>
+</html>
