@@ -3,9 +3,34 @@
  * @GitHub: https://github.com/SmithJson
  * @Date: 2019-10-30 11:16:25
  * @LastEditors: zhangl
- * @LastEditTime: 2019-10-31 12:11:03
+ * @LastEditTime: 2019-11-01 11:52:28
  * @Description: 你好
  */
+// global
+// /foo/g.global; // true
+// /foo/.global; // false
+
+// flags
+// /foo/ig.flags; // 'gi'
+// /foo/.flags; // ' '
+// /foo/muy.flags; // 'muy'
+
+// $`
+// var re = /world/g;
+// re.test('hello world');
+// console.log(
+//     RegExp.leftContext, // hello
+//     RegExp['$`'], // hello
+// );
+
+
+// dotAll (测试失败)
+// var re = /./;
+// re.test('\v');
+// console.log(
+//     re.dotAll,
+// );
+
 // $&
 // var re = /hi/g;
 // re.test('hi there hi');
@@ -15,13 +40,13 @@
 // );
 
 // $+
-var re = /(hi)/g;
-re.test('hi there!');
+// var re = /(hi)/g;
+// re.test('hi there!');
 
-console.log(
-    RegExp.lastParen, // 'hi'
-    RegExp['$+'], // 'hi'
-)
+// console.log(
+//     RegExp.lastParen, // 'hi'
+//     RegExp['$+'], // 'hi'
+// )
 
 // $_
 // var re = /hi/g;

@@ -33,7 +33,7 @@ re.test('hi world');
 console.log(RegExp.$_); // 匹配成功 'hi world'
 ```
 
-## \$&
+## \$\&
 
 获取最后匹配的内容
 
@@ -47,7 +47,7 @@ console.log(
 );
 ```
 
-## \$+
+## \$\+
 
 获取最后一个 `()` 匹配到的`子串`
 
@@ -59,4 +59,35 @@ console.log(
     RegExp.lastParen, // 'hi'
     RegExp['$+'], // 'hi'
 )
+```
+
+## \$\`
+
+获取匹配的内容之前的字符串
+
+```javascript
+var re = /world/g;
+re.test('hello world');
+console.log(
+    RegExp.leftContext, // hello
+    RegExp['$`'], // hello
+);
+```
+
+## flags
+
+获取正则的标签符号字符串，标志从左到右，即`gimuy`
+
+```javascript
+/foo/ig.flags; // 'gi'
+/foo/.flags; // ' '
+/foo/muy.flags; // 'muy'
+```
+
+## global
+
+判断正则是使用了 `global` 标志
+
+```javascript
+/foo/g.global
 ```
