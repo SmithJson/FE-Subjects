@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function each(obj, fn) {
+            if (Array.isArray(obj)) { // 数组
+                for (var i = 0; i < obj.length; i++) {
+                    fn.call(obj, obj[i], i, obj);
+                }
+            } else { // 对象
+                for (var prop in obj) {
+                    fn.call(obj, obj[prop], prop, obj);
+                }
+            }
+        }
+
+        each(
+            {
+                a: 1,
+                b: 2,
+                c: 3,
+            },
+            function (item, index, obj) {
+                console.log(item, index, obj);
+            }
+        );
+
+        each(
+            [10, 20, 30, 50],
+            function (item, index, obj) {
+                console.log(item, index, obj);
+            }
+        );
+    </script>
+</body>
+</html>
