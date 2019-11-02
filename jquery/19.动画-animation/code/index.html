@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .demo {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+    }
+</style>
+<body>
+    <button class="stop">stop</button>
+    <button class="finish">finish</button>
+    <button class="start">start</button>
+    <div class="demo"></div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // finish
+        // $('.stop').click(function () {
+        //     $('.demo').finish();
+        // });
+
+        // stop
+        // $('.stop').click(function () {
+        //     $('.demo').stop(true, true);
+        //     $('.demo').stop(true);
+        //     $('.demo').stop();
+        // });
+
+        // jQuery.fx.off = true;
+        // animate
+        $('.start').on('click', function () {
+            $('.demo')
+                .animate({
+                    width: '+=50',
+                    height: '+=50',
+                    left: '+=100',
+                    top: '+=100',
+                }, 1000, 'swing')
+                .delay(3000)
+                .animate({
+                    left: '+=100',
+                    top: '-=200',
+                }, 1000, 'swing')
+        });
+    </script>
+</body>
+</html>
