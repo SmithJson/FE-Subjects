@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .demo {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+    }
+</style>
+<body>
+    <div class="demo"></div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+         // queue
+        $('.demo')
+            .click(function () {
+                $(this).dequeue('work');
+            })
+            .queue('work', function (next) {
+                $(this).animate({
+                    width: '+=50',
+                    height: '+=50',
+                    top: '+=100',
+                    left: '+=100',
+                })
+                next();
+            })
+            .queue('work', function (next) {
+                $(this).animate({
+                    top: '+=100',
+                    left: '+=100',
+                })
+                next();
+            })
+            .queue('work', function () {
+                $(this).animate({
+                    top: '-=200',
+                    left: '+=100',
+                })
+            });
+
+        // queue
+        // $('.demo')
+        //     .queue('work', function (next) {
+        //         console.log('work1');
+        //         // next：下一个事件，即 work2
+        //         next();
+        //     })
+        //     .queue('work', function (next) {
+        //         console.log('work2');
+        //         next();
+        //     })
+        //     .queue('work', function () {
+        //         console.log('work3');
+        //     });
+
+        // $('.demo').clearQueue('work');
+        // console.log($('.demo').queue('work'));
+
+        // // dequeue
+        // $('.demo').dequeue('work');
+    </script>
+</body>
+</html>
