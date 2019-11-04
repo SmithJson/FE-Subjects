@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-10-11 23:57:42
  * @LastEditors: zhangl
- * @LastEditTime: 2019-11-04 22:27:22
+ * @LastEditTime: 2019-11-05 00:40:34
  * @Description: jQuery仿写
  */
 ;(function (w) {
@@ -153,6 +153,87 @@
         };
 
         typeof currFun === 'function' && currFun(next);
+    };
+
+    // delay
+    jQuery.prototype.myDelay = function (duration) {
+        var queueArr = this[0]['fx'];
+
+        queueArr.push(function (next) {
+            setTimeout(function () {
+                next();
+            }, duration);
+        });
+
+        return this;
+    };
+
+    // animate
+    jQuery.prototype.myAnimate = function (json, callback) {
+        var len = this.length;
+        var self = this;
+        var baseFun = function (next) {
+            var times = 0;
+            for (var i = 0; i < len; i++) {
+                startMove(self[i], json, function () {
+                    times++;
+
+                    if (times === len) {
+                        callback();
+                        next();
+                    }
+                });
+            }
+        };
+
+        self.myQueue('fx', baseFun);
+
+        if (self.myQueue('fx').length === 1) {
+            self.myDequeue('fx');
+        }
+
+        function getStyle(dom, attr) {
+            if (window.getComputedStyle) {
+                return window.getComputedStyle(dom, null)[attr];
+            } else {
+                return dom.currentStyle[attr];
+            }
+        }
+
+        function startMove(dom, attrObj, callback) {
+            var iCur = null;
+            var iSpeed = null;
+
+            clearInterval(dom.timer);
+            dom.timer = setInterval(function () {
+                var isStop = true;
+
+                for (var attr in attrObj) {
+                    if (attr == 'opacity') {
+                        iCur = parseFloat(getStyle(dom, attr)) * 100;
+                    } else {
+                        iCur = parseInt(getStyle(dom, attr));
+                    }
+                    iSpeed = (attrObj[attr] - iCur) / 7;
+                    iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+                    if (attr == 'opacity') {
+                        dom.style.opacity = (iCur + iSpeed) / 100;
+                    } else {
+                        dom.style[attr] = iCur + iSpeed + 'px';
+                    }
+                    if (iCur != attrObj[attr]) {
+                        isStop = false;
+                    }
+                }
+
+                if (isStop) {
+                    clearInterval(dom.timer);
+                    typeof callback === 'function' && callback();
+                }
+            }, 30);
+        }
+
+        return this;
     };
 
     // 将jQuery函数的原型赋值给构造函数原型，让通过init函数创建的对象，能够使用jQuery的方法
