@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-10-11 23:57:42
  * @LastEditors: zhangl
- * @LastEditTime: 2019-11-01 00:49:04
+ * @LastEditTime: 2019-11-04 22:27:22
  * @Description: jQuery仿写
  */
 ;(function (w) {
@@ -124,6 +124,35 @@
                 });
             }
         }
+    };
+
+    // Queue
+    jQuery.prototype.myQueue = function () {
+        var queueObj = this;
+        var queueName = arguments[0] || 'fx';
+        var addFunc = arguments[1] || null;
+        var len = arguments.length;
+
+        if (len === 1) {
+            return queueObj[0][queueName];
+        }
+
+        !queueObj[0][queueName]
+            ? queueObj[0][queueName] = [addFunc]
+            : queueObj[0][queueName].push(addFunc);
+
+        return this;
+    };
+
+    jQuery.prototype.myDequeue = function () {
+        var self = this;
+        var queueName = arguments[0] || 'fx';
+        var currFun = (self[0][queueName] || []).shift();
+        var next = function () {
+            self.myDequeue(queueName);
+        };
+
+        typeof currFun === 'function' && currFun(next);
     };
 
     // 将jQuery函数的原型赋值给构造函数原型，让通过init函数创建的对象，能够使用jQuery的方法
