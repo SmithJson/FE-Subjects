@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2019-10-11 23:57:42
  * @LastEditors: zhangl
- * @LastEditTime: 2019-11-05 00:40:34
+ * @LastEditTime: 2019-11-05 08:08:01
  * @Description: jQuery仿写
  */
 ;(function (w) {
@@ -128,112 +128,48 @@
 
     // Queue
     jQuery.prototype.myQueue = function () {
+        // 队列名
+        var queueName = arguments[0];
+        // 队列回调函数
+        var queueFunc = arguments[1] || function () {};
+        // 队列对象
         var queueObj = this;
-        var queueName = arguments[0] || 'fx';
-        var addFunc = arguments[1] || null;
+        // 实参长度（用于根据参数长度决定是否获取，还是设置）
         var len = arguments.length;
 
-        if (len === 1) {
+        if (!queueObj[0][queueName]) { // 判断当前队列是否存在
+            queueObj[0][queueName] = [];
+        }
+
+        if (len === 1) { // 获取队列内容
             return queueObj[0][queueName];
         }
 
-        !queueObj[0][queueName]
-            ? queueObj[0][queueName] = [addFunc]
-            : queueObj[0][queueName].push(addFunc);
+        queueObj[0][queueName].push(queueFunc);
 
         return this;
     };
 
     jQuery.prototype.myDequeue = function () {
         var self = this;
-        var queueName = arguments[0] || 'fx';
-        var currFun = (self[0][queueName] || []).shift();
+        var queueObj = self[0];
+        var queueName = arguments[0];
+        var queueArr = queueObj[queueName] || [];
+        var queueFunc = queueArr.shift();
+
         var next = function () {
             self.myDequeue(queueName);
         };
 
-        typeof currFun === 'function' && currFun(next);
+        queueFunc.call(self, next);
     };
 
     // delay
-    jQuery.prototype.myDelay = function (duration) {
-        var queueArr = this[0]['fx'];
-
-        queueArr.push(function (next) {
-            setTimeout(function () {
-                next();
-            }, duration);
-        });
-
-        return this;
+    jQuery.prototype.myDelay = function () {
     };
 
     // animate
-    jQuery.prototype.myAnimate = function (json, callback) {
-        var len = this.length;
-        var self = this;
-        var baseFun = function (next) {
-            var times = 0;
-            for (var i = 0; i < len; i++) {
-                startMove(self[i], json, function () {
-                    times++;
-
-                    if (times === len) {
-                        callback();
-                        next();
-                    }
-                });
-            }
-        };
-
-        self.myQueue('fx', baseFun);
-
-        if (self.myQueue('fx').length === 1) {
-            self.myDequeue('fx');
-        }
-
-        function getStyle(dom, attr) {
-            if (window.getComputedStyle) {
-                return window.getComputedStyle(dom, null)[attr];
-            } else {
-                return dom.currentStyle[attr];
-            }
-        }
-
-        function startMove(dom, attrObj, callback) {
-            var iCur = null;
-            var iSpeed = null;
-
-            clearInterval(dom.timer);
-            dom.timer = setInterval(function () {
-                var isStop = true;
-
-                for (var attr in attrObj) {
-                    if (attr == 'opacity') {
-                        iCur = parseFloat(getStyle(dom, attr)) * 100;
-                    } else {
-                        iCur = parseInt(getStyle(dom, attr));
-                    }
-                    iSpeed = (attrObj[attr] - iCur) / 7;
-                    iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
-                    if (attr == 'opacity') {
-                        dom.style.opacity = (iCur + iSpeed) / 100;
-                    } else {
-                        dom.style[attr] = iCur + iSpeed + 'px';
-                    }
-                    if (iCur != attrObj[attr]) {
-                        isStop = false;
-                    }
-                }
-
-                if (isStop) {
-                    clearInterval(dom.timer);
-                    typeof callback === 'function' && callback();
-                }
-            }, 30);
-        }
-
-        return this;
+    jQuery.prototype.myAnimate = function () {
     };
 
     // 将jQuery函数的原型赋值给构造函数原型，让通过init函数创建的对象，能够使用jQuery的方法
