@@ -2,10 +2,11 @@
  * @Author: zhangl
  * @Date: 2019-10-11 23:57:42
  * @LastEditors: zhangl
- * @LastEditTime: 2019-11-05 08:08:01
+ * @LastEditTime: 2019-11-05 21:01:14
  * @Description: jQuery仿写
  */
-;(function (w) {
+;
+(function (w) {
     function jQuery(selector) {
         return new jQuery.prototype.init(selector);
     }
@@ -49,15 +50,15 @@
     // 获取指定DOM元素
     jQuery.prototype.get = function (number) {
         return number != null ?
-                number >= 0 ? this[number] : this[number + this.length]
-                : [].slice.call(this);
+            number >= 0 ? this[number] : this[number + this.length] :
+            [].slice.call(this);
     };
 
     // 获取指定jQ元素
     jQuery.prototype.eq = function (number) {
         var dom = number != null ?
-                    number >= 0 ? this[number] : this[number + this.length]
-                    : null;
+            number >= 0 ? this[number] : this[number + this.length] :
+            null;
 
         return this.pushStack(dom);
     };
@@ -126,50 +127,99 @@
         }
     };
 
-    // Queue
     jQuery.prototype.myQueue = function () {
-        // 队列名
-        var queueName = arguments[0];
-        // 队列回调函数
-        var queueFunc = arguments[1] || function () {};
-        // 队列对象
         var queueObj = this;
-        // 实参长度（用于根据参数长度决定是否获取，还是设置）
+        var queueName = arguments[0] || 'fx';
+        var addFunc = arguments[1] || null;
         var len = arguments.length;
 
-        if (!queueObj[0][queueName]) { // 判断当前队列是否存在
-            queueObj[0][queueName] = [];
+        if (len === 1) {
+            return ;
         }
 
-        if (len === 1) { // 获取队列内容
-            return queueObj[0][queueName];
-        }
-
-        queueObj[0][queueName].push(queueFunc);
+        queueObj[0][queueName] ? queueObj[0][queueName] = [addFunc] : queueObj[0][queueName].push(addFunc);
 
         return this;
     };
 
+    // dequeue函数
     jQuery.prototype.myDequeue = function () {
-        var self = this;
-        var queueObj = self[0];
-        var queueName = arguments[0];
-        var queueArr = queueObj[queueName] || [];
-        var queueFunc = queueArr.shift();
-
+        // 定义变量
+        var self = this,
+            queueName = arguments[0] || 'fx',
+            queueArr = this.queue(queueName),
+            currFunc = queueArr.shift(); // 出队
         var next = function () {
-            self.myDequeue(queueName);
+            self.myDequeue(queueName)
+        };
+        if (currFunc === undefined) return;
+        currFunc(next);
+
+        return this;
+    };
+
+    // delay函数
+    jQuery.prototype.delay = function (duration) {
+        var queueArr = this.queue('fx');
+        queueArr.push(function (next) {
+            setTimeout(function () {
+                next();
+            }, duration);
+        });
+        return this;
+    };
+
+    // animate函数
+    jQuery.prototype.myAnimate = function (json, callback) {
+        var self = this,
+            len = self.length;
+
+        var baseFunc = function (next) {
+            var times = 0;
+            for (var i = 0; i < len; i++) {
+                stareMove(self[i], json, 30, function () {
+                    times++;
+                    if (times === len) {
+                        callback && callback();
+                        next();
+                    }
+                });
+            }
         };
 
-        queueFunc.call(self, next);
-    };
+        this.queue('fx', baseFunc);
+        if (this.queue('fx').length === 1) {
+            this.myDequeue('fx');
+        }
 
-    // delay
-    jQuery.prototype.myDelay = function () {
-    };
 
-    // animate
-    jQuery.prototype.myAnimate = function () {
+        function getStyle(dom, attr) {
+            if (window.getComputedStyle) return window.getComputedStyle(dom, null)[attr];
+            return dom.currentStyle[attr];
+        };
+
+        function stareMove(dom, styles, speed, callback) {
+            clearInterval(dom.timer);
+            let step = null,
+                iCur = null,
+                distance = null;
+            dom.timer = setInterval(() => {
+                let flag = true;
+                for (let attr in styles) {
+                    iCur = attr === 'opacity' ? parseFloat(getStyle(dom, attr)) * 100 : parseInt(getStyle(dom, attr));
+                    distance = (parseInt(styles[attr]) - iCur) / 10;
+                    step = distance > 0 ? Math.ceil(distance) : Math.floor(distance);
+                    dom.style[attr] = attr === 'opacity' ? (iCur + step) / 100 : `${iCur + step}px`;
+                    if (iCur !== parseInt(styles[attr])) flag = false;
+                }
+                if (flag) {
+                    clearInterval(dom.timer);
+                    typeof (callback) === 'function' && callback();
+                }
+            }, speed);
+        };
+
+        return this;
     };
 
     // 将jQuery函数的原型赋值给构造函数原型，让通过init函数创建的对象，能够使用jQuery的方法
