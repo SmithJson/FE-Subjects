@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    /* .tpl {
+        display: none;
+    } */
+
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: block;
+    }
+
+    .wrapper {
+        border: 1px solid #ccc;
+        padding: 10px 5px;
+        width: 350px;
+        margin: 100px auto 0px;
+    }
+
+    .wrapper .headSection {
+        margin-bottom: 10px;
+    }
+
+    .wrapper .headSection .hot {
+        font-size: 18px;
+        font-weight: bold;
+        float: left;
+    }
+
+    .wrapper .headSection .change {
+        color: #08f;
+        float: right;
+        cursor: pointer;
+    }
+
+    .wrapper .showSection .number {
+        color: #fff;
+        background: #0bf;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .wrapper .showSection .mes {
+        float: right;
+    }
+
+    .wrapper .showSection .mes::after {
+        content: "";
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        background-size: 100% 100%;
+    }
+
+    .wrapper .showSection .mes.up::after {
+        background-image: url("./img/up.png");
+    }
+
+    .wrapper .showSection .mes.down::after {
+        background-image: url("./img/down.png");
+    }
+</style>
+<body>
+    <div class="wrapper">
+        <div class="headSection clearfix">
+            <span class="hot">热点搜索</span>
+            <span class="change">换一换</span>
+        </div>
+        <ul class="showSection">
+            <li class="tpl clearfix">
+                <span class="number">1</span>
+                <span class="title">金星</span>
+                <span class="mes up">12312</span>
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        
+    </script>
+</body>
+</html>
