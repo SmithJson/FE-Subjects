@@ -1,7 +1,5 @@
 # 正则对象 {ignore=true}
 
-[toc]
-
 ## \$n
 
 获取第 n 个`()`里正则匹配的内容
@@ -86,8 +84,88 @@ console.log(
 
 ## global
 
-判断正则是使用了 `global` 标志
+判断正则是否使用了 `g` 标志
 
 ```javascript
 /foo/g.global
+```
+
+## ignoreCase
+
+判断正则是否使用了 `i` 标志
+
+```javascript
+/foo/i.ignoreCase
+```
+
+## multiline
+
+判断正则是否使用了 `m` 标志
+
+```javascript
+/foo/m.multiline
+```
+
+## source
+
+获取正则内容，忽略标识符和大小写
+
+```javascript
+var regexp = /fooBar/.ig;
+
+regexp.source; // fooBar
+```
+
+## sticky
+
+从指定索引位置开始，从左至右的匹配查找
+
+^的优先级大于 lastIndex 的优先级
+
+```javascript
+var str = '#foo#';
+var regexp = /foo/y; // y：sticky
+
+regexp.lastIndex = 0;
+regexp.test(str);
+```
+
+## unicode
+
+判断正则是否使用了 `u` 标识符
+
+```javascript
+var regex = new RegExp('\u{61}', 'u');
+
+console.log(regex.unicode); // true
+```
+
+## \$'
+
+获取匹配的内容之后的字符串
+
+```javascript
+var re = /hello/g;
+
+re.test('hello world');
+re.rightContext; // " world"
+re["$'"]; // " world"
+```
+
+## species
+
+获取正则对象的构造器
+
+```javascript
+RegExp[Symbol.species]; // 函数 RegExp()
+```
+
+## lastIndex
+
+下次匹配的开始位置
+
+只有正则含有 `g` 标识符才会有效
+
+```javascript
+
 ```
