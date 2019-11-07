@@ -108,7 +108,7 @@ console.log(
 
 ## source
 
-获取正则内容，忽略标识符和大小写
+获取正则文本，忽略标识符和大小写
 
 ```javascript
 var regexp = /fooBar/.ig;
@@ -166,6 +166,20 @@ RegExp[Symbol.species]; // 函数 RegExp()
 
 只有正则含有 `g` 标识符才会有效
 
-```javascript
+1. lastIndex > str.length
+    匹配失败，lastIndex = 0
+2. lastIndex === str.length，且匹配到空字符串
+    正则从 lastIndex 开始匹配
+3. lastIndex === str.length，且没有匹配到字符串
+    lastIndex = 0
+4. lastIndex = 最近匹配成功的下一个位置
 
+```javascript
+var re = /(hi)+/g;
+
+console.log(re.exec('hi123'));// ['hi', 'hi', ...]
+console.log(re.lastIndex); // 2
+
+console.log(re.exec('hi123')); // null
+console.log(re.lastIndex); // 0
 ```
