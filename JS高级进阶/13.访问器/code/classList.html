@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo"></div>
+    <script>
+        // classList，兼容性问题 支持 IE10 以上
+        // polyfill：旧浏览器兼容性解决方案
+        var isClassList = 'classList' in HTMLElement.prototype;
+
+        if (isClassList) {
+            Object.defineProperty(HTMLElement.prototype, 'classList', {
+                get: function () {
+                    var _self = this;
+
+                    return {
+                        add: function (cls) {
+                            var isContains = this.contains(cls);
+                            var oldClassName = _self.className;
+
+                            if (!isContains) {
+                                _self.className += !oldClassName ? cls : ' ' + cls;
+                            }
+                        },
+                        remove: function (cls) {
+                            var isContains = this.contains(cls);
+
+                            if (isContains) {
+                                var regexp = new RegExp(`\\s*${cls}`);
+
+                                _self.className = _self.className.replace(regexp, '');
+                            }
+                        },
+                        contains: function (cls) {
+                            var index = _self.className.indexOf(cls);
+
+                            return index !== -1;
+                        },
+                        toggle: function (cls) {
+                            var isContains = this.contains(cls);
+
+                            if (isContains) {
+                                this.remove(cls);
+                            } else {
+                                this.add(cls);
+                            }
+                        },
+                    };
+                },
+            });
+        }
+
+        var test = document.getElementById('demo');
+        
+        console.log(test.classList.contains('classListDemo'));
+        test.classList.add('test');
+        test.classList.add('test1');
+        test.classList.remove('test1');
+        test.classList.toggle('test1');
+    </script>
+</body>
+</html>

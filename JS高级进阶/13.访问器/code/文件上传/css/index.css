@@ -1,0 +1,93 @@
+.clear-fix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+:root,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper {
+    height: 100%;
+}
+
+/* 文件上传区 start */
+.wrapper .upload-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.wrapper .upload-container .file-upload,
+.wrapper .upload-container .drag-upload {
+    width: 250px;
+    height: 250px;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.wrapper .upload-container .file-upload {
+    position: relative;
+    margin-right: 10px;
+    border: 1px dashed #ccc;
+    background-image: url("../img/file.svg");
+
+}
+
+.wrapper .upload-container .drag-upload {
+    cursor: move;
+    border: 1px dotted #ccc;
+    background-image: url("../img/upload.svg");
+}
+
+.wrapper .upload-container #upload-input {
+    display: none;
+}
+
+.wrapper .upload-container .upload-input-label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+/* 文件上传区 end */
+
+/* 文件显示区 start */
+.wrapper .show-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wrapper .show-container .item {
+    width: 100px;
+    margin: 5px 5px 10px;
+    padding: 5px;
+    border: 1px dashed;
+    position: relative;
+}
+
+.wrapper .show-container .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.wrapper .show-container .close {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    top: -11px;
+    right: -8px;
+    border: 1px dashed;
+    border-radius: 50%;
+    cursor: pointer;
+}
+/* 文件显示区 end */

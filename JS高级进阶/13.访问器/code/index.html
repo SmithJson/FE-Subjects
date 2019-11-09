@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var demo = {
+            address: '浙江丽水',
+        };
+
+        var testObj2 = Object.create({}, {
+            // 数据属性
+            name: {
+                value: 'zhangl',
+                enumerable: true,
+                writable: true,
+                configurable: true,
+            },
+            age: {
+                value: 13,
+                enumerable: true,
+                writable: true,
+                configurable: true,
+            },
+            // 访问器属性
+            iterator: {
+                get() {
+                    return this.name + ' from ' + this.age;
+                },
+                set(name) {
+                    this.name = name;
+                },
+                enumerable: true,
+                configurable: true,
+            },
+        });
+    </script>
+</body>
+</html>
