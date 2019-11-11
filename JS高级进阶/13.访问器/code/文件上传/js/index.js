@@ -3,9 +3,10 @@
     const MIN_SIZE = 1024; // 1KB 文件最小值
     const MAX_FILE_SIZE = `${MAX_SIZE / 1024}KB`;
     const MIN_FILE_SIZE = `${MIN_SIZE / 1024}KB`;
-    const fileData = []; // 上传的文件数据
+    let fileData = []; // 上传的文件数据
     const fileType = /(jpe?g|svg|png|gif|webp)/i; // 允许上传图片类型
     const uploadInput = document.querySelector('#upload-input');
+    const dragUpload = document.querySelector('.drag-upload');
     const showContainer = document.querySelector('.show-container');
 
     // 文件转换
@@ -20,18 +21,8 @@
         });
     }
 
-    /**
-     * TODO:
-     * 1. 点击文件上传框 √
-     * 2. 获取到 input file 的数据 √
-     * 3. 数据校验 √
-     * 4. 处理数据转换为 base64 格式 √
-     * 5. 保存到 fileData 变量中 √
-     * 6. 点击上传按钮，数据上传
-     */
-    uploadInput.onchange = function (e) {
-        const {files} = e.target;
-
+    // 文件上传处理函数
+    function fileUpload(files) {
         for (let file of files) {
             const {
                 name,
@@ -63,11 +54,42 @@
                 const tpl = document.querySelector('.item.tpl').cloneNode(true);
 
                 tpl.children[0].src = result;
+                tpl.dataset.src = `${result}`;
                 tpl.classList.remove('tpl');
                 showContainer.appendChild(tpl);
-                console.log(fileData);
             });
         }
-    };
+    }
+
+    dragUpload.addEventListener('dragover', function (e) {
+        // 使 drop 事件生效
+        e.preventDefault();
+    }, false);
+
+    dragUpload.addEventListener('drop', function (e) {
+        // 避免本地文件直接以网页形式显示
+        e.preventDefault();
+        const { dataTransfer } = e;
+        const { files } = dataTransfer;
+
+        fileUpload(files);
+    }, false);
+
+    uploadInput.addEventListener('change', function (e) {
+        const { files } = e.target;
+
+        fileUpload(files);
+    }, false);
+
+    showContainer.addEventListener('click', function (e) {
+        const { classList, parentElement } = e.target;
+
+        if (classList.contains('close')) {
+            const { dataset } = parentElement;
+
+            fileData = fileData.filter(item => item !== dataset.src);
+            this.removeChild(parentElement);
+        }
+    }, false);
 
 })(window);
