@@ -32,31 +32,30 @@
 
             if (!fileType.test(type)) { // 文件类型检测
                 console.log(`${name} 文件类型不合法`);
-                return;
+                continue;
             }
 
             if (size > MAX_SIZE) { // 文件大小检测
                 console.log(`文件最大为${MAX_FILE_SIZE}`);
-                return;
+                continue;
             } else if (size < MIN_SIZE) {
                 console.log(`文件最小为${MIN_FILE_SIZE}`);
-                return;
+                continue;
             }
 
             fileTypeTranslate(file).then(result => {
                 if (fileData.includes(result)) {
                     console.log(`${name} 已存在`);
-                    return;
+                } else {
+                    fileData.push(result);
+
+                    const tpl = document.querySelector('.item.tpl').cloneNode(true);
+
+                    tpl.children[0].src = result;
+                    tpl.dataset.src = `${result}`;
+                    tpl.classList.remove('tpl');
+                    showContainer.appendChild(tpl);
                 }
-
-                fileData.push(result);
-
-                const tpl = document.querySelector('.item.tpl').cloneNode(true);
-
-                tpl.children[0].src = result;
-                tpl.dataset.src = `${result}`;
-                tpl.classList.remove('tpl');
-                showContainer.appendChild(tpl);
             });
         }
     }
