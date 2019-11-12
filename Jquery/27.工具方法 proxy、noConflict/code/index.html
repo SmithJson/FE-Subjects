@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .demo {
+        width: 100px;
+        height: 100px;
+        background: orange;
+    }
+</style>
+<body>
+<div class="demo"></div>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    // .noConflict
+    var $Z = $.noConflict();
+
+    $Z('.demo').on('click', function () {
+        console.log(1);
+    });
+
+    // .proxy
+    // const list = {
+    //     init: function () {
+    //         this.msg = 123;
+    //         this.dom = document.querySelector('.demo');
+    //         this.bindEvent();
+    //     },
+    //     bindEvent: function () {
+    //         // 此处的 this.show 函数里的 this 指向 dom，所以通过$.proxy 修改 this 指向为 list
+    //         // this.dom.onclick = this.show;
+    //         this.dom.onclick = $.proxy(this.show, this);
+    //     },
+    //     show: function () {
+    //         console.log(this.productMs(this.msg));
+    //     },
+    //     productMs: function (msg) {
+    //         return msg + 234;
+    //     },
+    // };
+    //
+    // list.init();
+</script>
+</body>
+</html>
