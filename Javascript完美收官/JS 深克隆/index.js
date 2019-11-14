@@ -1,48 +1,47 @@
 (function (global) {
-    function Obj() {
-        // complex data type
-        this.func = function () {
-            console.log('function inherit');
-        };
-        this.obj = {value: 'object inherit'};
-        this.arr = [
-            'array inherit',
+    let obj = {
+        bigInt:
+            BigInt(12312),
+
+        set: new Set([2]),
+
+        map: new Map([['a', 22], ['b', 33]]),
+
+        num: 0,
+
+        str: '',
+
+        boolean: true,
+
+        unf: undefined,
+
+        nul: null,
+
+        obj: {
+
+            name: '我是一个对象',
+
+            id: 1
+        }
+        ,
+        arr: [0, 1, 2],
+        func: function () {
+            console.log('我是一个函数');
+        }
+        ,
+        date: new Date(0),
+        reg: new RegExp('/我是一个正则/ig'),
+        [Symbol('1')]:
             1,
-            2,
-            {name: 'test'},
-        ];
-        this.reg = /regexp inherit/;
-        this.date = new Date();
+    };
 
-        // primitive data
-        this.und = undefined;
-        this.str = 'string inherit';
-        this.NaN = NaN;
-        this.infinity = Infinity;
-        this.num = 1234;
-        this.null = null;
-        this.bigInt = BigInt(1);
-
-        this.set = new Set(['set inherit', 1, 2, 3]);
-        this.map = new Map([
-            ['value', 'map inherit'],
-            ['a', 2],
-            ['b', 3],
-        ]);
-        // 符号属性
-        this[Symbol('1')] = 1;
-    }
-
-    Obj.prototype.gender = 'male';
-    Obj.prototype.hobbies = ['basketball', 'running', 'swimming'];
-
-    let obj1 = new Obj();
-
-    Object.defineProperty(obj1, 'innumerable', {
+    Object.defineProperty(obj, 'innumerable', {
         enumerable: false,
-        value: 'innumerable',
+        value: '不可枚举属性'
     });
-    obj1['loop'] = obj1;
+    obj = Object.create(obj, Object.getOwnPropertyDescriptors(obj));
+    obj.loop = obj;
+
 
     /**
      * 1. JSON.parse(JSON.stringify(obj))
@@ -62,23 +61,23 @@
      *   3. 没有实现原型属性赋值
      */
 
-    function deepClone(obj) {
-        let templateObj;
-
-        if (obj && typeof obj === 'object') {
-            let isArray = Array.isArray(obj);
-
-            templateObj = isArray ? [] : {};
-
-            for (let key in obj) {
-                templateObj[key] = deepClone(obj[key]);
-            }
-
-            return templateObj;
-        } else {
-            return obj;
-        }
-    }
+    // function deepClone(obj) {
+    //     let templateObj;
+    //
+    //     if (obj && typeof obj === 'object') {
+    //         let isArray = Array.isArray(obj);
+    //
+    //         templateObj = isArray ? [] : {};
+    //
+    //         for (let key in obj) {
+    //             templateObj[key] = deepClone(obj[key]);
+    //         }
+    //
+    //         return templateObj;
+    //     } else {
+    //         return obj;
+    //     }
+    // }
 
     // let obj3 = deepClone(obj1);
 
@@ -90,9 +89,9 @@
      *  3. 实现了对原型属性的复制
      */
     // 判断是否是引用数据类型
-    deepClone2.isComplexDataType = obj => obj !== null && (typeof obj === 'function' || typeof obj === 'object');
+    deepClone.isComplexDataType = obj => obj !== null && (typeof obj === 'function' || typeof obj === 'object');
 
-    function deepClone2(obj, hash = new WeakMap()) {
+    function deepClone(obj, hash = new WeakMap()) {
         // 提示：能递归进入该函数的都是引用类型数据
         // 存放 typeof === "object" 的的构造构造器，用于区别 obj 是否是普通对象
         const dataType = [Date, RegExp, WeakMap, WeakSet, Map, Set];
@@ -117,14 +116,14 @@
 
             // 原始类型属性直接返回
             // 引用类型属性继续递归deepClone
-            cloneObj[key] = (deepClone2.isComplexDataType(value) && typeof value !== 'function') ?
-                deepClone(value, hash) : value;
+            cloneObj[key] = (deepClone.isComplexDataType(value) && typeof value !== 'function')
+                ? deepClone(value, hash) : value;
         }
 
         return cloneObj;
     }
 
-    const cloneObj = deepClone2(obj);
-    // debugger
+    let cloneObj = deepClone(obj);
 
+    console.log(cloneObj);
 })(window);
