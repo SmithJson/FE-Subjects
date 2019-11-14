@@ -89,43 +89,42 @@
      *  2. 解决了循环引用属性值为自身时，栈溢出问题
      *  3. 实现了对原型属性的复制
      */
-    const deepClone2 = (obj, hash = new Map()) => {
-        // 存放一些不能
-        const type = [
-            Date,
-            Set,
-            Map,
-            WeakMap,
-            WeakSet,
-            RegExp,
-        ];
+    // 判断是否是引用数据类型
+    deepClone2.isComplexDataType = obj => obj !== null && (typeof obj === 'function' || typeof obj === 'object');
 
+    function deepClone2(obj, hash = new WeakMap()) {
+        // 提示：能递归进入该函数的都是引用类型数据
+        // 存放 typeof === "object" 的的构造构造器，用于区别 obj 是否是普通对象
+        const dataType = [Date, RegExp, WeakMap, WeakSet, Map, Set];
+
+        // 判断是否有缓存，如果有则直接返回，解决了递归爆栈的情况
+        // 例：obj.loop = obj：当这样形成环后，如果递归进入 deepClone，会返回第一次创建的 cloneObj 返回
         if (hash.has(obj)) return hash.get(obj);
-        if (type.includes(obj.constructor)) return new obj.constructor(obj);
+        // 如果不是普通对象，则拷贝一个新 obj 返回
+        if (dataType.includes(obj.constructor)) return new obj.constructor(obj);
 
-        // 获取对象所有的属性描述符
-        const allDescription = Object.getOwnPropertyDescriptors(obj);
-        // 原型继承
-        const cloneObj = Object.create(Object.getPrototypeOf(obj), allDescription);
+        // 获取目标对象的所有属性描述对象
+        const allDescriptions = Object.getOwnPropertyDescriptors(obj);
+        // 原型拷贝
+        const cloneObj = Object.create(Object.getPrototypeOf(obj), allDescriptions);
 
+        // 缓存引用类型数据值
         hash.set(obj, cloneObj);
 
-        // Reflect.ownKeys：以数组形式返回对象属性名（包括不可枚举属性， 属性）
+        // Reflect.ownKeys 以数组形式返回对象的属性名（包括符号属性和不可枚举属性）
         for (let key of Reflect.ownKeys(obj)) {
             const value = obj[key];
 
-            cloneObj[key] = (deepClone2.isComplexDataType(value) && typeof (value) !== 'function') ?
-                deepClone2(value, hash) : value;
+            // 原始类型属性直接返回
+            // 引用类型属性继续递归deepClone
+            cloneObj[key] = (deepClone2.isComplexDataType(value) && typeof value !== 'function') ?
+                deepClone(value, hash) : value;
         }
 
         return cloneObj;
-    };
+    }
 
-    // 判断是数据否是引用类型
-    deepClone2.isComplexDataType = obj => obj != null &&
-        (typeof (obj) === 'object' || typeof (obj) === 'function');
-
-    const obj4 = deepClone2(obj1);
+    const cloneObj = deepClone2(obj);
     // debugger
 
 })(window);
