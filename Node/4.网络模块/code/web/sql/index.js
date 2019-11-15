@@ -17,11 +17,11 @@ User.delay = (ms) => {
 User.isAccount = (username) => {
     return User.delay(300).then(() => {
         const user = userList.filter((item) => item.name === username);
-        console.log(user);
+
         if (!user.length) { // 用户不存在
             return false;
         }
 
-        return user;
+        return user[0].password;
     });
 };

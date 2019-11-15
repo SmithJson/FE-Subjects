@@ -13,6 +13,7 @@ const Exp = require('./lib/exp');
 const render = require('./lib/render');
 const apiRoute = require('./routers/apiRoute');
 const formRoute = require('./routers/formRoute');
+const indexRoute = require('./routers/indexRoute');
 
 const app = new Exp();
 
@@ -22,9 +23,7 @@ app.use('/taobao', (req, res) => {
 app.use('/baidu', (req, res) => {
     render('baidu.html', res);
 });
-app.use('/index', (req, res) => {
-    render('index.html', res);
-});
+app.use('/index', indexRoute);
 app.use('/form', formRoute);
 app.use('/api', apiRoute);
 
@@ -40,11 +39,28 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    parseCookie(req, res);
+
     if (app.handle(req, res)) return;
 
     res.end('404');
     res.statusCode = 404;
 });
+
+// 解析 cookie
+function parseCookie(req, res) {
+    const {headers} = req;
+    const {cookie} = headers;
+
+    req.cookie = cookie ?
+        cookie.split(';').reduce((prev, current) => {
+            const arr = current.split('=');
+
+            prev[arr[0].trim()] = arr[1].trim();
+
+            return prev;
+        }, {}) : {};
+}
 
 function serverStatic(req, res) {
     // 文件直接读取
