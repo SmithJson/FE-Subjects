@@ -5,12 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap.css">
 </head>
 <body>
-    <form action="/api">
-        用户名：<input type="text" name="username">
-        密码：<input type="password" name="password">
-        <input type="submit">
-    </form>
+<div class="container">
+    <div class="col-lg-8 card m-5 p-5">
+        <form id="contact-form" action="api">
+            <div class="form-group input-material">
+                <input type="text" class="form-control" id="name-field" required="" name="username">
+                <label for="name-field">Name</label>
+            </div>
+            <div class="form-group input-material">
+                <input type="password" class="form-control" id="email-field" required="" name="password">
+                <label for="email-field">Password</label>
+            </div>
+            <div class="form-group input-material">
+                <textarea name="message" class="form-control" id="textarea-field" rows="3" required=""></textarea>
+                <label for="textarea-field">Your Message</label>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
