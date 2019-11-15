@@ -7,25 +7,25 @@
  */
 const url = require('url');
 
-function exp() {
+function Exp() {
     this.router = [];
 }
 
-exp.prototype.use = function (path, fn) {
+Exp.prototype.use = function (path, fn) {
     this.router.push({
         path,
         fn,
-    })
-}
+    });
+};
 
-exp.prototype.handle = function (req, res) {
+Exp.prototype.handle = function (req, res) {
     let count = 0;
     const obj = url.parse(req.url, true);
 
     req.pathname = obj.pathname;
     req.query = obj.query;
 
-    while(true) {
+    while (true) {
         const layer = this.router[count++];
 
         if (!layer) {
@@ -40,4 +40,4 @@ exp.prototype.handle = function (req, res) {
     }
 };
 
-module.exports = exp;
+module.exports = Exp;
