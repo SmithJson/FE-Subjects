@@ -67,7 +67,7 @@ var Dictionary = function () {
             return item[key];
         }
 
-        return;
+        return undefined;
     };
 
     this.getItem = function () {

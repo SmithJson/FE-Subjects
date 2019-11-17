@@ -61,3 +61,15 @@ var Dictionary = function () {
 
 loseloseHashCode：通过将健名转化为 ASCII 码相加，然后取余 37 得到 hash 值
 
+## 解决散列表的方法
+
+### 分离链接
+
+散列表 + 链表
+
+```javascript
+
+```
+
+### 线性探查法
+

@@ -8,6 +8,16 @@
     <title>Document</title>
 </head>
 <body>
-<script src="./index.js"></script>
+<!--<script src="./index.js"></script>-->
+<script src="hashTable.js"></script>
+
+<script>
+    var a = new HashTable();
+    a.put('zhangl', 'zhanglei@qq.com');
+    a.put('zhangl', 'zhangl@qq.com');
+    a.put('Donna', 'Donna@qq.com');
+    a.remove('zhangl');
+    console.log(a.getItems()[15].getHead());
+</script>
 </body>
 </html>
