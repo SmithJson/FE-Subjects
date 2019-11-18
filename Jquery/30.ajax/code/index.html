@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="demo"></div>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    /**
+     * 参数 obj
+     *   url: 路径
+     *   type: 请求方式
+     *   data: 请求字段
+     *   success: 请求成功后的回调函数
+     *   error: 请求失败的回调函数
+     *   complete: 请求无论失败 | 成功都回执行
+     *   context: 改变函数上下文
+     *   timeout: 请求时间
+     *   async: true false 是否异步
+     *   dataType: 'jsonp' 希望后端返回什么类型数据, jsonp 跨域访问
+     */
+
+    $.ajax({
+        url: 'http://rap2api.taobao.org/app/mock/236728/example/1573720711179',
+        type: 'GET',
+        data: {
+            username: 'zhangl',
+            password: '123456',
+        },
+        success: function (res) {
+            console.log(res, this);
+        },
+        error: function (err) {
+            console.log(err.status, err.statusText);
+        },
+        complete: function () {
+            console.log('complete');
+        },
+        context: $('.demo'),
+        async: true,
+        dataType: 'jsonp',
+    });
+
+    function deal(data) {
+        console.log(data);
+    }
+
+    $.ajax({
+        url: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+        type: 'GET',
+        data: {
+            wd: 'nba',
+            cb: 'deal',
+
+        },
+        dataType: 'jsonp',
+    });
+</script>
+</body>
+</html>
