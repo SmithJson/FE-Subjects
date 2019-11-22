@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    // done 成功 fail 失败 progress 正在进行
+    // resolve  reject   notify
+    function createDeferred() {
+        var df = $.Deferred();
+        var grade = Math.random() * 100;
+
+        setTimeout(function () {
+            if (grade >= 90) {
+                df.resolve('优秀', grade);
+            } else if (grade >= 70 && grade < 90) {
+                df.resolve('良好', grade);
+            } else if (grade >= 60 && grade < 70) {
+                df.resolve('及格', grade);
+            } else if (grade >= 50 && grade < 60) {
+                df.reject('不及格', grade);
+            } else {
+                df.notify('让老师静静', grade);
+            }
+        }, 1000);
+
+        // df.promise：只能注册回调函数，不能触发
+        return df.promise();
+    }
+
+    var df = createDeferred();
+
+    console.dir(df);
+
+    // // 注册成功回调
+    df.done(function (msg, grade) {
+        console.log(grade + ' 属于 ' + msg);
+    });
+
+    // 注册失败回调
+    df.fail(function (msg, grade) {
+        console.log(grade + ' 属于 ' + msg);
+    });
+
+    // 注册等待回调 => 等待回调执行后，会随机选择成功或是失败回调执行
+    df.progress(function (msg, grade) {
+        console.log(grade + ' 属于 ' + msg);
+    });
+</script>
+</body>
+</html>
