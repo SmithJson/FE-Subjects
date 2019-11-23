@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    function createScore() {
+        var df = $.Deferred();
+        setInterval(function () {
+            var score = Math.random() * 100;
+
+            if (score > 60) {
+                df.resolve('congradulation!!!');
+            } else if (score < 50) {
+                df.reject('get out');
+            } else {
+                df.notify('go on');
+            }
+        }, 1500);
+
+        // done fail progress
+        return df.promise();
+    }
+
+    var df = createScore();
+
+    df.then(function (msg) {
+        var newDf = $.Deferred();
+
+        console.log('congratulation', msg);
+        setTimeout(function () {
+            newDf.resolve('newDef 的 resolve');
+        }, 1000);
+
+        return newDf.promise();
+    }, function (msg) {
+        var newDf = $.Deferred();
+
+        console.log('misfortune', msg);
+        setTimeout(function () {
+            newDf.reject('newDef 的 reject');
+        }, 1000);
+
+        return newDf.promise();
+    }, function (msg) {
+        var newDf = $.Deferred();
+
+        console.log('continue', msg);
+        setTimeout(function () {
+            newDf.notify('newDef 的 notify');
+        }, 1000);
+
+        return newDf.promise();
+    })
+      .then(function (msg) {
+          console.log('泡妞', msg);
+      }, function (msg) {
+          console.log('脸', msg);
+      }, function (msg) {
+          console.log('加油', msg);
+      });
+</script>
+</body>
+</html>
