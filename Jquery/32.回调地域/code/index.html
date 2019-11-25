@@ -56,92 +56,189 @@
     const apiKey = '0df993c66c0c636e29ecbb5344252a4a';
     const $Wrapper = $('.wrapper');
 
-    $.ajax({
-        url: `${baseUrl}/user/recognize`,
-        type: 'GET',
-        data: {
-            username: 'zhangl',
-            password: '123456',
-        },
-        success: function (res) {
-            const { data, state } = res;
+    (function () {
+        return $.ajax({
+            url: `${baseUrl}/user/recognize`,
+            type: 'GET',
+            data: {
+                username: 'zhangl',
+                password: '123456',
+            },
+        });
+    })().then(function (res) {
+        const { data, state } = res;
 
-            if (state) return false;
+        if (state) return false;
 
-            const { isLegal, nextUrl } = data;
+        const { isLegal, nextUrl } = data;
 
-            if (!isLegal) return false;
+        if (!isLegal) return false;
 
-            $.ajax({
-                url: nextUrl,
+        return $.ajax({
+            url: nextUrl,
+            data: {
+                start: 10,
+                count: 6,
+                apikey: apiKey,
+            },
+            dataType: 'jsonp',
+        });
+    })
+        .then(function (res) {
+            const { subjects } = res;
+            let df = $.Deferred();
+
+            console.log(res);
+
+            for (let i = 0; i < subjects.length; i++) {
+                const item = subjects[i];
+                const tpl = $('.tpl').clone()
+                                     .addClass('movieSection')
+                                     .removeClass('tpl');
+
+                tpl.data({
+                    id: item.id,
+                })
+                   .on('click', function () {
+                       df.resolve(this);
+                   })
+                   .children()
+                   .eq(0)
+                   .attr('src', item.images.small)
+                   .next()
+                   .text(item.title);
+
+                $Wrapper.append(tpl);
+            }
+
+            return df.promise();
+        })
+        .then(function (_self) {
+            const id = $(_self).data('id');
+
+            return $.ajax({
+                url: `${doubanUrl}/v2/movie/subject/${id}`,
+                dataType: 'jsonp',
                 data: {
-                    start: 10,
-                    count: 6,
                     apikey: apiKey,
                 },
-                dataType: 'jsonp',
-                success: function (res) {
-                    const { subjects } = res;
-                    console.log(res);
-                    for (let i = 0; i < subjects.length; i++) {
-                        const item = subjects[i];
-                        const tpl = $('.tpl').clone()
-                                             .addClass('movieSection')
-                                             .removeClass('tpl');
-
-                        tpl.data({
-                            id: item.id,
-                        })
-                           .on('click', function () {
-                               const id = $(this).data('id');
-
-                               $.ajax({
-                                   url: `${doubanUrl}/v2/movie/subject/${id}`,
-                                   dataType: 'jsonp',
-                                   data: {
-                                       apikey: apiKey,
-                                   },
-                                   success: function (res) {
-                                       const {
-                                           directors, // 导演
-                                           casts, // 演员
-                                           writers, // 编剧
-                                           summary, // 剧情
-                                       } = res;
-                                       const htmlStr = `
-                                            <div class="mask">
-                                                <p>导演: ${directors.map(item => item.name).join('/')}</p>
-                                                <p>剧情: ${summary}</p>
-                                                <p>主演: ${casts.map(item => item.name).join('/')}</p>
-                                                <p>编剧: ${writers.map(item => item.name).join('/')}</p>
-                                            </div>
-                                        `;
-
-                                       $('.mask').remove();
-                                       $(htmlStr)
-                                           .appendTo('body')
-                                           .css({
-                                               position: 'absolute',
-                                               left: $(window).outerWidth() / 2,
-                                               bottom: 20,
-                                               width: 400,
-                                               marginLeft: -200,
-                                           });
-                                   },
-                               });
-                           })
-                           .children()
-                           .eq(0)
-                           .attr('src', item.images.small)
-                           .next()
-                           .text(item.title);
-
-                        $Wrapper.append(tpl);
-                    }
-                },
             });
-        },
-    });
+        })
+        .then(function (res) {
+                const {
+                    directors, // 导演
+                    casts, // 演员
+                    writers, // 编剧
+                    summary, // 剧情
+                } = res;
+                const htmlStr = `
+                      <div class="mask">
+                          <p>导演: ${directors.map(item => item.name).join('/')}</p>
+                          <p>剧情: ${summary}</p>
+                          <p>主演: ${casts.map(item => item.name).join('/')}</p>
+                          <p>编剧: ${writers.map(item => item.name).join('/')}</p>
+                      </div>
+                      `;
+
+                $('.mask').remove();
+                $(htmlStr)
+                    .appendTo('body')
+                    .css({
+                        position: 'absolute',
+                        left: $(window).outerWidth() / 2,
+                        bottom: 20,
+                        width: 400,
+                        marginLeft: -200,
+                    });
+            },
+        );
+
+    // $.ajax({
+    //     url: `${baseUrl}/user/recognize`,
+    //     type: 'GET',
+    //     data: {
+    //         username: 'zhangl',
+    //         password: '123456',
+    //     },
+    //     success: function (res) {
+    //         const { data, state } = res;
+    //
+    //         if (state) return false;
+    //
+    //         const { isLegal, nextUrl } = data;
+    //
+    //         if (!isLegal) return false;
+
+    // $.ajax({
+    //     url: nextUrl,
+    //     data: {
+    //         start: 10,
+    //         count: 6,
+    //         apikey: apiKey,
+    //     },
+    //     dataType: 'jsonp',
+    //     success: function (res) {
+    //         const { subjects } = res;
+    //         console.log(res);
+    //         for (let i = 0; i < subjects.length; i++) {
+    //             const item = subjects[i];
+    //             const tpl = $('.tpl').clone()
+    //                                  .addClass('movieSection')
+    //                                  .removeClass('tpl');
+    //
+    //             tpl.data({
+    //                 id: item.id,
+    //             })
+    //                .on('click', function () {
+    //                    const id = $(this).data('id');
+    //
+    //                    $.ajax({
+    //                        url: `${doubanUrl}/v2/movie/subject/${id}`,
+    //                        dataType: 'jsonp',
+    //                        data: {
+    //                            apikey: apiKey,
+    //                        },
+    //                        success: function (res) {
+    //                            const {
+    //                                directors, // 导演
+    //                                casts, // 演员
+    //                                writers, // 编剧
+    //                                summary, // 剧情
+    //                            } = res;
+    //                            const htmlStr = `
+    //                                         <div class="mask">
+    //                                             <p>导演: ${directors.map(item => item.name).join('/')}</p>
+    //                                             <p>剧情: ${summary}</p>
+    //                                             <p>主演: ${casts.map(item => item.name).join('/')}</p>
+    //                                             <p>编剧: ${writers.map(item => item.name).join('/')}</p>
+    //                                         </div>
+    //                                     `;
+    //
+    //                            $('.mask').remove();
+    //                            $(htmlStr)
+    //                                .appendTo('body')
+    //                                .css({
+    //                                    position: 'absolute',
+    //                                    left: $(window).outerWidth() / 2,
+    //                                    bottom: 20,
+    //                                    width: 400,
+    //                                    marginLeft: -200,
+    //                                });
+    //                        },
+    //                    });
+    //                })
+    //                .children()
+    //                .eq(0)
+    //                .attr('src', item.images.small)
+    //                .next()
+    //                .text(item.title);
+    //
+    //             $Wrapper.append(tpl);
+    //         }
+    //     },
+    // });
+    //     },
+    // });
 </script>
 </body>
 </html>
