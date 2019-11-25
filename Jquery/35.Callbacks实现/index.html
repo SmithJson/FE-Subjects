@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<!--<script src="./mJquery.js"></script>-->
+<script>
+    // var cb = $.Callbacks();
+    // var cb = $.myCallbacks();
+
+    // var cb = $.Callbacks('once');
+    // var cb = $.myCallbacks('once');
+
+    // var cb = $.Callbacks('memory');
+    // var cb = $.myCallbacks('memory');
+
+    var cb = $.Callbacks('once memory');
+    // var cb = $.myCallbacks('once memory');
+
+    function a(ms) {
+        console.log('a', ms);
+    }
+
+    function b(ms) {
+        console.log('b', ms);
+    }
+
+    function c(ms) {
+        console.log('c', ms);
+    }
+
+    cb.add(a);
+    cb.add(b);
+    cb.fire(null);
+    cb.fire(null);
+    cb.add(c);
+    cb.fire(null);
+</script>
+</body>
+</html>
