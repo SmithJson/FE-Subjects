@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="./mJquery.js"></script>
+<script>
+    function createScore() {
+        var df = $.myDeferred();
+
+        setInterval(function () {
+            var score = Math.random() * 100;
+
+            if (score > 90) {
+                df.resolve('congratulation');
+            } else if (score < 30) {
+                df.reject('get out');
+            } else {
+                df.notify('go on');
+            }
+        }, 1500);
+
+        return df;
+    }
+
+    var df = createScore();
+
+    df.done(function (msg) {
+        console.log(msg);
+    });
+    df.fail(function (msg) {
+        console.log(msg);
+    });
+    df.progress(function (msg) {
+        console.log(msg);
+    });
+</script>
+</body>
+</html>
