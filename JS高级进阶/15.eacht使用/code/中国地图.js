@@ -2,6 +2,7 @@ var myChart = echarts.init(document.querySelector('#main'));
 
 function initMap(name, data) {
     var option = {
+        backgroundColor: '#eee',
         title: {
             text: '中国地图',
             left: 'center',
@@ -12,7 +13,7 @@ function initMap(name, data) {
         },
         series: [
             {
-                type: 'map',
+                type: 'map3D',
                 map: name,
                 data: data,
                 zoom: 1.2,
@@ -22,7 +23,8 @@ function initMap(name, data) {
                 },
                 selectedMode: 'single',
                 itemStyle: {
-                    borderWidth: 0.5,
+                    color: '#B1D0EC',
+                    borderWidth: 1,
                     areaColor: '#4ea397',
                     borderColor: '#0550c3',
                 },
@@ -30,7 +32,7 @@ function initMap(name, data) {
                     itemStyle: {
                         borderWidth: 2,
                         areaColor: '#ece39e',
-                        borderColor: '#4b0082',
+                        borderColor: '#eee',
                     },
                 },
             },
@@ -44,6 +46,7 @@ function initMap(name, data) {
             if (!param.name)
                 return false;
 
+            console.log(param);
             var provinceName = param.data.alias;
 
             loadRelativeProvince(provinceName, function (data) {
