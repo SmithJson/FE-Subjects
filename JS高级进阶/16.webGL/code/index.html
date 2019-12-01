@@ -7,9 +7,55 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .wrapper {
+        width: 300px;
+        height: 150px;
+        position: relative;
+        border: 1px solid;
+    }
+
+    :root,
+    html {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .wrapper #canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    .wrapper .prize {
+        position: absolute;
+        width: 300px;
+        height: 150px;
+        text-align: center;
+        line-height: 150px;
+        font-size: 30px;
+        color: red;
+    }
+</style>
 <body>
-<canvas id="canvas" width="500" height="400"></canvas>
-<script src="绘制动态点.js"></script >
+<div class="wrapper">
+    <canvas id="canvas" width="300" height="150"></canvas>
+    <div class="prize"></div>
+</div>
+<script src="刮刮乐.js"></script>
+<!--<script src="绘制背景效果.js"></script>-->
+<!--<script src="绘制多个圆和三角形.js"></script>-->
+<!--<script src="绘制圆.js"></script>-->
+<!--<script src="绘制动态点.js"></script>-->
 <!--<script src="./绘制点.js"></script>-->
 <!--<script src="改变画布颜色.js"></script>-->
 </body>
