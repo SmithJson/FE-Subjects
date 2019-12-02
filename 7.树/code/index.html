@@ -1,23 +1,46 @@
-<!doctype html>
+<!--
+ * @Author: zhangl
+ * @Date: 2019-12-02 00:34:11
+ * @LastEditTime: 2019-12-02 23:27:23
+ * @LastEditors: zhangl
+ * @Description: 测试 html
+ * @FilePath: /FE-Subjects/7.树/code/index.html
+ -->
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<script src="index.js"></script>
-<script>
-    var tree = new Tree();
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+		/>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script src="index.js"></script>
+		<script>
+			var tree = new Tree();
 
-    tree.insert(10);
-    tree.insert(12);
-    tree.insert(1);
-    tree.insert(11);
+			/**
+			 *              10
+			 *        1                 12
+			 *   null   null         11    null
+			 *                   null null
+			 */
 
-    console.log(tree.root());
-</script>
-</body>
+			tree.insert(10);
+			tree.insert(12);
+			tree.insert(1);
+			tree.insert(11);
+
+			console.log(tree.root());
+			console.log(tree.remove(1));
+
+			// 遍历
+			// tree.traverse(function(node) {
+			//   console.log(node);
+			// });
+		</script>
+	</body>
 </html>
