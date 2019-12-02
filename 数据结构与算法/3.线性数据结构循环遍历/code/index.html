@@ -1,0 +1,69 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2019-12-03 01:01:44
+ * @LastEditTime: 2019-12-03 01:20:52
+ * @LastEditors: zhangl
+ * @Description: 线性数据结构的遍历/code
+ * @FilePath: /FE-Subjects/数据结构与算法/3.线性数据结构遍历/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			/**
+			 * 遍历: 将集合中的每一个元素获取并查看
+			 */
+
+			// 数组循环遍历
+			var arr = [1, 2, 3, 4, 5];
+
+			function traverseArr(arr) {
+				var len = arr.length;
+
+				for (var i = 0; i < len; i++) {
+					console.log(arr[i]);
+				}
+			}
+
+			traverseArr(arr);
+
+			// 链表的循环遍历
+			function Node(value) {
+				this.value = value;
+				this.next = null;
+			}
+
+			var node1 = new Node(5);
+			var node2 = new Node(4);
+			var node3 = new Node(3);
+			var node4 = new Node(2);
+			var node5 = new Node(1);
+
+			node1.next = node2;
+			node2.next = node3;
+			node3.next = node4;
+			node4.next = node5;
+
+			function traverseLinkList(node) {
+				var currentNode = node;
+
+				while (true) {
+					if (currentNode.next) {
+						console.log(currentNode.value);
+						currentNode = currentNode.next;
+					} else {
+						break;
+					}
+				}
+			}
+
+			traverseLinkList(node1);
+		</script>
+	</body>
+</html>

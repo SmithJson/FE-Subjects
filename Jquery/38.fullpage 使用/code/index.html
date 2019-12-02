@@ -1,0 +1,46 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2019-12-03 00:48:33
+ * @LastEditTime: 2019-12-03 00:59:56
+ * @LastEditors: zhangl
+ * @Description: fullpage 使用
+ * @FilePath: /FE-Subjects/Jquery/38.fullpage 使用/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="section">
+				<h3>第1屏</h3>
+			</div>
+			<div class="section">
+				<h3>第2屏</h3>
+			</div>
+			<div class="section">
+				<h3>第3屏</h3>
+			</div>
+			<div class="section">
+				<h3>第4屏</h3>
+			</div>
+		</div>
+		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js"></script>
+		<script>
+			$('.wrapper').fullpage({
+				afterLoad(anchor, index) {
+					console.log('load', index);
+				},
+				onLeave(index) {
+					console.log('leave', index);
+				},
+			});
+		</script>
+	</body>
+</html>
