@@ -1,7 +1,7 @@
 /*
  * @Author: zhangl
  * @Date: 2019-12-02 00:42:26
- * @LastEditTime: 2019-12-02 23:32:22
+ * @LastEditTime: 2019-12-03 00:04:59
  * @LastEditors: zhangl
  * @Description: In User Settings Edit
  * @FilePath: /FE-Subjects/7.树/code/index.js
@@ -73,10 +73,11 @@ function Tree() {
 		return min(root);
 	};
 
-	var getMinLeftTree = function(node) {
+	// 获取右分支最小左节点
+	var getRightMinTree = function(node) {
 		if (node === null) return false;
 
-		while (node.left) node = node.left;
+		while (node && node.left) node = node.left;
 
 		return node;
 	};
@@ -87,13 +88,13 @@ function Tree() {
 		else if (node.value < value) node.right = removeNode(node.right, value);
 		else {
 			if (node.left === null && node.right === null) return null;
-			if (node.left === null && node.right) return node.right;
 			if (node.left && node.right === null) return node.left;
+			if (node.right && node.left === null) return node.right;
 
-			var minLeftTree = getMinLeftTree(node.right);
+			var minTree = getRightMinTree(node.right);
 
-			node.value = minLeftTree.value;
-			node.right = removeNode(node.right, value);
+			node.value = minTree.value;
+			node.right = removeNode(node.right, minTree.value);
 		}
 
 		return node;
