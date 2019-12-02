@@ -1,7 +1,7 @@
 /*
  * @Author: zhangl
  * @Date: 2019-12-02 00:42:26
- * @LastEditTime: 2019-12-02 23:27:02
+ * @LastEditTime: 2019-12-02 23:30:38
  * @LastEditors: zhangl
  * @Description: In User Settings Edit
  * @FilePath: /FE-Subjects/7.树/code/index.js
@@ -54,7 +54,7 @@ function Tree() {
 
 		return node;
 	};
-	// 查询最大数
+	// 查询最大数a
 	this.max = function() {
 		return max(root);
 	};
