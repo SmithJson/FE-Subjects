@@ -1,11 +1,12 @@
 /*
  * @Author: zhangl
  * @Date: 2019-12-03 23:24:00
- * @LastEditTime: 2019-12-04 21:28:56
+ * @LastEditTime: 2019-12-05 12:35:51
  * @LastEditors: zhangl
  * @Description: 邻接表存储图结构
  * @FilePath: /FE-Subjects/8.图/code/index.js
  */
+
 function Graph() {
 	var vertices = [], // 顶点
 		edges = {}; // 连接边
@@ -22,37 +23,45 @@ function Graph() {
 		edges[vertex2].push(vertex1);
 	};
 
-	var initColor = function() {
-		var color = {};
+	var initVertexTraversalCase = function() {
+		var caseTable = {},
+			len = vertices.length,
+			i = 0;
 
-		for (var i = 0; i < vertices.length; i++) {
-			color[vertices[i]] = 'white';
+		for (; i < len; i++) {
+			caseTable[vertices[i]] = 0;
 		}
 
-		return color;
+		return caseTable;
 	};
 	// 广度优先遍历
-	this.breadthFirst = function(v, callback) {
-		var color = initColor();
+	this.breadthFirstTraversal = function(vertex, callback) {
+		/**
+		 * 顶点状态
+		 * 	1. 已探索: explored -1
+		 * 	2. 已发现未探索: unexplored 1
+		 * 	3. 未发现: undiscovered 0
+		 */
+		var caseTable = initVertexTraversalCase();
 		var queue = new Queue();
 
-		queue.enqueue(v);
+		queue.enqueue(vertex);
 
 		while (!queue.isEmpty()) {
-			var now = queue.dequeue();
-			var list = edges[now];
+			var nowVertex = queue.dequeue(),
+				edgesList = edges[nowVertex],
+				len = edgesList.length,
+				i = 0;
 
-			for (var i = 0; i < list.length; i++) {
-				var w = list[i];
-
-				if (color[w] === 'white') {
-					color[w] = 'grey';
-					queue.enqueue(w);
+			for (; i < len; i++) {
+				if (caseTable[edgesList[i]] === 0) {
+					queue.enqueue(edgesList[i]);
+					caseTable[edgesList[i]] = 1;
 				}
 			}
 
-			color[now] = 'black';
-			callback && callback(now);
+			caseTable[nowVertex] = -1;
+			callback && callback(nowVertex);
 		}
 	};
 

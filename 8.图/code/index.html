@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangl
  * @Date: 2019-12-03 23:23:49
- * @LastEditTime: 2019-12-04 21:29:18
+ * @LastEditTime: 2019-12-05 12:10:37
  * @LastEditors: zhangl
  * @Description: 图
  * @FilePath: /FE-Subjects/8.图/code/index.html
@@ -14,6 +14,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Document</title>
 	</head>
+
 	<body>
 		<script src="../../3.队列/code/index.js"></script>
 		<script src="./index.js"></script>
@@ -51,7 +52,7 @@
 			graph.insertEdge('F', 'B');
 			graph.print();
 
-			graph.breadthFirst('A', function(item) {
+			graph.breadthFirstTraversal('A', function(item) {
 				console.log(item);
 			});
 		</script>
