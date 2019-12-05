@@ -1,60 +1,68 @@
 <!--
  * @Author: zhangl
  * @Date: 2019-12-03 23:23:49
- * @LastEditTime: 2019-12-05 12:10:37
+ * @LastEditTime: 2019-12-06 00:59:47
  * @LastEditors: zhangl
  * @Description: 图
  * @FilePath: /FE-Subjects/8.图/code/index.html
  -->
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>Document</title>
-	</head>
 
-	<body>
-		<script src="../../3.队列/code/index.js"></script>
-		<script src="./index.js"></script>
-		<script>
-			/**
-			 * 图的表示方式:
-			 *  一. 邻接矩阵
-			 *      缺点:
-			 *       1. 非常浪费计算机内存
-			 *       2. 添加和删除节点麻烦
-			 *
-			 *  二 .邻接表
-			 * 		A: [BCD]
-			 * 		B: [AEF]
-			 * 		C: [AD]
-			 * 		D: [AC]
-			 * 		E: [B]
-			 * 		F: [B]
-			 */
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+</head>
 
-			var graph = new Graph();
+<body>
+	<script src="../../2.栈/code/index.js"></script>
+	<script src="../../3.队列/code/index.js"></script>
+	<script src="./index.js"></script>
+	<script>
+		/**
+		 * 图的表示方式:
+		 *  一. 邻接矩阵
+		 *      缺点:
+		 *       1. 非常浪费计算机内存
+		 *       2. 添加和删除节点麻烦
+		 *
+		 *  二 .邻接表
+		 * 		A: [BCD]
+		 * 		B: [AEF]
+		 * 		C: [AD]
+		 * 		D: [AC]
+		 * 		E: [B]
+		 * 		F: [B]
+		 */
 
-			graph.insertVertex('A');
-			graph.insertVertex('B');
-			graph.insertVertex('C');
-			graph.insertVertex('D');
-			graph.insertVertex('E');
-			graph.insertVertex('F');
+		var graph = new Graph();
 
-			graph.insertEdge('A', 'B');
-			graph.insertEdge('A', 'C');
-			graph.insertEdge('A', 'D');
-			graph.insertEdge('C', 'D');
-			graph.insertEdge('B', 'E');
-			graph.insertEdge('F', 'B');
-			graph.print();
+		graph.insertVertex('A');
+		graph.insertVertex('B');
+		graph.insertVertex('C');
+		graph.insertVertex('D');
+		graph.insertVertex('E');
+		graph.insertVertex('F');
 
-			graph.breadthFirstTraversal('A', function(item) {
-				console.log(item);
-			});
-		</script>
-	</body>
+		graph.insertEdge('A', 'B');
+		graph.insertEdge('A', 'C');
+		graph.insertEdge('A', 'D');
+		graph.insertEdge('C', 'D');
+		graph.insertEdge('B', 'E');
+		graph.insertEdge('F', 'B');
+		graph.insertEdge('F', 'E');
+
+		// graph.print();
+
+		// graph.breadthFirstTraversal('A', function (item) {
+		// 	console.log(item);
+		// });
+		var shortestPath = graph.getShortestPath('B', 'B');
+
+		console.log(shortestPath)
+	</script>
+</body>
+
 </html>

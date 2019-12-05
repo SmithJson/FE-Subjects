@@ -1,7 +1,7 @@
 /*
  * @Author: zhangl
  * @Date: 2019-12-03 23:24:00
- * @LastEditTime: 2019-12-05 12:35:51
+ * @LastEditTime: 2019-12-06 00:58:34
  * @LastEditors: zhangl
  * @Description: 邻接表存储图结构
  * @FilePath: /FE-Subjects/8.图/code/index.js
@@ -12,18 +12,18 @@ function Graph() {
 		edges = {}; // 连接边
 
 	// 插入顶点
-	this.insertVertex = function(vertex) {
+	this.insertVertex = function (vertex) {
 		vertices.push(vertex);
 		edges[vertex] = [];
 	};
 
 	// 插入边
-	this.insertEdge = function(vertex1, vertex2) {
+	this.insertEdge = function (vertex1, vertex2) {
 		edges[vertex1].push(vertex2);
 		edges[vertex2].push(vertex1);
 	};
 
-	var initVertexTraversalCase = function() {
+	var initVertexTraversalCase = function () {
 		var caseTable = {},
 			len = vertices.length,
 			i = 0;
@@ -35,15 +35,22 @@ function Graph() {
 		return caseTable;
 	};
 	// 广度优先遍历
-	this.breadthFirstTraversal = function(vertex, callback) {
+	this.breadthFirstTraversal = function (vertex, callback) {
 		/**
 		 * 顶点状态
 		 * 	1. 已探索: explored -1
 		 * 	2. 已发现未探索: unexplored 1
 		 * 	3. 未发现: undiscovered 0
 		 */
-		var caseTable = initVertexTraversalCase();
-		var queue = new Queue();
+		var caseTable = initVertexTraversalCase(),
+			queue = new Queue(),
+			distance = {}, // 每个顶点间的距离
+			pred = {}; // 回溯点
+
+		for (var j = 0; j < vertices.length; j++) {
+			distance[vertices[j]] = 0;
+			pred[vertices[j]] = null;
+		}
 
 		queue.enqueue(vertex);
 
@@ -55,6 +62,10 @@ function Graph() {
 
 			for (; i < len; i++) {
 				if (caseTable[edgesList[i]] === 0) {
+					// 设置回溯点: 例 B 的回溯点为 A
+					pred[edgesList[i]] = nowVertex;
+					// 设置顶点间距: 回溯点距离 + 1
+					distance[edgesList[i]] = distance[nowVertex] + 1;
 					queue.enqueue(edgesList[i]);
 					caseTable[edgesList[i]] = 1;
 				}
@@ -63,10 +74,35 @@ function Graph() {
 			caseTable[nowVertex] = -1;
 			callback && callback(nowVertex);
 		}
+
+		return {
+			distance,
+			pred,
+		};
+	};
+
+	// 最短路径
+	this.getShortestPath = function (fromVertex, toVertex) {
+		var { pred } = graph.breadthFirstTraversal(fromVertex),
+			stack = new Stack(),
+			result = '';
+
+		while (toVertex !== fromVertex) {
+			stack.push(toVertex);
+			toVertex = pred[toVertex];
+		}
+
+		stack.push(toVertex);
+
+		while (!stack.isEmpty()) {
+			result += stack.pop() + '-';
+		}
+
+		return result.slice(0, result.length - 1);
 	};
 
 	// 打印
-	this.print = function() {
+	this.print = function () {
 		for (var i = 0; i < vertices.length; i++) {
 			var vertex = vertices[i],
 				edgeTableRow = edges[vertex] || [],
@@ -80,4 +116,5 @@ function Graph() {
 			console.log(str);
 		}
 	};
-}
+};
+
