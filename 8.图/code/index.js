@@ -1,11 +1,13 @@
 /*
  * @Author: zhangl
- * @Date: 2019-12-03 23:24:00
- * @LastEditTime: 2019-12-06 00:58:34
+ * @GitHub: https://github.com/SmithJson
+ * @Date: 2019-12-05 23:23:25
+ * @LastEditTime: 2019-12-07 00:32:07
  * @LastEditors: zhangl
- * @Description: 邻接表存储图结构
+ * @Description: 图模拟
  * @FilePath: /FE-Subjects/8.图/code/index.js
  */
+
 
 function Graph() {
 	var vertices = [], // 顶点
@@ -23,16 +25,16 @@ function Graph() {
 		edges[vertex2].push(vertex1);
 	};
 
-	var initVertexTraversalCase = function () {
-		var caseTable = {},
+	var initColor = function () {
+		var color = {},
 			len = vertices.length,
 			i = 0;
 
 		for (; i < len; i++) {
-			caseTable[vertices[i]] = 0;
+			color[vertices[i]] = 0;
 		}
 
-		return caseTable;
+		return color;
 	};
 	// 广度优先遍历
 	this.breadthFirstTraversal = function (vertex, callback) {
@@ -42,10 +44,12 @@ function Graph() {
 		 * 	2. 已发现未探索: unexplored 1
 		 * 	3. 未发现: undiscovered 0
 		 */
-		var caseTable = initVertexTraversalCase(),
+		var color = initColor(),
 			queue = new Queue(),
 			distance = {}, // 每个顶点间的距离
 			pred = {}; // 回溯点
+
+		color[vertex] = 1;
 
 		for (var j = 0; j < vertices.length; j++) {
 			distance[vertices[j]] = 0;
@@ -61,17 +65,17 @@ function Graph() {
 				i = 0;
 
 			for (; i < len; i++) {
-				if (caseTable[edgesList[i]] === 0) {
+				if (color[edgesList[i]] === 0) {
 					// 设置回溯点: 例 B 的回溯点为 A
 					pred[edgesList[i]] = nowVertex;
 					// 设置顶点间距: 回溯点距离 + 1
 					distance[edgesList[i]] = distance[nowVertex] + 1;
 					queue.enqueue(edgesList[i]);
-					caseTable[edgesList[i]] = 1;
+					color[edgesList[i]] = 1;
 				}
 			}
 
-			caseTable[nowVertex] = -1;
+			color[nowVertex] = -1;
 			callback && callback(nowVertex);
 		}
 
@@ -101,6 +105,33 @@ function Graph() {
 		return result.slice(0, result.length - 1);
 	};
 
+
+	// 辅助函数
+	var bfs = function (vertex, color, callback) {
+		var edgesList = edges[vertex],
+			len = edgesList.length,
+			i = 0;
+
+		color[vertex] = 1;
+
+		for (; i < len; i++) {
+			var currentVertex = edgesList[i];
+
+			if (color[currentVertex] === 0) {
+				bfs(currentVertex, color, callback);
+			}
+		}
+
+		color[vertex] = -1;
+		callback && callback(vertex)
+	}
+	// 深度优先遍历
+	this.deepFirstTraversal = function (vertex, callback) {
+		var color = initColor();
+
+		bfs(vertex, color, callback);
+	};
+
 	// 打印
 	this.print = function () {
 		for (var i = 0; i < vertices.length; i++) {
@@ -117,4 +148,3 @@ function Graph() {
 		}
 	};
 };
-
