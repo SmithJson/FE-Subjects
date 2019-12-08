@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @GitHub: https://github.com/SmithJson
  * @Date: 2019-12-07 23:44:37
- * @LastEditTime: 2019-12-08 00:47:08
+ * @LastEditTime: 2019-12-08 17:09:42
  * @LastEditors: zhangl
  * @Description: 冒泡排序
  * @FilePath: /FE-Subjects/数据结构与算法/6.冒泡排序/code/index.html
@@ -19,26 +19,20 @@
 
 <body>
     <script>
-        /*
-         * 排序的本质是比较和交换
-        */
-        var arr1 = [3, 2, 1];
+        var arr1 = [1, 0, 10, 8, 5, 4, 3, 9, 6, 2, 7];
 
-        // 比较函数
         function compare(a, b) {
             return a > b;
         }
 
-        // 交换函数
         function swap(arr, a, b) {
-            var tem = null;
+            var temp = null;
 
-            tem = arr[a];
+            temp = arr[a];
             arr[a] = arr[b];
-            arr[b] = tem;
+            arr[b] = temp;
         }
 
-        // 冒泡排序
         function bubbleSort(arr) {
             var len = arr.length;
 
