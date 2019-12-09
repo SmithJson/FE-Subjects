@@ -1,0 +1,153 @@
+<!--
+ * @Author: zhangl
+ * @GitHub: https://github.com/SmithJson
+ * @Date: 2019-12-08 17:21:12
+ * @LastEditTime: 2019-12-08 21:38:05
+ * @LastEditors: zhangl
+ * @Description: let var const
+ * @FilePath: /FE-Subjects/ES6/let-var-const/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 1. 全程扫描一下错误
+         * 2. 预编译环节
+         * 3. 解释性语言：解释一行，执行一行
+         */
+        // console.log(a); // undefined
+        // var a = 123;
+
+        // // es6
+        // console.log(b); // 报错
+        // let b = 456;
+        // console.log(b);
+
+        // 一. 暂时性死区 let，const在声明之前是不能用我的
+        // var temp = 890;
+        // if (true) {
+        //     temp = 'abc';
+        //     let temp;
+        // }
+
+        // 二. typeof 不再是百分百不报错
+        // typeof c;
+        // let c = 123;
+
+        // 三. 不允许重复声明
+        // let a = 123;
+        // let a = 456;
+
+        // var a = '全部';
+        // function fn() {
+        //     console.log(a);
+
+        //     if (false) {
+        //         var a = '局部';
+        //     }
+        // }
+
+        // fn();
+
+        // 四. 全局 函数 块级作用域 => 模块间互不影响
+        // var a = '全局';
+        // (function () {
+        //     var a = '局部';
+        //     console.log(a);
+        // }());
+
+        // let a = '全局';
+        // {
+        //     let a = '局部';
+        //     console.log(a);
+        // }
+        // console.log(a);
+
+        // {
+        //     {
+        //         let b = '局部';
+        //         {
+        //             console.log(b);
+        //         }
+        //     }
+        // }
+
+        // const a = 123;
+        // // assignment to constant variable
+        // a = '123';
+
+        // 五. 冻结对象
+        // const obj = Object.freeze({ name: 'zhangl' });
+        // obj.name = 'zl';
+        // console.log(obj.name); // zhangl
+
+        // 六. 全局缺陷
+        // ES5
+        // console.log(window.Array);
+        // var Array = '这是数组';
+        // console.log(window.Array);
+        // var a = '123';
+        // console.log(window.a); // 123
+
+        // let b = 123;
+        // console.log(window.b); // undefined
+
+        // 通过对数组进行解构赋值
+        // let arr = [1, 2, 3];
+        // console.log(arr[0]);
+        // console.log(arr[1]);
+        // console.log(arr[2]);
+
+        // let [a, b, c] = arr;
+        // console.log(a);
+        // console.log(b);
+        // console.log(c);
+
+        // 模式匹配
+        // const [a, [[b]], c] = [1, [[2]], 3];
+        // console.log(a);
+        // console.log(b);
+        // console.log(c);
+
+        // 不完全匹配
+        // const [a, b, c] = [1, 2, 3, 4];
+        // console.log(a);
+        // console.log(b);
+        // console.log(c);
+
+        // 指定默认值
+        // const [flag = true] = [];
+        // console.log(flag);
+
+        // const [a = 1] = [null];
+        // const [b = 1] = [undefined];
+        // console.log(a); // null
+        // console.log(b); // undefined
+
+        const person = {
+            name: 'zhangl',
+            age: 33,
+        };
+        // const { age, name } = person;
+        // console.log(name);
+        // console.log(age);
+        const obj1 = {
+            gender: 'male',
+        }
+
+        Object.setPrototypeOf(person, obj1);
+        const { gender } = person;
+        console.log(gender);
+    </script>
+</body>
+
+</html>
