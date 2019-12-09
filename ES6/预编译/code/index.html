@@ -1,0 +1,109 @@
+<!--
+ * @Author: zhangl
+ * @GitHub: https://github.com/SmithJson
+ * @Date: 2019-12-09 21:07:58
+ * @LastEditTime: 2019-12-10 01:00:28
+ * @LastEditors: zhangl
+ * @Description: 预编译
+ * @FilePath: /FE-Subjects/ES6/预编译/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 函数预编译
+         * 1. 创建一个 AO 对象
+         * 2. 提取变量与形参，将变量与形参作为 AO 对象的属性，赋值为 undefined
+         * 3. 形参和实参相统一
+         * 4. 提取函数声明，将函数函数作为 AO 对象的属性，并将函数作为该属性的值
+         */
+
+        /**
+         * 全局预编译
+         * 1. 创建 GO 对象
+         * 2. 提取全局变量，将变量作为 GO 对象的属性，值为 undefined
+         * 3. 提取函数声明，将函数声明作为 GO 对象的属性，并将函数作为该属性的值
+         */
+
+        /**
+         *  浅拷贝：内容一样，但引用地址不同
+         *  复制：引用地址相同
+         *  浅拷贝 !== 复制
+         */
+
+        const arr = [1, 2, 3, 4];
+        console.log(arr.findIndex(item => item < 3)); // 0
+
+        // const arr = [1, 2, 3, 4];
+        // console.log(arr.find(item => item < 0));
+
+        // const arr = [1, 2, 3, 4, 5, 6];
+        // console.log(arr.copyWithin(0, 3)); // [4, 5, 6, 4, 5, 6]
+
+        // const arr = Array.of(1, 2, 3);
+        // console.log(arr);
+
+        // const str = '🍎🍎🍎🍎🍎🍎🍊🍊🍊🍊🍊🍎🍎';
+        // console.log(Array.from(str));
+
+        // rest 运算符
+        // const [a, ...arr] = [1, 2, 3, 4];
+        // console.log(arr); // [2, 3, 4]
+
+        // const a = 1;
+        // const arr = [
+        //     ...(a > 1 ? ['a'] : [])
+        // ];
+        // console.log(arr);
+
+        // function test(a, b, c) {
+        //     console.log(a, b, c);
+        // }
+
+        // test(...[1, 2, 3]);
+
+        // padStart
+        // const str = 'x';
+        // console.log(str.padStart(5, 'abcdef'));
+
+        // const str = '1';
+        // console.log(str.repeat(2));
+
+        //  includes、startWidth、endsWidth
+        // const str = 'Hello World';
+        // console.log(str.includes('e')); // true
+        // console.log(str.startsWith('Hello')); // true
+        // console.log(str.endsWith('World')); // true
+
+        // 模板字符串
+        // const str = `
+        //     ES6
+        //     模块字符串换行
+        // `;
+        // const a = '变量';
+        // const newA = `我是 ${a}`;
+
+        // const fn = function () {
+        //     console.log('我是字符串里的函数调用');
+        // };
+        // const newA = `${fn()}`;
+
+        // const a = `
+        //     我是
+        //     ${[1, 2, 3].map(item => item)}
+        // `;
+
+        // console.log(a);
+    </script>
+</body>
+
+</html>
