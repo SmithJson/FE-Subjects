@@ -1,0 +1,120 @@
+<!--
+ * @Author: zhangl
+ * @GitHub: https://github.com/SmithJson
+ * @Date: 2019-12-12 08:20:23
+ * @LastEditTime: 2019-12-13 02:04:38
+ * @LastEditors: zhangl
+ * @Description: 对象的扩展
+ * @FilePath: /FE-Subjects/ES6/对象的扩展/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const s1 = new Set([1, 2, 3]);
+
+        // console.log(s1.add(4));
+        // console.log(s1.has(4));
+        // console.log(s1.delete(1));
+        // // console.log(s1.clear());
+        // console.log(s1);
+        s1.forEach((value, key) => {
+            console.log(`${key}：${value}`);
+        });
+
+        // 转换为数组
+        // const s1 = new Set([1, 2, 3]);
+        // console.log(Array.from(s1));
+
+        // set 新提出的引用数据类型
+        // const s1 = new Set([1, 2, 3]);
+        // const s2 = new Set([{ name: 'zhangl' }]);
+        // console.log(s1, s2)
+
+        // 模拟私有属性
+        // const private = Symbol('private');
+        // const obj = {
+        //     [private]: '生日',
+        //     age: 18,
+        // };
+
+        // console.log(Object.keys(obj)); // ['age'];
+
+        // Symbol.iterator
+        // const obj = {};
+        // let sym1 = Symbol('a');
+        // let sym2 = Symbol('b');
+        // obj[sym1] = 'hello';
+        // obj[sym2] = 'world';
+        // // 获取 Symbol 属性
+        // const arr = Object.getOwnPropertySymbols(obj);
+        // console.log(obj, arr);
+
+        // const s1 = Symbol('我是描述1');
+        // console.log(s1.toString());
+        // console.log(String(s1));
+
+        // Symbol 数据类型
+        // const s1 = Symbol('我是描述1');
+        // const s2 = Symbol('我是描述1');
+        // console.log(s1, s2, s1 === s2);
+
+        // 对象的解构
+        // let { x, a: a1, ...z } = {
+        //     x: 1,
+        //     y: 2,
+        //     a: 3,
+        //     b: 4,
+        // };
+        // console.log(a1, z);
+
+        // super 关键字指向当前对象z(this)的原型对象
+        // const prototype = {
+        //     food: '西红柿',
+        // };
+        // const obj = {
+        //     food: '黄瓜',
+        //     say() {
+        //         // super === obj.__proto__
+        //         return super.food;
+        //     }
+        // };
+        // Object.setPrototypeOf(obj, prototype);
+        // console.log(obj.say()); // 西红柿
+
+        // let key = 'key1';
+        // // 属性表达式
+        // let obj = {
+        //     [key]: true,
+        //     ['o' + 'b']: 123,
+        //     ['ok']: 456
+        // };
+        // console.log(obj);
+
+        // 方法的简写
+        // const obj = {
+        //     say() {
+        //         console.log('方法的简写');
+        //     }
+        // };
+
+        // obj.say();
+
+
+        // 属性的简写
+        // const a = 'a';
+        // // 相当于 const obj = { a: 'a' };
+        // const obj = { a };
+        // console.log(obj);
+    </script>
+</body>
+
+</html>

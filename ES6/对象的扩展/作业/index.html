@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr1 = [1, 2, 3];
+        let arr2 = [4, 3, 2];
+        // 并集
+        let union = new Set([...arr1, ...arr2]);
+        // 交集
+        let intersect = new Set(arr1.filter(item => arr2.includes(item)));
+        // 交集
+        let except = new Set(arr1.filter(item => !arr2.includes(item)));
+
+        console.log('并集', Array.from(union));
+        console.log('交集', Array.from(intersect));
+        console.log('交集', Array.from(except));
+    </script>
+</body>
+
+</html>
