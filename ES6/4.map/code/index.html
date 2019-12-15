@@ -1,0 +1,93 @@
+<!--
+ * @Author: zhangl
+ * @GitHub: https://github.com/SmithJson
+ * @Date: 2019-12-14 23:17:59
+ * @LastEditTime: 2019-12-15 14:00:13
+ * @LastEditors: zhangl
+ * @Description: Map 数据类型
+ * @FilePath: /FE-Subjects/ES6/4.map/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const obj = {
+        //     data: [1, 2, 3],
+        //     [Symbol.iterator]() {
+        //         let nextIndex = 0;
+        //         const self = this;
+
+        //         return {
+        //             next() {
+        //                 const data = self.data;
+        //                 const isDone = nextIndex >= data.length;
+
+        //                 return {
+        //                     value: data[nextIndex++],
+        //                     done: isDone,
+        //                 };
+        //             },
+        //         };
+        //     },
+        // };
+
+        // for (const iterator of obj) {
+        //     console.log(iterator);
+        // }
+
+        // iterator 执行过程模拟
+        // const arr = [1, 2, 3];
+        // const makeIterator = function (arr) {
+        //     let nextIndex = 0;
+
+        //     return {
+        //         next: function () {
+        //             let isDone = nextIndex >= arr.length;
+
+        //             return {
+        //                 value: arr[nextIndex++],
+        //                 done: isDone,
+        //             };
+        //         }
+        //     };
+        // };
+
+        // const res = makeIterator(arr);
+        // console.log(res.next());
+        // console.log(res.next());
+        // console.log(res.next());
+        // console.log(res.next());
+
+
+        // map 数据接受数组作为参数的本质
+        // const arr = [
+        //     ['name', 'zhangl'],
+        //     [3 > 1, 'yeah'],
+        // ];
+        // arr.forEach(([key, value]) => console.log(key, value));
+
+
+        // 证明 map 是引用数据类型
+        // const map = new Map();
+        // console.log(map instanceof Map); // true
+        // console.log(Object.prototype.toString.call(map)); // "[object Map]"
+
+        // 声明 map 对象
+        // const map = new Map();
+        // const o = {
+        //     name: 'zhangl'
+        // };
+        // map.set(o, 'content');
+        // console.log(map.get(o));
+    </script>
+</body>
+
+</html>
