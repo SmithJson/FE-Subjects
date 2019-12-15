@@ -1,0 +1,67 @@
+<!--
+ * @Author: zhangl
+ * @GitHub: https://github.com/SmithJson
+ * @Date: 2019-12-15 14:06:42
+ * @LastEditTime: 2019-12-15 23:29:22
+ * @LastEditors: zhangl
+ * @Description: 箭头函数
+ * @FilePath: /FE-Subjects/ES6/5.箭头函数/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 箭头函数
+        // 函数参数展开运算符打包
+        // // 计算 1, 2, 3的合
+        // function test(...rest) {
+        //     let sum = 0;
+
+        //     for (const iterator of rest) {
+        //         sum += iterator;
+        //     }
+
+        //     return sum;
+        // }
+
+        // console.log(test(1, 2, 3));
+
+        // 函数的作用域会形成一个单独的作用域
+        // let x = 1;
+        // // 函数参数作用域
+        // function test(y = x) {
+        //     let x = 2;
+        //     console.log(y); // 1
+        // }
+
+        // test();
+
+        // 函数参数解构赋值
+        // function test({ x, y = 'i am y' } = {}) {
+        //     console.log(x);
+        //     console.log(y);
+        // }
+
+        // test({ x: 1, y: null });
+
+        // 函数默认值
+        // function test(x, y = 'i am y') {
+        //     console.log(x); // undefined
+        //     console.log(y); // i am y
+        // }
+
+        // test();
+    </script>
+
+
+</body>
+
+</html>
