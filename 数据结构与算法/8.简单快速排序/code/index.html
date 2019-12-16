@@ -1,0 +1,47 @@
+<!--
+ * @Author: zhangl
+ * @GitHub: https://github.com/SmithJson
+ * @Date: 2019-12-16 22:55:01
+ * @LastEditTime: 2019-12-16 23:17:45
+ * @LastEditors: zhangl
+ * @Description: 简单快速排序,设置比较数 X，左边放小于 X 的数，右边放大于 X 的数
+ * @FilePath: /FE-Subjects/数据结构与算法/8.简单快速排序/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [4, 1, 6, 9, 3, 2, 8, 7];
+
+        function quickSort(arr) {
+            if (arr == null || arr.length === 0) return [];
+
+            var leader = arr[0];
+            var left = [];
+            var right = [];
+
+            for (var i = 1; i < arr.length; i++) {
+                if (leader >= arr[i]) left.push(arr[i]);
+                else right.push(arr[i]);
+            }
+
+            left = quickSort(left);
+            right = quickSort(right);
+            left.push(leader);
+
+            return left.concat(right);
+        }
+
+        console.log(quickSort(arr));
+    </script>
+</body>
+
+</html>

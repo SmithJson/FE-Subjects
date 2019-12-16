@@ -2,9 +2,9 @@
  * @Author: zhangl
  * @GitHub: https://github.com/SmithJson
  * @Date: 2019-12-07 23:44:37
- * @LastEditTime: 2019-12-10 23:54:23
+ * @LastEditTime: 2019-12-16 00:12:14
  * @LastEditors: zhangl
- * @Description: 冒泡排序：相邻两个树进行比较，如果前面的数大于后面则交换两者位置
+ * @Description: 冒泡排序：相邻两个数进行比较，如果前面的数大于后面则交换两者位置
  * @FilePath: /FE-Subjects/数据结构与算法/6.冒泡排序/code/index.html
  -->
 <!DOCTYPE html>
@@ -21,10 +21,12 @@
     <script>
         var arr1 = [1, 0, 10, 8, 5, 4, 3, 9, 6, 2, 7];
 
+        // 比较
         function compare(a, b) {
             return a > b;
         }
 
+        // 交换
         function swap(arr, a, b) {
             var tem;
 
