@@ -1,0 +1,60 @@
+<!--
+ * @Author: zhangl
+ * @GitHub: https://github.com/SmithJson
+ * @Date: 2019-12-17 23:12:35
+ * @LastEditTime: 2019-12-17 23:43:23
+ * @LastEditors: zhangl
+ * @Description: 标准快速排序
+ * @FilePath: /FE-Subjects/数据结构与算法/9.标准快速排序/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [3, 2, 1];
+
+        function swap(arr, a, b) {
+            var tem;
+
+            tem = arr[a];
+            arr[a] = arr[b];
+            arr[b] = tem;
+        }
+
+        function quickSort2(arr, begin, end) {
+            if (begin >= end - 1) return;
+
+            var left = begin;
+            var right = end;
+            var leader = arr[begin];
+
+            do {
+                do left++; while (left < right && arr[left] < leader);
+                do right--; while (left < right && arr[right] > leader);
+            } while (left < right);
+
+            var swapPoint = left === right ? right - 1 : right;
+
+            swap(arr, begin, swapPoint);
+            quickSort2(arr, begin, swapPoint);
+            quickSort2(arr, swapPoint + 1, end);
+        }
+
+        function quickSort(arr) {
+            quickSort2(arr, 0, arr.length);
+        }
+
+        quickSort(arr);
+        console.log(arr);
+    </script>
+</body>
+
+</html>
