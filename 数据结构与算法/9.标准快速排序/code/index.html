@@ -2,8 +2,8 @@
  * @Author: zhangl
  * @GitHub: https://github.com/SmithJson
  * @Date: 2019-12-17 23:12:35
- * @LastEditTime: 2019-12-17 23:43:23
- * @LastEditors: zhangl
+ * @LastEditTime : 2019-12-18 23:52:21
+ * @LastEditors  : zhangl
  * @Description: 标准快速排序
  * @FilePath: /FE-Subjects/数据结构与算法/9.标准快速排序/code/index.html
  -->
@@ -34,11 +34,13 @@
 
             var left = begin;
             var right = end;
-            var leader = arr[begin];
+            var key = arr[begin];
 
             do {
-                do left++; while (left < right && arr[left] < leader);
-                do right--; while (left < right && arr[right] > leader);
+                do left++; while (left < right && arr[left] < key);
+                do right--; while (left < right && arr[right] > key);
+
+                if (left < right) swap(arr, left, right);
             } while (left < right);
 
             var swapPoint = left === right ? right - 1 : right;
