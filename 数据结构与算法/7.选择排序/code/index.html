@@ -2,8 +2,8 @@
  * @Author: zhangl
  * @GitHub: https://github.com/SmithJson
  * @Date: 2019-12-10 23:46:48
- * @LastEditTime: 2019-12-16 00:29:13
- * @LastEditors: zhangl
+ * @LastEditTime : 2019-12-19 01:18:28
+ * @LastEditors  : zhangl
  * @Description: 选择排序：记录最大数的索引，然后与倒数的数进行位置交换
  * @FilePath: /FE-Subjects/数据结构与算法/7.选择排序/code/index.html
  -->
@@ -35,16 +35,15 @@
 
         function selectSort(arr) {
             var len = arr.length;
+            var maxIndex;
 
             for (var i = 0; i < len; i++) {
-                var maxIndex = 0;
-
+                maxIndex = 0;
                 for (var j = 0; j < len - i; j++) {
                     if (compare(arr[j], arr[maxIndex])) {
                         maxIndex = j;
                     }
                 }
-
                 swap(arr, maxIndex, len - 1 - i);
             }
         }

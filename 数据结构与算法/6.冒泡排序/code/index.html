@@ -2,8 +2,8 @@
  * @Author: zhangl
  * @GitHub: https://github.com/SmithJson
  * @Date: 2019-12-07 23:44:37
- * @LastEditTime: 2019-12-16 00:12:14
- * @LastEditors: zhangl
+ * @LastEditTime : 2019-12-19 01:12:09
+ * @LastEditors  : zhangl
  * @Description: 冒泡排序：相邻两个数进行比较，如果前面的数大于后面则交换两者位置
  * @FilePath: /FE-Subjects/数据结构与算法/6.冒泡排序/code/index.html
  -->
@@ -25,21 +25,19 @@
         function compare(a, b) {
             return a > b;
         }
-
         // 交换
         function swap(arr, a, b) {
-            var tem;
+            var tem = arr[a];
 
-            tem = arr[a];
             arr[a] = arr[b];
             arr[b] = tem;
         }
-
+        // 冒泡排序
         function bubbleSort(arr) {
             var len = arr.length;
 
             for (var i = 0; i < len; i++) {
-                for (var j = 0; j < len - 1 - i; j++) {
+                for (var j = 0; j < len - 1- i; j++) {
                     if (compare(arr[j], arr[j + 1])) {
                         swap(arr, j, j + 1);
                     }

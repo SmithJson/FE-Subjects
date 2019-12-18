@@ -19,12 +19,12 @@
 
 <body>
     <script>
-        var arr = [3, 2, 1];
+        var arr = [3, 2, 1, 0, 1, 9, 8];
 
+        // 交换
         function swap(arr, a, b) {
-            var tem;
+            var tem = arr[a];
 
-            tem = arr[a];
             arr[a] = arr[b];
             arr[b] = tem;
         }
@@ -34,11 +34,11 @@
 
             var left = begin;
             var right = end;
-            var key = arr[begin];
+            var leader = arr[begin];
 
             do {
-                do left++; while (left < right && arr[left] < key);
-                do right--; while (left < right && arr[right] > key);
+                do left++;while (left < right && arr[left] < leader);
+                do right--;while (left < right && arr[right] > leader);
 
                 if (left < right) swap(arr, left, right);
             } while (left < right);
