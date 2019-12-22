@@ -1,0 +1,179 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2019-12-20 11:36:16
+ * @GitHub: https://github.com/SmithJson
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2019-12-20 11:36:29
+ * @Description: class类
+ * @FilePath: /FE-Subjects/ES6/6.class/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 私有属性和私有方法
+        // class Person {
+        //     #name = 1231;
+        //     get() {
+        //         return this.#name;
+        //     }
+        // }
+
+        // let p1 = new Person();
+        // console.log(p1.get());
+        // console.log(p1.#name); // 会报错，私有属性，只能只能在类的内部使用
+
+
+        // 实例属性新写法
+        // class Person {
+        //     // 实例属性新写法
+        //     name = 'zhangl';
+        //     // 静态属性
+        //     static prop = '123';
+        // }
+
+        // let p1 = new Person();
+        // console.log(p1.name);
+        // console.log(Person.prop);
+
+
+        // 解决 this 指向错误的问退
+        // class Person {
+        //     // 类内部的默认采用严格模式，所以当使用解构赋值调用 eat 函数
+        //     // 里面的 this 为 undefined
+        //     // 可以用箭头函数或 bind 解决
+        //     // eat() {
+        //     //     console.log(this);
+        //     //     this.get();
+        //     // }
+
+        //     constructor() {
+        //         // 方法二
+        //         // this.eat = this.eat.bind(this);
+        //     }
+
+        //     // 方法一
+        //     eat = () => this.get();
+
+        //     get() {
+        //         console.log('获得食物');
+        //     }
+        // }
+
+        // let p1 = new Person();
+        // let { eat } = p1;
+        // eat();
+
+        // 取值函数与存值函数
+        // ES6
+        // class MyClass {
+        //     get prop() {
+        //         return MyClass.prop;
+        //     }
+        //     set prop(value) {
+        //         // 错误，会导致一直调用 set 操作
+        //         // this.prop = value;
+        //         MyClass.prop = value;
+        //     }
+        // }
+
+        // let my = new MyClass();
+        // my.prop = 'zhangl';
+        // console.log(my.prop);
+
+        // ES5
+        // const person = {
+        //     get name() {
+        //         console.log('调用 get');
+        //         return name
+        //     },
+        //     set name(value) {
+        //         console.log('调用 set');
+        //         name = value;
+        //     }
+        // };
+
+        // person.name = 'tony'; // 调用 set 操作
+        // console.log(person.name); // tony // 调用 get 操作
+
+
+        // 共享原型对象
+        // class Person {
+        //     constructor() {}
+        // }
+        // Person.prototype.get = function () {
+        //     console.log('父类');
+        // };
+
+        // let p1 = new Person();
+        // let p2 = new Person();
+
+        // p1.get();
+        // p2.get();
+
+
+        // class Car {
+        //     constructor() {
+        //         console.log(this);
+
+        //         return Object.create(null);
+        //     }
+        // }
+
+        // 类似于
+        // Car.prototype = {
+        //     constructor() {},
+        // };
+
+        // let bmp = new Car();
+        // console.log(bmp instanceof Car); // false
+
+
+
+
+
+
+
+        // ES6
+        // class Person {
+        //     constructor(name, age) {
+        //         this.name = name;
+        //         this.age = age;
+        //     }
+
+        //     say() {
+        //         console.log(`我是${this.name}`);
+        //     }
+        // }
+
+        // let p1 = new Person('李四', 18);
+        // p1.say();
+        // let p2 = new Person();
+        // console.log(typeof Person.constructor); // "function"
+        // console.log(p2.constructor === Person);
+
+        // ES5
+        // Person.prototype.say = function () {
+        //     console.log(`我是${this.name}`);
+        // };
+        // 错误写法
+        // Person.prototype.say = () => {
+        //     console.log(`我是${this.name}`);
+        // };
+
+        // function Person(name, age) {
+        //     this.name = name;
+        //     this.age = age;
+        // }
+
+        // let p1 = new Person('张三', 18);
+        // p1.say();
+    </script>
+</body>
+</html>

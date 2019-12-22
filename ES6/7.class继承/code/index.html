@@ -1,0 +1,92 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2019-12-20 20:04:18
+ * @GitHub: https://github.com/SmithJson
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2019-12-20 20:23:01
+ * @Description: ES6 class继承
+ * @FilePath: /FE-Subjects/ES6/7.class继承/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // super 关键字
+        // class Father {
+        //     static num  =1;
+
+        //     static get() {
+        //         console.log(`static-${this.num}`);
+        //     }
+
+        //     get() {
+        //         console.log(`普通-${this.num}`);
+        //     }
+        // }
+
+        // class Children extends Father {
+        //     constructor() {
+        //         super();
+
+        //         this.num = 2;
+        //         super.num = 3;
+
+        //         console.log(super.num); // undefined
+        //         console.log(this.num); // 3
+        //     }
+
+        //     static get() {
+        //         super.get();
+        //     }
+
+        //     get() {
+        //         super.get();
+        //     }
+        // }
+
+        // Children.get(); // static-1
+        // let c1 = new Children();
+        // c1.get(); // 普通-3
+
+        /**
+         * super 关键字
+         * 继承必须调用 super 关键字
+         * 因为子类的 this 是通过父类的构造函数生成的
+         * 不调用 super 就无法，获得 this 对象
+         * super() 只能在构造函数中
+         */
+        // class Father {
+        //     constructor() {
+        //         this.name = '父亲';
+        //         this.age = 33;
+        //     }
+
+        //     work() {
+        //         console.log('我是父亲');
+        //     }
+        // }
+
+        // class Children extends Father {
+        //     constructor(name, job) {
+        //         super();
+        //         this.name = name;
+        //         this.job = job;
+        //     }
+        // }
+
+        // let c1 = new Children('zhangl', 'programmer');
+
+
+        // 对象的有写属性我们能够直接访问到
+        // js 有些属性我们是访问不到的，比如[[scope]]
+        // 一般来说[[attribute]]这样的属性都有提给 js 引擎使用的
+        // [[scope]] 是执行期上下文的集合，以链表结构呈现，这个链表就是作用域链
+    </script>
+</body>
+</html>
