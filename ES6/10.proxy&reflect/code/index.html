@@ -1,0 +1,124 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2019-12-29 19:13:54
+ * @GitHub: https://github.com/SmithJson
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2019-12-29 22:39:27
+ * @Description: promise & reflect
+ * @FilePath: /FE-Subjects/ES6/10.proxy&reflect/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta ht1073741824tp-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let obj = {
+        //     get do() {
+        //         return `${this.name} is ${this.identify}`;
+        //     }
+        // };
+        // let person = {
+        //     name: 'zhangl',
+        //     identify: 'student',
+        // };
+
+        // let res = Reflect.get(obj, 'do', person);
+
+        // console.log(res);
+
+        // function Person(name) {
+        //     this.name = name;
+        // }
+        // let person = new Person('tony');
+        // let proxy = new Proxy(Person, {
+        //     construct(target, key) {
+        //         return {
+        //             name: 'zhangl',
+        //             age: 18,
+        //         };
+        //     }
+        // });
+        // console.log(new proxy('张三') instanceof proxy)
+
+
+        // let father = {
+        //     name: 'father',
+        // };
+        // let son = {
+        //     _prop: '私有',
+        //     prop: 'b',
+        // };
+        // son.__proto__ = father;
+        // let handle = {
+        //     has(target, key) {
+        //         if (/^_/.test(key)) {
+        //             return false;
+        //         }
+        //         return key in target;
+        //     }
+        // };
+        // let proxy = new Proxy(son, handle);
+
+        // console.log('_prop' in proxy); // false
+        // console.log('prop' in proxy); // true
+        // console.log('name' in proxy); // true
+
+
+        // let target = function () {
+        //     return '函数调用';
+        // }
+        // let handle = {
+        //     apply(target, thisArgs, args) {
+        //         console.log(target, thisArgs, args);
+
+        //         return 456;
+        //     }
+        // };
+
+        // let proxy = new Proxy(target, handle);
+
+        // console.log(proxy(123));
+
+
+        // deleteProperty
+        // let obj = {
+        //     name: 'zhangl',
+        // };
+        // let handle = {
+        //     deleteProperty(target, key) {
+        //         delete target[key];
+        //     }
+        // };
+        // let proxy = new Proxy(obj, handle);
+
+        // delete proxy.name;
+        // console.log(proxy);
+
+
+        // 需求：禁止外部访问内部属性，默认带 _name 的是内部属性
+        // let obj = {
+        //     _proto: '内部属性',
+        // };
+
+        // let handle = {
+        //     set(target, key, value, proxy) {
+        //         target[key] = value;
+        //     },
+        //     get(target, key, proxy) {
+        //         if (!/^_/.test(key)) {
+        //             return target[key];
+        //         }
+        //     },
+        // };
+        // let proxy = new Proxy(obj, handle);
+
+        // proxy._proto = 123;
+        // console.log(proxy._proto);
+    </script>
+</body>
+</html>
