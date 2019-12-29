@@ -1,0 +1,204 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2019-12-29 01:17:34
+ * @GitHub: https://github.com/SmithJson
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2019-12-29 13:04:40
+ * @Description: generator和异步函数
+ * @FilePath: /FE-Subjects/ES6/9.generator和异步函数/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        // 基础请求路径
+        const baseUrl = 'http://rap2api.taobao.org/app/mock/241170';
+        function request(url) {
+            return axios.get(url);
+        }
+
+        // async function get() {
+        //     const res = await request(`${baseUrl}/name`);
+        //     console.log(res);
+        //     const { data } = res;
+        //     const { data: result } = data;
+        //     const [{ id }] = result;
+        //     const res2 = await request(`${baseUrl}/weapon?id=${id}`);
+        //     console.log(res2);
+
+        //     return 123;
+        // }
+
+        // const result = get();
+        // result.then(res => console.log(res));
+
+        async function asyncPromise() {
+            const result = await Promise.all([
+                request(`${baseUrl}/name`),
+                request(`${baseUrl}/weapon?id=1`)
+            ]);
+
+            return result;
+        }
+
+        asyncPromise().then(res => console.log(res));
+
+        // function request(url) {
+        //     axios
+        //         .get(url)
+        //         .then(res => result.next(res));
+        // }
+
+        // function* get() {
+        //     const res = yield request(`${baseUrl}/name`);
+        //     console.log(res);
+        //     const { data } = res;
+        //     const { data: result } = data;
+        //     const [{ id }] = result;
+        //     const res2 = yield request(`${baseUrl}/weapon?id=${id}`);
+        //     console.log(res2);
+        // }
+
+        // const result = get();
+        // result.next();
+
+
+        // const gen = function* () {
+        //     this.a = 1;
+        //     yield this.b = 2;
+        //     yield this.c = 3;
+        // };
+
+        // // generator 对象能从原型上继承属性
+        // const g = gen.call(gen.prototype);
+        // console.log(g instanceof gen); // true
+        // console.log(g.next());
+        // console.log(g.next());
+        // console.log(g.next());
+        // console.log(g.a);
+        // console.log(g.b);
+        // console.log(g.c);
+
+        // function* first() {
+        //     yield 2;
+        //     yield 3;
+        // }
+
+        // function* second() {
+        //     yield 1;
+        //     yield * first();
+        //     yield 4;
+        // }
+
+        // for (const v of second()) {
+        //     console.log(v);
+        // }
+
+
+        // function* gen() {
+        //     yield 1;
+        //     yield 2;
+        //     yield 3;
+        // }
+
+        // const g = gen();
+        // console.log(g.next());
+        // console.log(g.return('res')); // 相当于 return，遍历器到这个位置结束
+        // console.log(g.next());
+
+        // // 内部捕获外部异常
+        // function* gen1() {
+        //     try {
+        //         yield;
+        //     } catch(err) {
+        //         console.log(err)
+        //     }
+        // }
+
+        // const g1 = gen1();
+        // g1.next();
+        // g1.throw('错误1');
+
+        // // 外部捕获内部错误
+        // function* gen2() {
+        //     yield;
+        // }
+
+        // const g2 = gen2();
+        // g2.next();
+
+        // try {
+        //     g2.throw('错误2');
+        // } catch(err) {
+        //     console.log(err)
+        // }
+
+        // function* gen() {
+        //     yield 1;
+        //     yield 2;
+        //     yield 3;
+        //     yield 4;
+        //     return 123;
+        // }
+
+        // for (const v of gen()) {
+        //     console.log(v);
+        // }
+
+        // function* helloGenerator() {
+        //     const res1 = yield 123;
+        //      // 这里是第二个 next 的参数
+        //     console.log(res1);
+        //     const res2 = yield 456;
+        //      // 这里是第三个 next 的参数
+        //     console.log(res2);
+        //     const res3 = yield 789;
+        //      // 这里是第四个 next 的参数
+        //     console.log(res3);
+        // }
+
+        // const res = helloGenerator();
+        // console.log(res.next());
+        // console.log(res.next('第二次'));
+        // console.log(res.next('第三次'));
+        // console.log(res.next('第四次'));
+
+        // Object.prototype[Symbol.iterator] = function* () {
+        //     for (const [key, value] of Object.entries(this)) {
+        //         yield { key, value };
+        //     }
+        // };
+
+        // const myIterator = {
+        //     name: 'zhangl',
+        //     age: 18,
+        //     gender: 'male',
+        // };
+
+        // console.log([...myIterator]);
+
+        // function* fn() {
+        //     console.log('暂缓执行');
+        // }
+
+        // const res = fn();
+        // console.log(res.next());
+
+        // function* helloGenerator() {
+        //     yield 'hello';
+        //     yield 'world';
+        //     return 123;
+        // }
+
+        // const res = helloGenerator();
+        // console.log(res.next());
+    </script>
+</body>
+</html>
