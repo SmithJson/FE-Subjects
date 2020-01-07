@@ -133,6 +133,9 @@ const app = http.createServer((request, response) => {
     response.end();
 });
 
+// 监听所有网络请求
+// app.on('request', (req, res) => {});
+
 app.listen(3000, () => {
     console.log(`http://127.0.0.1 is running`);
 });

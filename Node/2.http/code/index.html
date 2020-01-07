@@ -1,0 +1,62 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-01-07 21:49:54
+ * @GitHub: https://github.com/SmithJson
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-01-08 00:04:17
+ * @Description: Do not edit
+ * @FilePath: /FE-Subjects/Node/2.http/code/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="msg"></div>
+    <input type="text" class="i-msg">
+    <button class="send-btn">发送</button>
+    <script>
+        const msgShow = document.getElementsByClassName('msg')[0];
+        const msgSendInput = document.getElementsByClassName('i-msg')[0];
+        const btnSend = document.getElementsByClassName('send-btn')[0];
+        const ws = new WebSocket('ws://localhost:3000');
+
+        function sendMessage(data) {
+            ws.send(data);
+        }
+
+        ws.onopen = function (e) {
+            sendMessage('zhangl');
+        };
+
+        ws.onmessage = function (res) {
+            msgShow.innerHTML = res.data;
+        };
+
+        btnSend.onclick = function () {
+            sendMessage(msgSendInput.value);
+        };
+    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        // axios.default.baseUrl = 'http://127.0.0.1:3000';
+        // 跨域携带 cookie true 允许带 cookie
+        // axios.defaults.withCredentials = true;
+        // axios.defaults.headers.common['Authorization'] = 'NCUT:1001';
+        // axios.defaults.headers.common['X-Token'] = '19951060119';
+
+        // 跨域前端自己设置的 Cookie 不能通过请求头携带到服务端
+        // document.cookie='name=zhangl';
+
+        // axios
+        //     .get('https://localhost:3000/')
+        //     .then(res => {
+        //         console.log(res);
+        //     });
+    </script>
+</body>
+</html>

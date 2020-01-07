@@ -3,7 +3,7 @@
  * @Date: 2020-01-03 15:29:44
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-03 16:35:32
+ * @LastEditTime : 2020-01-06 23:36:07
  * @Description: 模拟p promise
  * @FilePath: /FE-Subjects/Node/1.node基础/code/express.js
  */
@@ -38,7 +38,7 @@ class Express {
                 item.url === decodeURI(pathname) && method === item.method
             ));
 
-            res.query = urlObj.query;
+            res.query = query;
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json; charset=utf-8');
             router && router.handle && router.handle(req, res);
