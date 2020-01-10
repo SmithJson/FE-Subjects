@@ -94,6 +94,8 @@ app.listen(3000, (res) => {
 });
 ```
 
+终端执行 telnet localhost 3000 进行访问
+
 ## 建立 HTTPS 服务
 
 生成本地 SSL 证书
