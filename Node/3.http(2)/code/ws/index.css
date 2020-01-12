@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root, body, .wrapper {
+    color: #333;
+    background: #f3f3f3;
+    height: 100%;
+}
+
+.wrapper .content {
+    padding-bottom: 60px;
+    overflow: hidden;
+}
+
+.wrapper .content .role {
+    width: 40px;
+}
+
+.wrapper .content .speak {
+    max-width: 45%;
+    background: #a2e563;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.wrapper .content .mine {
+    margin: 15px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wrapper .content .mine .speak {
+    text-align: right;
+}
+
+.wrapper .content .mine p:first-child {
+    order: 2;
+}
+
+.wrapper .content .mine p:last-child {
+    order: 1;
+}
+
+.wrapper .content .other {
+    display: flex;
+    margin: 15px 0;
+    justify-content: flex-start;
+}
+
+.wrapper .content .other .role {
+    text-align: right;
+}
+
+.wrapper .content .other .speak {
+    background: #fff;
+}
+
+.wrapper .content p {
+    margin: 0 5px;
+}
+
+.wrapper .send-box {
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    position: fixed;
+    display: flex;
+}
+
+.wrapper .send-box input {
+    flex-grow: 3;
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.wrapper .send-box button {
+    flex-grow: 1;
+}
