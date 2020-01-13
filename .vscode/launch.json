@@ -7,11 +7,15 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "nodemon",
+            "runtimeExecutable": "nodemon",
+            "program": "${workspaceFolder}/Node/5.data-base/code/mysql-demo/index.js",
+            "restart": true,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
             "skipFiles": [
                 "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/Node/4.express/code/index.js"
+            ]
         }
     ]
 }
