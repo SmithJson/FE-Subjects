@@ -1,0 +1,6 @@
+###
+
+# GET 请求
+GET http://localhost:3000/api/blog/list
+    ?author=一叶小和尚&keyword=玄幻
+

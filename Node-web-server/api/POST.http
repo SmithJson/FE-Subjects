@@ -1,0 +1,10 @@
+###
+
+# POST 请求
+POST http://localhost:3000/api/blog?id=1
+Content-Type: 'application/json'
+
+{
+    "titile": "文章标题A",
+    "content": "文章内容A"
+}
