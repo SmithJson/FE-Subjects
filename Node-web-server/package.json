@@ -4,9 +4,13 @@
   "description": "[toc]",
   "main": "app.js",
   "scripts": {
-    "dev": "node app.js"
+    "dev": "cross-env NODE_ENV=dev nodemon ./bin/www",
+    "prd": "cross-env NODE_ENV=production nodemon ./bin/www"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^6.0.3"
+  }
 }

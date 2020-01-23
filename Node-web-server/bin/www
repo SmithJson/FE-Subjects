@@ -1,0 +1,17 @@
+/*
+ * @Author: zhangl
+ * @Date: 2020-01-23 02:29:22
+ * @GitHub: https://github.com/SmithJson
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-01-23 02:30:40
+ * @Description: Do not edit
+ * @FilePath: /FE-Subjects/Node-web-server/bin/www.js
+ */
+const http = require('http');
+const app = require('../app');
+
+const PORT = 3000;
+const server = http.createServer(app);
+
+server.listen(PORT);
+

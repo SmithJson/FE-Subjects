@@ -1,0 +1,26 @@
+###
+
+# 博客创建
+POST http://localhost:3000/api/blog/new
+Content-Type: 'application/json'
+
+{
+    "titile": "创建文章标题",
+    "content": "创建文章内容"
+}
+
+###
+
+# 博客更新
+POST http://localhost:3000/api/blog/update?id=1
+Content-Type: 'application/json'
+
+{
+    "titile": "更新文章标题",
+    "content": "更新文章内容"
+}
+
+###
+
+# 博客删除
+POST http://localhost:3000/api/blog/delete?id=1
