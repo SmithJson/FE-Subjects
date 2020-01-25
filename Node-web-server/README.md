@@ -112,3 +112,11 @@ const server = http.createServer((req, res) => {
 server.listen(3000, () => console.log('OK'));
 ```
 
+## 抽离代码
+
+- bin：创建 http 服务
+- app.js：对请求服务的集中处理
+- router：路由代码管理
+- model：返回数据模型
+- controller：处理需要返回数据
+

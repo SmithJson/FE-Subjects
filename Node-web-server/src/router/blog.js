@@ -3,28 +3,43 @@
  * @Date: 2020-01-24 01:44:18
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-24 02:06:54
+ * @LastEditTime : 2020-01-25 03:14:59
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/router/blog.js
  */
+const {
+    SuccessModel,
+    ErrorModel,
+} = require('../model/resModel');
+const {
+    getList,
+    getDetail,
+} = require('../controller/blog');
+
 const handleBlogRouter = (req, res) => {
     const {
         method,
         path,
+        query,
     } = req;
 
     // 博客列表
     if (method === 'GET' && path === '/api/blog/list') {
-        return {
-            msg: '这是博客列表接口',
-        };
+        const {
+            author,
+            keyword,
+        } = query;
+        const data = getList(author, keyword);
+
+        return new SuccessModel(data);
     }
 
     // 博客详情
     if (method === 'GET' && path === '/api/blog/detail') {
-        return {
-            msg: '这是博客详情接口',
-        };
+        const { id } = query;
+        const data = getDetail(id);
+
+        return new SuccessModel(data);
     }
 
     // 博客创建
