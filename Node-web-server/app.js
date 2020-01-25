@@ -3,7 +3,7 @@
  * @Date: 2020-01-21 19:08:02
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-25 02:15:10
+ * @LastEditTime : 2020-01-26 01:51:39
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/app.js
  */
@@ -11,6 +11,39 @@ const querystring = require('querystring');
 const handleBlogRouter = require('./src/router/blog');
 const handleUserRouter = require('./src/router/user');
 
+const getPostData = req => {
+    return new Promise((resolve, reject) => {
+        const {
+            method,
+            headers,
+        } = req;
+        let postData = '';
+
+        if (method !== 'POST') {
+            resolve({});
+
+            return;
+        }
+
+        if (headers['content-type'] !== 'application/json') {
+            resolve({});
+            console.log(headers['content-type'] !== 'application/json')
+
+            return;
+        }
+
+        req.on('data', chunk => postData += chunk.toString());
+        req.on('end', () => {
+            if (!postData) {
+                resolve({});
+
+                return;
+            }
+
+            resolve(JSON.parse(postData));
+        });
+    });
+};
 const serverHandle = (req, res) => {
     const { url } = req;
 
@@ -18,27 +51,33 @@ const serverHandle = (req, res) => {
     req.path = decodeURIComponent(url).split('?')[0];
     req.query = querystring.parse(decodeURIComponent(url).split('?')[1]);
 
-    const blogData = handleBlogRouter(req, res);
+    getPostData(req)
+        .then(postData => {
+            req.body = postData;
+            console.log(postData)
 
-    if (blogData) {
-        res.end(JSON.stringify(blogData));
+            const blogData = handleBlogRouter(req, res);
 
-        return;
-    }
+            if (blogData) {
+                res.end(JSON.stringify(blogData));
 
-    const userData = handleUserRouter(req, res);
+                return;
+            }
 
-    if (userData) {
-        res.end(JSON.stringify(userData));
+            const userData = handleUserRouter(req, res);
 
-        return;
-    }
+            if (userData) {
+                res.end(JSON.stringify(userData));
 
-    res.writeHead(404, {
-        'Content-Type': 'text/plain',
-    });
-    res.write('404 Not Found');
-    res.end();
+                return;
+            }
+
+            res.writeHead(404, {
+                'Content-Type': 'text/plain',
+            });
+            res.write('404 Not Found');
+            res.end();
+        });
 };
 
 module.exports = serverHandle;

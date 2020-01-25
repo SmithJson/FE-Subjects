@@ -2,7 +2,7 @@
 
 # 博客创建
 POST http://localhost:3000/api/blog/new
-Content-Type: 'application/json'
+Content-Type: application/json
 
 {
     "titile": "创建文章标题",
@@ -13,7 +13,7 @@ Content-Type: 'application/json'
 
 # 博客更新
 POST http://localhost:3000/api/blog/update?id=1
-Content-Type: 'application/json'
+Content-Type: application/json
 
 {
     "titile": "更新文章标题",
