@@ -3,7 +3,7 @@
  * @Date: 2020-01-24 01:44:18
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-25 03:14:59
+ * @LastEditTime : 2020-01-26 17:05:18
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/router/blog.js
  */
@@ -14,6 +14,9 @@ const {
 const {
     getList,
     getDetail,
+    createBlog,
+    updateBlog,
+    deleteBlog,
 } = require('../controller/blog');
 
 const handleBlogRouter = (req, res) => {
@@ -21,7 +24,9 @@ const handleBlogRouter = (req, res) => {
         method,
         path,
         query,
+        body,
     } = req;
+    const { id } = query;
 
     // 博客列表
     if (method === 'GET' && path === '/api/blog/list') {
@@ -36,7 +41,6 @@ const handleBlogRouter = (req, res) => {
 
     // 博客详情
     if (method === 'GET' && path === '/api/blog/detail') {
-        const { id } = query;
         const data = getDetail(id);
 
         return new SuccessModel(data);
@@ -44,23 +48,27 @@ const handleBlogRouter = (req, res) => {
 
     // 博客创建
     if (method === 'POST' && path === '/api/blog/new') {
-        return {
-            msg: '这是博客创建接口',
-        };
+        const data = createBlog(body);
+
+        return new SuccessModel(data);
     }
 
     // 博客更新
     if (method === 'POST' && path === '/api/blog/update') {
-        return {
-            msg: '这是博客更新接口',
-        };
+        const data = updateBlog(id, body);
+
+        if (data) return new SuccessModel();
+
+        return new ErrorModel('博客更新失败');
     }
 
     // 博客删除
     if (method === 'POST' && path === '/api/blog/delete') {
-        return {
-            msg: '这是博客删除接口',
-        };
+        const data = deleteBlog(id);
+
+        if (data) return new SuccessModel();
+
+        return new ErrorModel('博客删除失败');
     }
 };
 

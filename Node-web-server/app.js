@@ -3,7 +3,7 @@
  * @Date: 2020-01-21 19:08:02
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-26 01:51:39
+ * @LastEditTime : 2020-01-26 16:47:02
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/app.js
  */
@@ -54,7 +54,6 @@ const serverHandle = (req, res) => {
     getPostData(req)
         .then(postData => {
             req.body = postData;
-            console.log(postData)
 
             const blogData = handleBlogRouter(req, res);
 
