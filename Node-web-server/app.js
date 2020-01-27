@@ -3,7 +3,7 @@
  * @Date: 2020-01-21 19:08:02
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-26 16:47:02
+ * @LastEditTime : 2020-01-28 02:22:33
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/app.js
  */
@@ -52,10 +52,10 @@ const serverHandle = (req, res) => {
     req.query = querystring.parse(decodeURIComponent(url).split('?')[1]);
 
     getPostData(req)
-        .then(postData => {
+        .then(async postData => {
             req.body = postData;
 
-            const blogData = handleBlogRouter(req, res);
+            const blogData = await handleBlogRouter(req, res);
 
             if (blogData) {
                 res.end(JSON.stringify(blogData));
@@ -63,7 +63,7 @@ const serverHandle = (req, res) => {
                 return;
             }
 
-            const userData = handleUserRouter(req, res);
+            const userData = await handleUserRouter(req, res);
 
             if (userData) {
                 res.end(JSON.stringify(userData));

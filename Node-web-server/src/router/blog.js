@@ -3,7 +3,7 @@
  * @Date: 2020-01-24 01:44:18
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-26 17:05:18
+ * @LastEditTime : 2020-01-28 02:13:58
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/router/blog.js
  */
@@ -19,7 +19,7 @@ const {
     deleteBlog,
 } = require('../controller/blog');
 
-const handleBlogRouter = (req, res) => {
+const handleBlogRouter = async (req, res) => {
     const {
         method,
         path,
@@ -30,32 +30,30 @@ const handleBlogRouter = (req, res) => {
 
     // 博客列表
     if (method === 'GET' && path === '/api/blog/list') {
-        const {
-            author,
-            keyword,
-        } = query;
-        const data = getList(author, keyword);
+        const data = await getList(query);
 
         return new SuccessModel(data);
     }
 
     // 博客详情
     if (method === 'GET' && path === '/api/blog/detail') {
-        const data = getDetail(id);
+        const data = await getDetail(query);
 
         return new SuccessModel(data);
     }
 
     // 博客创建
     if (method === 'POST' && path === '/api/blog/new') {
-        const data = createBlog(body);
+        body.author = '一叶小和尚'; // 假数据，开发了用户接口后实现真实数据
+
+        const data = await createBlog(body);
 
         return new SuccessModel(data);
     }
 
     // 博客更新
     if (method === 'POST' && path === '/api/blog/update') {
-        const data = updateBlog(id, body);
+        const data = await updateBlog({id, ...body});
 
         if (data) return new SuccessModel();
 
@@ -64,7 +62,9 @@ const handleBlogRouter = (req, res) => {
 
     // 博客删除
     if (method === 'POST' && path === '/api/blog/delete') {
-        const data = deleteBlog(id);
+        body.author = '一叶小和尚'; // 假数据，开发了用户接口后实现真实数据
+
+        const data = await deleteBlog({ id, ...body });
 
         if (data) return new SuccessModel();
 

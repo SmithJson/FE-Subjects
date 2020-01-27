@@ -3,16 +3,22 @@
  * @Date: 2020-01-26 17:06:23
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-26 17:11:21
+ * @LastEditTime : 2020-01-28 02:27:10
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/controller/user.js
  */
-const loginCheck = ({ username, password }) => {
-    if (username === 'zhangl' && password === '123456') {
-        return true;
-    }
+const { execute } = require('../db/mysql');
 
-    return false;
+const loginCheck = ({ username, password }) => {
+    const sql = `
+        SELECT username, realname
+        FROM users
+        WHERE username='${username}' AND password='${password}'
+    `;
+
+    return execute(sql).then(result => {
+        return result[0] || {};
+    });
 };
 
 module.exports = {

@@ -3,7 +3,7 @@
  * @Date: 2020-01-24 01:44:24
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-26 17:10:42
+ * @LastEditTime : 2020-01-28 02:28:26
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/router/user.js
  */
@@ -13,7 +13,7 @@ const {
 } = require('../model/resModel');
 const { loginCheck } = require('../controller/user');
 
-const handleUserRouter = (req, res) => {
+const handleUserRouter = async (req, res) => {
     const {
         method,
         path,
@@ -21,9 +21,10 @@ const handleUserRouter = (req, res) => {
     } = req;
 
     if (method === 'POST' && path === '/api/user/login') {
-        const data = loginCheck(body);
+        const data = await loginCheck(body);
+        const { username } = data;
 
-        if (data) return new SuccessModel();
+        if (username) return new SuccessModel();
 
         return new ErrorModel('登录失败');
     }
