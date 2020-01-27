@@ -3,7 +3,7 @@
  * @Date: 2020-01-25 02:12:44
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-28 02:26:18
+ * @LastEditTime : 2020-01-28 02:36:18
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/controller/blog.js
  */
@@ -15,11 +15,12 @@ const getList = ({ author, keyword }) => {
         SELECT id, title, content, createtime, author
         FROM blogs
         WHERE state=1
-        `;
+    `;
 
     if (author) sql += `
         AND author='${author}'
-        `;
+    `;
+
     if (keyword) sql += `
         AND title LIKE '%${keyword}%'
     `;
