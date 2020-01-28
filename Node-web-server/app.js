@@ -3,7 +3,7 @@
  * @Date: 2020-01-21 19:08:02
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-28 02:22:33
+ * @LastEditTime : 2020-01-29 03:41:36
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/app.js
  */
@@ -11,6 +11,26 @@ const querystring = require('querystring');
 const handleBlogRouter = require('./src/router/blog');
 const handleUserRouter = require('./src/router/user');
 
+const ALLOW_METHODS = [
+    'GET',
+    'PATCH',
+    'DELETE',
+    'POST',
+    'PUT',
+    'OPTIONS',
+],
+ALLOW_ORIGINS = [
+    'http://127.0.0.1:5500',
+],
+ALLOW_HEADERS = [
+    'Authorization',
+    'Content-Type',
+    'X-Token',
+],
+ALLOW_CONTENT_TYPE = [
+    'Application/json',
+    'charset=uft-8',
+];
 const getPostData = req => {
     return new Promise((resolve, reject) => {
         const {
@@ -27,7 +47,6 @@ const getPostData = req => {
 
         if (headers['content-type'] !== 'application/json') {
             resolve({});
-            console.log(headers['content-type'] !== 'application/json')
 
             return;
         }
@@ -45,38 +64,60 @@ const getPostData = req => {
     });
 };
 const serverHandle = (req, res) => {
-    const { url } = req;
+    const {
+        url,
+        method,
+        headers
+    } = req;
 
-    res.setHeader('Content-type', 'application/json;charset=utf-8');
+    res.setHeader('Access-Control-Allow-Origin', ALLOW_ORIGINS.join(','));
+    res.setHeader('Access-Control-Allow-Methods', ALLOW_METHODS.join(','));
+    res.setHeader('Access-Control-Allow-Headers', ALLOW_HEADERS.join(','));
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Content-Type', ALLOW_CONTENT_TYPE.join(','));
+
     req.path = decodeURIComponent(url).split('?')[0];
     req.query = querystring.parse(decodeURIComponent(url).split('?')[1]);
+    req.cookie = {};
 
-    getPostData(req)
-        .then(async postData => {
-            req.body = postData;
+    if (headers.cookie) {
+        headers.cookie.split(/;\s/).forEach(item => {
+            const [key, value] = item.split(/\=/);
 
-            const blogData = await handleBlogRouter(req, res);
-
-            if (blogData) {
-                res.end(JSON.stringify(blogData));
-
-                return;
-            }
-
-            const userData = await handleUserRouter(req, res);
-
-            if (userData) {
-                res.end(JSON.stringify(userData));
-
-                return;
-            }
-
-            res.writeHead(404, {
-                'Content-Type': 'text/plain',
-            });
-            res.write('404 Not Found');
-            res.end();
+            req.cookie[key] = value;
         });
+    }
+
+    if (method === 'OPTIONS') {
+        res.end();
+    } else {
+        getPostData(req)
+            .then(async postData => {
+                req.body = postData;
+
+                const blogData = await handleBlogRouter(req, res);
+
+                if (blogData) {
+                    res.end(JSON.stringify(blogData));
+
+                    return;
+                }
+
+                const userData = await handleUserRouter(req, res);
+
+                if (userData) {
+                    res.end(JSON.stringify(userData));
+
+                    return;
+                }
+
+                res.writeHead(404, {
+                    'Content-Type': 'text/plain',
+                });
+                res.write('404 Not Found');
+                res.end();
+            });
+    }
 };
 
 module.exports = serverHandle;

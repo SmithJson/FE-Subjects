@@ -1,0 +1,45 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-01-29 02:44:02
+ * @GitHub: https://github.com/SmithJson
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-01-29 03:04:51
+ * @Description: Do not edit
+ * @FilePath: /FE-Subjects/Node-web-server/test/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        axios.defaults.baseURL = 'http://localhost:3000/api';
+        axios({
+            method: 'post',
+            url: '/user/login',
+            data: {
+                "username": "lisi",
+                "password": "zl123456"
+            },
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    </script>
+</body>
+
+</html>

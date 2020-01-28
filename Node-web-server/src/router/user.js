@@ -3,7 +3,7 @@
  * @Date: 2020-01-24 01:44:24
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-28 02:28:26
+ * @LastEditTime : 2020-01-29 03:20:29
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/router/user.js
  */
@@ -11,7 +11,7 @@ const {
     SuccessModel,
     ErrorModel,
 } = require('../model/resModel');
-const { loginCheck } = require('../controller/user');
+const { login } = require('../controller/user');
 
 const handleUserRouter = async (req, res) => {
     const {
@@ -21,8 +21,10 @@ const handleUserRouter = async (req, res) => {
     } = req;
 
     if (method === 'POST' && path === '/api/user/login') {
-        const data = await loginCheck(body);
+        const data = await login(body);
         const { username } = data;
+
+        res.setHeader('Set-Cookie', `username=${username}; path=/;`);
 
         if (username) return new SuccessModel();
 
