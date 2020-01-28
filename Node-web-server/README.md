@@ -120,3 +120,12 @@ server.listen(3000, () => console.log('OK'));
 - model：返回数据模型
 - controller：处理需要返回数据
 
+## cookie
+
+存储在浏览器的一段字符串（最大为 5KB）
+
+- 跨域不共享
+- 每次发送 http 请求，会将请求域的 cookie 一起发送给 server
+- server 可以修改 cookie 并发送给服务器
+- 浏览器中可以通过 javascript 修改 cookie （有限制）
+

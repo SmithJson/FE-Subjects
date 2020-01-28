@@ -3,7 +3,7 @@
  * @Date: 2020-01-21 19:08:02
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-29 03:41:36
+ * @LastEditTime : 2020-01-29 03:47:41
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/app.js
  */
@@ -39,6 +39,7 @@ const getPostData = req => {
         } = req;
         let postData = '';
 
+
         if (method !== 'POST') {
             resolve({});
 
@@ -53,6 +54,7 @@ const getPostData = req => {
 
         req.on('data', chunk => postData += chunk.toString());
         req.on('end', () => {
+
             if (!postData) {
                 resolve({});
 
