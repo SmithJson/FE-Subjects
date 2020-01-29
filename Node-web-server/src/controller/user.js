@@ -3,7 +3,7 @@
  * @Date: 2020-01-26 17:06:23
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-28 02:27:10
+ * @LastEditTime : 2020-01-29 23:20:48
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/controller/user.js
  */
@@ -15,7 +15,6 @@ const login = ({ username, password }) => {
         FROM users
         WHERE username='${username}' AND password='${password}'
     `;
-
     return execute(sql).then(result => {
         return result[0] || {};
     });

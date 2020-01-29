@@ -3,7 +3,7 @@
  * @Date: 2020-01-21 19:08:02
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-29 03:47:41
+ * @LastEditTime : 2020-01-29 23:46:21
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/app.js
  */
@@ -11,6 +11,8 @@ const querystring = require('querystring');
 const handleBlogRouter = require('./src/router/blog');
 const handleUserRouter = require('./src/router/user');
 
+// session 数据
+const SESSION_DATA = {};
 const ALLOW_METHODS = [
     'GET',
     'PATCH',
@@ -31,6 +33,14 @@ ALLOW_CONTENT_TYPE = [
     'Application/json',
     'charset=uft-8',
 ];
+
+const getCookieExpires = (distance = 0.5) => {
+    const day = distance * 24 * 60 * 60 * 1000;
+    const date = new Date();
+    date.setTime(date.getTime() + day);
+    return date.toGMTString();
+};
+
 const getPostData = req => {
     return new Promise((resolve, reject) => {
         const {
@@ -39,16 +49,13 @@ const getPostData = req => {
         } = req;
         let postData = '';
 
-
         if (method !== 'POST') {
             resolve({});
-
             return;
         }
 
         if (headers['content-type'] !== 'application/json') {
             resolve({});
-
             return;
         }
 
@@ -57,7 +64,6 @@ const getPostData = req => {
 
             if (!postData) {
                 resolve({});
-
                 return;
             }
 
@@ -65,19 +71,18 @@ const getPostData = req => {
         });
     });
 };
+
 const serverHandle = (req, res) => {
     const {
         url,
         method,
         headers
     } = req;
-
     res.setHeader('Access-Control-Allow-Origin', ALLOW_ORIGINS.join(','));
     res.setHeader('Access-Control-Allow-Methods', ALLOW_METHODS.join(','));
     res.setHeader('Access-Control-Allow-Headers', ALLOW_HEADERS.join(','));
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Content-Type', ALLOW_CONTENT_TYPE.join(','));
-
     req.path = decodeURIComponent(url).split('?')[0];
     req.query = querystring.parse(decodeURIComponent(url).split('?')[1]);
     req.cookie = {};
@@ -85,10 +90,26 @@ const serverHandle = (req, res) => {
     if (headers.cookie) {
         headers.cookie.split(/;\s/).forEach(item => {
             const [key, value] = item.split(/\=/);
-
             req.cookie[key] = value;
         });
     }
+
+    let = { userId } = req.cookie;
+    let needSetSession = false;
+
+    if (userId) {
+
+        if (!SESSION_DATA[userId]) {
+            SESSION_DATA[userId] = {};
+        }
+
+    } else {
+        needSetSession = true;
+        userId = `${Date.now()}_${Math.random()}`;
+        SESSION_DATA[userId] = {};
+    }
+
+    req.session = SESSION_DATA[userId];
 
     if (method === 'OPTIONS') {
         res.end();
@@ -96,20 +117,33 @@ const serverHandle = (req, res) => {
         getPostData(req)
             .then(async postData => {
                 req.body = postData;
-
                 const blogData = await handleBlogRouter(req, res);
 
                 if (blogData) {
-                    res.end(JSON.stringify(blogData));
 
+                    if (needSetSession) {
+                        res.setHeader(
+                            'Set-Cookie',
+                            `userId=${userId}; path=/; httpOnly; expires=${getCookieExpires()}`,
+                        );
+                    }
+
+                    res.end(JSON.stringify(blogData));
                     return;
                 }
 
                 const userData = await handleUserRouter(req, res);
 
                 if (userData) {
-                    res.end(JSON.stringify(userData));
 
+                    if (needSetSession) {
+                        res.setHeader(
+                            'Set-Cookie',
+                            `userId=${userId}; path=/; httpOnly; expires=${getCookieExpires()}`,
+                        );
+                    }
+
+                    res.end(JSON.stringify(userData));
                     return;
                 }
 
@@ -120,6 +154,7 @@ const serverHandle = (req, res) => {
                 res.end();
             });
     }
+
 };
 
 module.exports = serverHandle;

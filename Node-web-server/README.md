@@ -129,3 +129,32 @@ server.listen(3000, () => console.log('OK'));
 - server 可以修改 cookie 并发送给服务器
 - 浏览器中可以通过 javascript 修改 cookie （有限制）
 
+服务端设置 cookie
+
+```javascript
+// httpOnly：不允许前端对 cookie 操作
+res.setHeader('Set-Cookie', 'name=value; path=/; httpOnly');
+```
+
+前端设置 cookie
+
+```javascript
+document.cookie = 'name=value;';
+```
+
+## session
+
+解决 cookie 的安全性问题
+
+## redis
+
+web server 最常用的缓存数据库，数据存在内存中
+
+相较于 mysql 读取速度更快，（mysql 数据存在硬盘中，redis 数据存在内存中）
+
+### 不适的场景
+
+1. 操作频率不是很高
+2. 断电不能丢失
+3. 数据量太大，内存成本太高
+

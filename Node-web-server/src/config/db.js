@@ -3,7 +3,7 @@
  * @Date: 2020-01-28 00:22:33
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-28 00:25:15
+ * @LastEditTime : 2020-01-29 23:45:16
  * @Description: mysql 配置
  * @FilePath: /FE-Subjects/Node-web-server/src/config/db.js
  */

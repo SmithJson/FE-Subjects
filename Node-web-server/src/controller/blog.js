@@ -3,7 +3,7 @@
  * @Date: 2020-01-25 02:12:44
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-28 02:36:18
+ * @LastEditTime : 2020-01-29 23:45:03
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/controller/blog.js
  */
@@ -28,7 +28,6 @@ const getList = ({ author, keyword }) => {
     sql += `
         ORDER BY createtime DESC
     `;
-
     return execute(sql);
 };
 
@@ -39,7 +38,6 @@ const getDetail = ({ id }) => {
         FROM blogs
         WHERE state=1 AND id=${id}
     `;
-
     return execute(sql).then(result => {
         return result[0] || {};
     });
@@ -52,7 +50,6 @@ const createBlog = ({ title, content, author }) => {
         VALUES
         ('${title}', '${content}', ${Date.now()}, '${author}')
     `;
-
     return execute(sql).then(result => {
         return {
             id: result.insertId,
@@ -67,7 +64,6 @@ const updateBlog = ({ id, title, content }) => {
         SET title='${title}', content='${content}'
         WHERE id=${id}
     `;
-
     return execute(sql).then(result => {
         return result.affectedRows > 0;
     });
@@ -80,7 +76,6 @@ const deleteBlog = ({ id, author }) => {
         SET state=0
         WHERE id=${id} AND author='${author}'
     `;
-
     return execute(sql).then(result => {
         return result.affectedRows > 0;
     });
