@@ -148,7 +148,7 @@ document.cookie = 'name=value;';
 
 ## redis
 
-web server 最常用的缓存数据库，数据存在内存中
+web server 最常用的缓存数据库，数据存在内存中，是一种键值存储
 
 相较于 mysql 读取速度更快，（mysql 数据存在硬盘中，redis 数据存在内存中）
 
@@ -157,4 +157,32 @@ web server 最常用的缓存数据库，数据存在内存中
 1. 操作频率不是很高
 2. 断电不能丢失
 3. 数据量太大，内存成本太高
+
+### 安装
+
+```bash
+brew install redis
+```
+
+### 启动 redis 服务
+
+```bash
+# 启动 redis 服务
+redis-server
+# 进入 redis 模式
+redis-cli
+
+# 以下都是在 redis cli 模式相爱进行的命令
+# 查看所有键名
+keys *
+
+# 设置键值
+set myname zhangl
+
+# 获取键值
+get myname
+
+# 删除键值
+del myname
+```
 
