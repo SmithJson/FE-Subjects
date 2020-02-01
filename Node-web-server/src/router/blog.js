@@ -3,7 +3,7 @@
  * @Date: 2020-01-24 01:44:18
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-29 23:43:56
+ * @LastEditTime : 2020-02-02 01:29:08
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/router/blog.js
  */
@@ -19,6 +19,12 @@ const {
     deleteBlog,
 } = require('../controller/blog');
 
+const checkLogin = req => {
+    if (!req.session.username) {
+        return new ErrorModel('未登录');
+    }
+};
+
 const handleBlogRouter = async (req, res) => {
     const {
         method,
@@ -31,37 +37,58 @@ const handleBlogRouter = async (req, res) => {
     // 博客列表
     if (method === 'GET' && path === '/api/blog/list') {
         const data = await getList(query);
+
         return new SuccessModel(data);
     }
 
     // 博客详情
     if (method === 'GET' && path === '/api/blog/detail') {
         const data = await getDetail(query);
+
         return new SuccessModel(data);
     }
 
     // 博客创建
     if (method === 'POST' && path === '/api/blog/new') {
-        body.author = '一叶小和尚'; // 假数据，开发了用户接口后实现真实数据
+        const checkLoginResult = checkLogin(req);
+
+        if (checkLoginResult) {
+            return checkLoginResult;
+        }
+        body.author = req.session.username;
         const data = await createBlog(body);
+
         return new SuccessModel(data);
     }
 
     // 博客更新
     if (method === 'POST' && path === '/api/blog/update') {
-        const data = await updateBlog({id, ...body});
+        const checkLoginResult = checkLogin(req);
+
+        if (checkLoginResult) {
+            return checkLoginResult;
+        }
+        const data = await updateBlog({ id, ...body });
+
         if (data) return new SuccessModel();
+
         return new ErrorModel('博客更新失败');
     }
 
     // 博客删除
     if (method === 'POST' && path === '/api/blog/delete') {
-        body.author = '一叶小和尚'; // 假数据，开发了用户接口后实现真实数据
+        const checkLoginResult = checkLogin(req);
+
+        if (checkLoginResult) {
+            return checkLoginResult;
+        }
+        body.author = req.session.username;
         const data = await deleteBlog({ id, ...body });
+
         if (data) return new SuccessModel();
+
         return new ErrorModel('博客删除失败');
     }
-
 };
 
 module.exports = handleBlogRouter;

@@ -3,7 +3,7 @@
  * @Date: 2020-01-28 00:22:53
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-29 23:44:47
+ * @LastEditTime : 2020-02-02 00:39:07
  * @Description: mysql 连接封装
  * @FilePath: /FE-Subjects/Node-web-server/src/db/mysql.js
  */
@@ -17,12 +17,11 @@ con.connect();
 function execute(...arg) {
     return new Promise((resolve, reject) => {
         con.query(...arg, (err, result) => {
-
             if (err) {
                 reject(err);
+
                 return;
             }
-
             resolve(result);
         });
     });

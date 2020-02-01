@@ -184,5 +184,31 @@ get myname
 
 # 删除键值
 del myname
+
+# 删除所有键
+FLUSHDB
+```
+
+## nginx
+
+高性能的 web 服务器，开源免费
+
+一般用于静态服务、负载均衡、反向代理
+
+## nginx 命令
+
+```bash
+# 配置文件位置
+Windows：C:\\nginx\\conf\\nginx.conf
+Mac：/user/local/etc/nginx/nginx.conf
+
+# 检测 nginx 配置文件格式是否正确
+nginx -t
+
+# 启动 nginx
+nginx
+
+# 重启|停止 nginx
+nginx -s reload|stop
 ```
 
