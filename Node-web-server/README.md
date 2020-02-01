@@ -200,7 +200,8 @@ FLUSHDB
 ```bash
 # 配置文件位置
 Windows：C:\\nginx\\conf\\nginx.conf
-Mac：/user/local/etc/nginx/nginx.conf
+# usr：我的目录叫 usr，但有些电脑是 user
+Mac：/usr/local/etc/nginx/nginx.conf
 
 # 检测 nginx 配置文件格式是否正确
 nginx -t
