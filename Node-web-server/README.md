@@ -198,6 +198,12 @@ FLUSHDB
 ## nginx 命令
 
 ```bash
+# 修改 /usr/local 权限
+ sudo chown -R $(whoami) /usr/local
+
+# 下载 nginx
+brew install nginx
+
 # 配置文件位置
 Windows：C:\\nginx\\conf\\nginx.conf
 # usr：我的目录叫 usr，但有些电脑是 user
