@@ -1,10 +1,10 @@
 ###
 
 # 用户登录
-POST http://localhost:3000/api/user/login
+GET  http://localhost:8000/api/user/login?username=lisi&password=zl123456
 Content-Type: application/json
 
-{
-    "username": "lisi",
-    "password": "zl123456"
-}
+# {
+#     "username": "lisi",
+#     "password": "zl123456"
+# }

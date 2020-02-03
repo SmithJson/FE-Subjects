@@ -1,0 +1,38 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-03 16:55:25
+ * @GitHub: https://github.com/SmithJson
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-03 20:03:35
+ * @Description: Do not edit
+ * @FilePath: /FE-Subjects/Node-web-server/public/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+</head>
+
+<body>
+    <h1>博客首页</h1>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script>
+        $.ajax({
+            url: '/api/blog/list',
+            data: {
+                author: 'lisi',
+                // hasAdmin: 1,
+            },
+            success: function (data) {
+                console.log(data);
+            },
+        })
+    </script>
+</body>
+
+</html>

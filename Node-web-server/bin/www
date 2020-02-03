@@ -3,14 +3,14 @@
  * @Date: 2020-01-23 02:29:22
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-01-23 02:30:40
+ * @LastEditTime : 2020-02-03 18:10:44
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/bin/www.js
  */
 const http = require('http');
 const app = require('../app');
 
-const PORT = 3000;
+const PORT = 8000;
 const server = http.createServer(app);
 
 server.listen(PORT);

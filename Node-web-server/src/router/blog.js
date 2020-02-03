@@ -3,7 +3,7 @@
  * @Date: 2020-01-24 01:44:18
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-02-02 01:29:08
+ * @LastEditTime : 2020-02-03 20:12:48
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/router/blog.js
  */
@@ -32,10 +32,21 @@ const handleBlogRouter = async (req, res) => {
         query,
         body,
     } = req;
-    const { id } = query;
+    const {
+        id,
+        hasAdmin,
+    } = query;
 
     // 博客列表
     if (method === 'GET' && path === '/api/blog/list') {
+        if (hasAdmin) {
+            const checkLoginResult = checkLogin(req);
+
+            if (checkLoginResult) {
+                return checkLoginResult;
+            }
+            query.author = req.session.username;
+        }
         const data = await getList(query);
 
         return new SuccessModel(data);
