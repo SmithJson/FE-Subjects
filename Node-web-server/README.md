@@ -367,3 +367,8 @@ http {
  sudo chown -R mysql /usr/local/mysql/data
 ```
 
+## I/O 性能瓶颈
+
+- I/O 包括 "网络 I/O"、"文件 I/O"
+- 相较于 CPU 计算和内存读写，I/O 的突出特点：慢
+
