@@ -3,7 +3,7 @@
  * @Date: 2020-01-21 19:08:02
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-02-02 01:14:18
+ * @LastEditTime : 2020-02-05 02:23:30
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/app.js
  */
@@ -14,6 +14,7 @@ const {
     get,
     set,
 } = require('./src/db/myredis');
+const { access } = require('./utils/log');
 
 const ALLOW_METHODS = [
     'GET',
@@ -22,19 +23,19 @@ const ALLOW_METHODS = [
     'POST',
     'PUT',
     'OPTIONS',
-],
-    ALLOW_ORIGINS = [
-        'http://127.0.0.1:5500',
-    ],
-    ALLOW_HEADERS = [
-        'Authorization',
-        'Content-Type',
-        'X-Token',
-    ],
-    ALLOW_CONTENT_TYPE = [
-        'Application/json',
-        'charset=uft-8',
-    ];
+];
+const ALLOW_ORIGINS = [
+    'http://127.0.0.1:5500',
+];
+const ALLOW_HEADERS = [
+    'Authorization',
+    'Content-Type',
+    'X-Token',
+];
+const ALLOW_CONTENT_TYPE = [
+    'Application/json',
+    'charset=uft-8',
+];
 
 const getCookieExpires = (distance = 0.5) => {
     const day = distance * 24 * 60 * 60 * 1000;
@@ -80,8 +81,11 @@ const serverHandle = async (req, res) => {
     const {
         url,
         method,
-        headers
+        headers,
     } = req;
+
+    // 记录访问日志
+    access(`${method} -- ${url} -- ${headers['user-agent']} -- ${Date.now()}`);
     res.setHeader('Access-Control-Allow-Origin', ALLOW_ORIGINS.join(','));
     res.setHeader('Access-Control-Allow-Methods', ALLOW_METHODS.join(','));
     res.setHeader('Access-Control-Allow-Headers', ALLOW_HEADERS.join(','));

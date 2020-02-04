@@ -3,7 +3,7 @@
  * @Date: 2020-01-24 01:44:24
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-02-03 19:20:51
+ * @LastEditTime : 2020-02-05 02:26:23
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/router/user.js
  */
@@ -23,9 +23,8 @@ const handleUserRouter = async (req, res) => {
         cookie,
     } = req;
 
-    if (method === 'GET' && path === '/api/user/login') {
-        console.log(body)
-        const data = await login(query);
+    if (method === 'POST' && path === '/api/user/login') {
+        const data = await login(body);
         const {
             username,
             realname,
