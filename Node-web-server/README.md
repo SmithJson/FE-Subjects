@@ -372,3 +372,18 @@ http {
 - I/O 包括 "网络 I/O"、"文件 I/O"
 - 相较于 CPU 计算和内存读写，I/O 的突出特点：慢
 
+## crontab
+
+linux 自动脚本执行
+
+```bash
+# 编辑 crontab 配置
+$ crontab -e
+
+# 分 时 日 月 星期
+* 0 * * * sh 脚本绝对路径
+
+# 查看 crontab 任务
+$ crontab -l
+```
+
