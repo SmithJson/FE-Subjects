@@ -1,12 +1,12 @@
 ###
 
 # 博客列表
-GET http://localhost:3000/api/blog/list
+GET http://localhost:8080/api/blog/list
     ?author=lisi&keyword=标题B
 
 ###
 
 # 博客详情
-GET http://localhost:3000/api/blog/detail
+GET http://localhost:8080/api/blog/detail
     ?id=3
 

@@ -1,7 +1,7 @@
 ###
 
 # 博客创建
-POST http://localhost:3000/api/blog/new
+POST http://localhost:8080/api/blog/new
 Content-Type: application/json
 
 {
@@ -12,7 +12,7 @@ Content-Type: application/json
 ###
 
 # 博客更新
-POST http://localhost:3000/api/blog/update?id=3
+POST http://localhost:8080/api/blog/update?id=3
 Content-Type: application/json
 
 {
@@ -23,4 +23,4 @@ Content-Type: application/json
 ###
 
 # 博客删除
-POST http://localhost:3000/api/blog/delete?id=4
+POST http://localhost:8080/api/blog/delete?id=4
