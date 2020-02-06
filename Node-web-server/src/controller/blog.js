@@ -3,10 +3,11 @@
  * @Date: 2020-01-25 02:12:44
  * @GitHub: https://github.com/SmithJson
  * @LastEditors  : zhangl
- * @LastEditTime : 2020-02-06 20:49:04
+ * @LastEditTime : 2020-02-06 21:22:46
  * @Description: Do not edit
  * @FilePath: /FE-Subjects/Node-web-server/src/controller/blog.js
  */
+const xss = require('xss');
 const {
     execute,
     escape,
@@ -21,10 +22,10 @@ const getList = ({ author, keyword }) => {
     `;
 
     if (author) sql += `
-        AND author=${escape(author)}
+        AND author=${xss(escape(author))}
     `;
     if (keyword) sql += `
-        AND title LIKE ${escape(`%${keyword}%`)}
+        AND title LIKE ${xss(escape(`%${keyword}%`))}
     `;
     sql += `
         ORDER BY createtime DESC
@@ -51,7 +52,7 @@ const createBlog = ({ title, content, author }) => {
     const sql = `
         INSERT INTO blogs(title, content ,createtime ,author)
         VALUES
-        (${escape(title)}, ${escape(content)}, ${Date.now()}, ${escape(author)})
+        (${xss(escape(title))}, ${xss(escape(content))}, ${Date.now()}, ${escape(author)})
     `;
 
     return execute(sql).then(result => {
@@ -65,7 +66,7 @@ const createBlog = ({ title, content, author }) => {
 const updateBlog = ({ id, title, content }) => {
     const sql = `
         UPDATE blogs
-        SET title=${escape(title)}, content=${escape(content)}
+        SET title=${xss(escape(title))}, content=${xss(escape(content))}
         WHERE id=${escape(id)}
     `;
     return execute(sql).then(result => {
