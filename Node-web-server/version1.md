@@ -382,6 +382,7 @@ $ crontab -e
 
 # 分 时 日 月 星期
 * 0 * * * sh 脚本绝对路径
+#例如: * 0 * * * sh /Users/zhangl/Desktop/FE-Subjects/Node-web-server/utils/copy.sh
 
 # 查看 crontab 任务
 $ crontab -l
