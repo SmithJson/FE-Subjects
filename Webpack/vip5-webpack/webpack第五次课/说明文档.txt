@@ -1,0 +1,3 @@
+webpack-vue  是最后给大家讲的构建vue项目的 架构
+
+pluginsTest 文件夹是loader的演示文件

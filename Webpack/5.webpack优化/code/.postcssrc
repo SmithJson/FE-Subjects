@@ -1,0 +1,15 @@
+{
+    "plugins": {
+        "postcss-preset-env": {
+            "autoprefixer": {
+                "flex-box": "no-2009",
+                "stage": 3
+            }
+        },
+        "postcss-pxtorem": {
+            "rootValue": 10,
+            "minPixelValue": 2,
+            "propWhiteList": []
+        }
+    }
+}
