@@ -1,0 +1,67 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-10 01:18:35
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-10 02:02:16
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/1.vue基础用法/code/01.html
+ * @Description: v-for
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+</head>
+
+<body>
+    <div id="root">
+        <ul>
+
+            <!-- 普通循环 -->
+            <!-- <li v-for="value in arr">{{value}}</li> -->
+            <!-- <li v-for="value in user">{{value}}</li> -->
+
+            <!-- 键值循环 -->
+            <!-- :key：指定唯一性，提高 diff 算法比较的效率 -->
+            <!-- <li v-for="(item, index) in user" :key="index">{{index}} -- {{item}}</li> -->
+            <!-- <li v-for="(item, index) in users" :key="index">{{index + 1}} -- {{item.id}} -- {{item.name}} -- {{item.age}}</li> -->
+        </ul>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#root', // 指定关联对象
+            data: {
+                arr: [1, 2, 3, 4],
+                user: {
+                    id: 11,
+                    name: 'jeason',
+                    age: 18
+                },
+                users: [
+                    {
+                        id: 22,
+                        name: 'jeason2',
+                        age: 23
+                    },
+                    {
+                        id: 23,
+                        name: 'jeason3',
+                        age: 24
+                    },
+                    {
+                        id: 24,
+                        name: 'jeason4',
+                        age: 25
+                    },
+                ],
+            },
+        });
+    </script>
+</body>
+
+</html>

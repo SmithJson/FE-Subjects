@@ -1,0 +1,42 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-10 01:18:35
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-10 02:25:23
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/1.vue基础用法/code/01.html
+ * @Description: v-show、v-if
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-show</title>
+</head>
+
+<body>
+    <div id="root">
+        {{flag}}
+        <button v-on:click="handleComponentShow">切换</button>
+        <h1 v-show="flag">Welcome HangZhou</h1>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#root', // 指定关联对象
+            data: { // 存储数据
+                flag: true,
+            },
+            methods: { // 存储方法
+                handleComponentShow() {
+                    this.flag = !this.flag;
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

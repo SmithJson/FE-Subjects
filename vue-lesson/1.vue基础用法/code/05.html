@@ -1,0 +1,40 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-10 01:18:35
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-10 02:45:35
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/1.vue基础用法/code/01.html
+ * @Description: $event
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-show</title>
+</head>
+
+<body>
+    <div id="root">
+        <button @click="print($event)">点我</button>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#root', // 指定关联对象
+            methods: { // 存储方法
+                print(e) {
+                    const target = e.target;
+
+                    console.log(target);
+                    console.log(target.innerText);
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

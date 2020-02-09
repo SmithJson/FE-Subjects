@@ -1,0 +1,60 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-10 01:18:35
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-10 01:48:39
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/1.vue基础用法/code/01.html
+ * @Description: vue 基础语法
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用指令</title>
+</head>
+
+<body>
+    <div id="root">
+        {{msg}}
+        {{arr}}
+        {{users}}
+
+        <!-- 输入框 -->
+        <input type="text" v-model="name" />
+        {{name}}
+
+        <!-- 多选框 -->
+        <input type="checkbox" value="01" v-model="test" />
+        {{test}}
+
+        <!-- 下拉列表 -->
+        <select v-model="tag">
+            <option value="01">01</option>
+            <option value="02">02</option>
+        </section>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#root', // 指定关联对象
+            data: {
+                msg: 'Hello World',
+                arr: [1, 2, 3],
+                age: 12,
+                users: {
+                    id: 12,
+                    name: 'jeason',
+                },
+                name: '一叶小和尚',
+                test: true,
+                tag: '02',
+            },
+        });
+    </script>
+</body>
+
+</html>

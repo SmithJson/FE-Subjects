@@ -1,0 +1,53 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-10 01:18:35
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-10 02:13:42
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/1.vue基础用法/code/01.html
+ * @Description: v-on
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on</title>
+</head>
+
+<body>
+    <div id="root">
+        {{arr}}
+        <button v-on:click="show">点我</button>
+        <button v-on:click="add">添加元素</button>
+        <button v-on:mouseover="printf">鼠标经过</button>
+        <button @dblclick="show">双击</button>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#root', // 指定关联对象
+            data: { // 存储数据
+                arr: [1, 2, 3],
+            },
+            methods: { // 存储方法
+                show() {
+                    console.log('show 方法');
+                },
+                add() {
+
+                    // 使用 this 访问当前实例对象
+                    this.arr.push(666);
+                },
+                printf(e) {
+                    console.log(e.target.innerHTML);
+                    console.log(this);
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
