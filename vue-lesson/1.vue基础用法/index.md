@@ -49,6 +49,3 @@
 - .up | .13：键盘回车键，通过 e.keyCode 获取
 - .once：事件只触发一次
 - .native：监听组件根元素的原生事件
-
-## class 和 style 属性
-

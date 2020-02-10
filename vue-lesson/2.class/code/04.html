@@ -1,0 +1,89 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-10 23:35:12
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-11 00:38:25
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/2.class/code/04.html
+ * @Description: vue 生命周期
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        {{message}}
+        <button @click="handleMessageChange('更新过后的数据')">update</button>
+        <button @click="handleComponentDestroy">destroy</button>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                message: 'Hello World',
+            },
+            methods: {
+                handleMessageChange(msg) {
+                    this.message = msg;
+                },
+                handleComponentDestroy() {
+                    this.$destroy();
+                }
+            },
+            beforeCreate() {
+                console.group('------beforeCreate 创建前状态:组件实例刚刚创建，还未进行数据观测和事件配置------');
+                console.log("%c%s", "color:red", "el     : " , this.$el); // undefined
+                console.log("%c%s", "color:red", "data   : " , this.$data); // undefined
+                console.log("%c%s", "color:red", "message: " , this.message)  // undefined
+            },
+            created() {
+                console.group('------created 创建完毕状态:实例已经创建完成，并且已经进行数据观测和事件配置------');
+                console.log("%c%s", "color:red", "el     : " , this.$el); // undefined
+                console.log("%c%s", "color:red", "data   : " , this.$data); // 已被初始化
+                console.log("%c%s", "color:red", "message: " , this.message)  // 已被初始化
+            },
+            beforeMount() {
+                console.group('------beforeMount 挂载前状态:模板编译之前，还没挂载------');
+                console.log("%c%s", "color:red", "el     : ", this.$el); // undefined
+                console.log("%c%s", "color:red", "data   : ", this.$data); // 已被初始化
+                console.log("%c%s", "color:red", "message: ", this.message)  // 已被初始化
+            },
+            mounted() {
+                console.group('------mounted 挂载结束状态:模板编译之后，已经挂载，此时才会渲染页面，才能看到页面上数据的展示------');
+                console.log("%c%s", "color:red", "el     : ", this.$el); // 已被初始化
+                console.log("%c%s", "color:red", "data   : ", this.$data); // 已被初始化
+                console.log("%c%s", "color:red", "message: ", this.message)  // 已被初始化
+            },
+            beforeUpdate() {
+                console.group('beforeUpdate 更新前状态:组件更新之前===============》');
+                console.log("%c%s", "color:red", "el     : ", this.$el.innerText); // 还是原来数据，新数据还没有渲染
+                console.log("%c%s", "color:red", "data   : ", this.$data); // 已被初始化
+                console.log("%c%s", "color:red", "message: ", this.message)  // 已被初始化
+            },
+            updated () {
+                console.group('updated 更新完成状态:组件更新之后===============》');
+                console.log("%c%s", "color:red", "el     : ", this.$el.innerText); // 新数据已经渲染完成
+                console.log("%c%s", "color:red", "data   : ", this.$data);
+                console.log("%c%s", "color:red", "message: ", this.message);
+            },
+            beforeDestroy() {
+                console.group('beforeDestroy 销毁前状态 :组件销毁之前===============》');
+                console.log("%c%s", "color:red", "el     : ", this.$el);
+                console.log("%c%s", "color:red", "data   : ", this.$data);
+                console.log("%c%s", "color:red", "message: ", this.message);
+            },
+            destroyed() {
+                console.group('destroyed 销毁完成状态:组件销毁之后===============》');
+                console.log("%c%s", "color:red", "el     : " , this.$el);
+                console.log("%c%s", "color:red", "data   : ", this.$data);
+                console.log("%c%s", "color:red", "message: ", this.message);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-10 20:58:58
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-10 21:39:17
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/2.class/code/01.html
+ * @Description: vue text、html、once、pre
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    /* 必须配合这个样式，才能使 v-cloak 生效 */
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<body>
+    <div id="root">
+
+        <!-- 模板 -->
+        <h1 v-cloak>{{msg}}</h1>
+
+        <!-- v-text -->
+        <h1 v-text="msg1" />
+
+        <!-- v-html -->
+        <h1 v-html="msg2" />
+
+        <!-- v-once -->
+        <h1 v-once>{{msg}}</h1>
+
+        <!-- v-pre -->
+        <h1 v-pre>{{msg}}</h1>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                msg: 'model',
+                msg1: 'text',
+                msg2: 'html <hr />',
+            },
+            created() {
+                alert('created');
+            },
+            mounted() {
+                this.msg = '我是修改后的 msg';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-10 20:58:58
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-10 21:59:13
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/2.class/code/01.html
+ * @Description: vue 过滤器
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+
+        <!-- 使用全局过滤器 -->
+        <h3>{{num | addZero}}</h3>
+
+        <!-- 使用局部过滤器 -->
+        <h3>{{num2 | toFixed(2)}}</h3>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+
+        // 自定义全局过滤器
+        Vue.filter('addZero', function (data) {
+            return data < 10 ? '0' + data : data;
+        });
+
+        // vue 实例
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                num: 1,
+                num2: Math.random() * 100,
+            },
+            filters: { // 自定义局部过滤器
+                toFixed(data, n) {
+                    return data.toFixed(n);
+                },
+            },
+        });
+    </script>
+</body>
+</html>

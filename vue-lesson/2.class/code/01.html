@@ -1,0 +1,56 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-10 20:58:58
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-10 21:13:12
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/2.class/code/01.html
+ * @Description: vue class、style
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .demo1 {
+        color: red;
+    }
+    .demo2 {
+        background: pink;
+    }
+</style>
+<body>
+    <div id="root">
+
+        <!-- 变量方式 -->
+        <h1 :class="t1">一叶小和尚</h1>
+
+        <!-- 数组形式 -->
+        <h1 :class="[t1, t2]">一叶小和尚</h1>
+
+        <!-- 对象形式 -->
+        <h1 :class="{ demo1: true, demo2: false }">一叶小和尚</h1>
+
+        <!-- 表达式 -->
+        <h1 :class="{ demo1: num > 2 }">一叶小和尚</h1>
+
+        <h1 :style="[xx, yy]">一叶小和尚</h1>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                t1: 'demo1',
+                t2: 'demo2',
+                num: 3,
+                xx: { color: 'skyblue', fontSize: '30px' },
+                yy: { backgroundColor: '#ff7300' },
+            },
+        });
+    </script>
+</body>
+</html>

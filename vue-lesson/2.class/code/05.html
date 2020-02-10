@@ -1,0 +1,72 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-11 00:44:00
+ * @LastEditors  : zhangl
+ * @LastEditTime : 2020-02-11 01:06:16
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/2.class/code/05.html
+ * @Description: vue 计算属性
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+
+        <!-- 基本用法 -->
+        <h2>msg -- {{msg}}</h2>
+        <h2>msg2 -- {{msg2}}</h2>
+
+        <!-- 数据处理后显示 -->
+        <h2>msg -- {{msg.split(' ').reverse().join(' ')}}</h2>
+        <h2>msg2 -- {{reverseMsg}}</h2>
+
+        <!-- 计算属性 VS 方法 -->
+        <button @click="change">更新计算属性</button>
+        <h2>num1 -- {{num1}}</h2>
+        <h2>num2 -- {{num2}}</h2>
+        <h2>getNum2 -- {{getNum2()}}</h2>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                msg: 'welcome to msg1',
+                num1: 10,
+            },
+            computed: {
+                msg2() {
+                    return 'welcome to msg2';
+                },
+                reverseMsg() {
+                    return this.msg2.split(' ').reverse().join(' ');
+                },
+                num2: {
+                    get() {
+                        console.log('get num2');
+                        return this.num1 - 1;
+                    },
+                    set(val) {
+                        console.log('set num2');
+                        this.num1 = Math.random();
+                    }
+                }
+            },
+            methods: {
+                change() {
+                    this.num2 = 50;
+                },
+                getNum2() {
+                    console.log('methods get num2');
+                    return this.num1 - 1;
+                },
+            },
+        });
+    </script>
+</body>
+</html>
