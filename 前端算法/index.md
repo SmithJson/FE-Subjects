@@ -46,3 +46,66 @@
 
 1. 查询性能慢（查询某个结点的值）
 2. 每个结点都需要单独开启指向 next 的引用，浪费一些空间，当存储的值越多，这部分开销的内存影响越少
+
+## 排序
+
+排序的本质是 `比较` 和 `交换`
+
+### 冒泡排序
+
+```javascript
+function compare(a, b) { // 比较是否需要交换
+    return a > b;
+}
+
+function swap(arr, i, j) { // 将数组中的 i, j 位置进行值的交换
+    var temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+function sort(arr) {
+    for (var i = 0; i < arr.length; i++) {
+        for (var j = 0; j < arr.length - 1 - i; j++) {
+            if (compare(arr[j], arr[j + 1])) {
+                swap(arr, j, j + 1);
+            }
+        }
+    }
+}
+
+var arr = [4, 5, 1, 0, 9, 8, 10, 2];
+
+sort(arr);
+```
+
+### 选择排序
+
+```javascript
+function compare(a, b) {
+    return a < b;
+}
+
+function swap(arr, i, j) {
+    var temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+function sort(arr) {
+    for (var i = 0; i < arr.length; i++) {
+        var maxIndex = 0;
+        for (var j = 0; j < arr.length - i; j++) {
+            if (compare(arr[maxIndex], arr[j])) {
+                maxIndex = j;
+            }
+        }
+        // maxIndex 对应的值，与数组倒数的 n 位置的数进行交换
+        swap(arr, maxIndex, arr.length - 1 - i);
+    }
+}
+
+var arr = [4, 5, 1, 0, 9, 8, 10, 2];
+
+sort(arr);
+```
