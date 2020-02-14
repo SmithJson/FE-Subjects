@@ -109,3 +109,98 @@ var arr = [4, 5, 1, 0, 9, 8, 10, 2];
 
 sort(arr);
 ```
+
+### 快速排序
+
+```javascript
+function swap(arr, i, j) {
+    var temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+var arr = [4, 1, 9, 6, 2, 3, 7, 8];
+
+function quickSort2(arr, begin, end) {
+    if (begin >= end - 1) {
+        return;
+    }
+    var left = begin;
+    var right = end;
+    do {
+        do {
+            left++;
+        } while (left < right && arr[left] < arr[begin]);
+        do {
+            right--;
+        } while (right > left && arr[right] > arr[begin]);
+        if (left < right) {
+            swap(arr, left, right);
+        }
+    } while(left < right);
+    var startPoint = left === right ? right - 1 : right;
+    swap(arr, begin, startPoint);
+    quickSort2(arr, begin, startPoint);
+    quickSort2(arr, startPoint + 1, end);
+}
+
+function quickSort(arr) {
+    quickSort2(arr, 0, arr.length);
+}
+
+quickSort(arr);
+
+console.log(arr);
+```
+
+## 栈
+
+特征：先进后出（FILO）
+
+```javascript
+function Stack() {
+     this.arr = [];
+
+    this.push = function (value) {
+        this.arr.push(value);
+    };
+
+    this.pop = function () {
+        return this.arr.pop();
+    }
+ }
+
+ var stack = new Stack();
+ stack.push(1);
+ stack.push(2);
+ stack.push(3);
+ console.log(stack.arr);
+ stack.pop();
+ console.log(stack.arr);
+```
+
+## 队列
+
+特征：先进先出（FIFO）
+
+```javascript
+unction Queue() {
+    this.arr = [];
+
+    this.push = function (value) {
+        this.arr.push(value);
+    };
+
+    this.pop = function () {
+        return this.arr.shift();
+    }
+}
+
+var queue = new Queue();
+queue.push(1);
+queue.push(2);
+queue.push(3);
+console.log(queue.arr);
+queue.pop();
+console.log(queue.arr);
+```
