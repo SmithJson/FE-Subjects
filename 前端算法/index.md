@@ -47,6 +47,94 @@
 1. 查询性能慢（查询某个结点的值）
 2. 每个结点都需要单独开启指向 next 的引用，浪费一些空间，当存储的值越多，这部分开销的内存影响越少
 
+### 栈
+
+特征：先进后出（FILO）
+
+```javascript
+function Stack() {
+     this.arr = [];
+
+    this.push = function (value) {
+        this.arr.push(value);
+    };
+
+    this.pop = function () {
+        return this.arr.pop();
+    }
+ }
+
+ var stack = new Stack();
+ stack.push(1);
+ stack.push(2);
+ stack.push(3);
+ console.log(stack.arr);
+ stack.pop();
+ console.log(stack.arr);
+```
+
+### 队列
+
+特征：先进先出（FIFO）
+
+```javascript
+unction Queue() {
+    this.arr = [];
+
+    this.push = function (value) {
+        this.arr.push(value);
+    };
+
+    this.pop = function () {
+        return this.arr.shift();
+    }
+}
+
+var queue = new Queue();
+queue.push(1);
+queue.push(2);
+queue.push(3);
+console.log(queue.arr);
+queue.pop();
+console.log(queue.arr);
+```
+
+### 双向链表
+
+优点：无论给出哪个节点都能对整个链表进行遍历
+
+缺点：
+
+1. 需要额外消耗一个引用空间
+2. 构建双向链表复杂
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.neighbor = [];
+}
+
+var a = new Node('A');
+var b = new Node('B');
+var c = new Node('C');
+var d = new Node('D');
+var e = new Node('E');
+var f = new Node('F');
+
+a.neighbor.push(b);
+a.neighbor.push(c);
+a.neighbor.push(f);
+b.neighbor.push(a);
+b.neighbor.push(d);
+b.neighbor.push(e);
+c.neighbor.push(a);
+d.neighbor.push(b);
+e.neighbor.push(b);
+f.neighbor.push(a);
+
+console.log(a);
+```
+
 ## 排序
 
 排序的本质是 `比较` 和 `交换`
@@ -153,54 +241,250 @@ quickSort(arr);
 console.log(arr);
 ```
 
-## 栈
+## 二维数据结构
 
-特征：先进后出（FILO）
+二维数组
+
+## 二维拓扑结构（图）
+
+树、图
+
+## 树型结构（有向无环图）
+
+特征：
+
+1. 只有一个根节点
+2. 没有回路
+
+叶子节点：没有子节点的节点
+
+节点：既不是根节点，又不是叶子节点的节点
+
+树的度：单个节点最多的分叉数
+
+树的深度：树的最深层数
+
+### 满二叉树
+
+定义：
+
+1. 所有叶子节点在同一层
+2. 每个非叶子节点都有两个子节点
+
+### 完全二叉树
+
+国内定义：
+
+1. 叶子节点都在最后一层或倒数第二层
+2. 叶子节点都向左聚拢
+
+国外定义：
+
+1. 叶子节点都在最后一层或倒数第二层
+2. 如果有叶子节点，必然有两个叶子节点
+
+### 子树
+
+定义：二叉树中，每一节点或叶子节点，都认为自己是一颗子树的根节点
+
+### 前序遍历（先根次序遍历）
+
+先打印当前的节点，再打印左边的子树，再打印右边的子树
 
 ```javascript
-function Stack() {
-     this.arr = [];
-
-    this.push = function (value) {
-        this.arr.push(value);
-    };
-
-    this.pop = function () {
-        return this.arr.pop();
-    }
- }
-
- var stack = new Stack();
- stack.push(1);
- stack.push(2);
- stack.push(3);
- console.log(stack.arr);
- stack.pop();
- console.log(stack.arr);
-```
-
-## 队列
-
-特征：先进先出（FIFO）
-
-```javascript
-unction Queue() {
-    this.arr = [];
-
-    this.push = function (value) {
-        this.arr.push(value);
-    };
-
-    this.pop = function () {
-        return this.arr.shift();
-    }
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
 }
 
-var queue = new Queue();
-queue.push(1);
-queue.push(2);
-queue.push(3);
-console.log(queue.arr);
-queue.pop();
-console.log(queue.arr);
+var a = new Node('A');
+var b = new Node('B');
+var c = new Node('C');
+var d = new Node('D');
+var e = new Node('E');
+var f = new Node('F');
+var g = new Node('G');
+
+a.left = c;
+a.right = b;
+c.left = f;
+c.right = g;
+b.left = d;
+b.right = e;
+
+function preOrderTraverse(root) {
+    if (root === null) {
+        return;
+    }
+    console.log(root.value);
+    preOrderTraverse(root.left);
+    preOrderTraverse(root.right);
+}
+
+preOrderTraverse(a);
+```
+
+### 中序遍历（中根次序遍历）
+
+先打印左边的子树，再打印当前的节点，再打印右边的子树（可以使用投影法快速得出）
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+}
+
+var a = new Node('A');
+var b = new Node('B');
+var c = new Node('C');
+var d = new Node('D');
+var e = new Node('E');
+var f = new Node('F');
+var g = new Node('G');
+
+a.left = c;
+a.right = b;
+c.left = f;
+c.right = g;
+b.left = d;
+b.right = e;
+
+function inOrderTraverse(root) {
+    if (root === null) {
+        return;
+    }
+    inOrderTraverse(root.left);
+    console.log(root.value);
+    inOrderTraverse(root.right);
+}
+
+inOrderTraverse(a);
+```
+
+### 后序遍历（后根次序遍历）
+
+先打印左边的子树，再打印右边的子树，再打印当前的节点
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+}
+
+var a = new Node('A');
+var b = new Node('B');
+var c = new Node('C');
+var d = new Node('D');
+var e = new Node('E');
+var f = new Node('F');
+var g = new Node('G');
+
+a.left = c;
+a.right = b;
+c.left = f;
+c.right = g;
+b.left = d;
+b.right = e;
+
+function postTraverse(root) {
+    if (root === null) {
+        return;
+    }
+    postTraverse(root.left);
+    postTraverse(root.right);
+    console.log(root.value);
+}
+
+postTraverse(a);
+```
+
+### 前序 + 中序还原二叉树
+
+![1581777122942](/assets/1581777122942.jpg)
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+}
+
+var preOrderList = ['A', 'C', 'F', 'G', 'B', 'D', 'E'];
+var inOrderList = ['F', 'C', 'G', 'A', 'D', 'B', 'E'];
+
+function restoreBinaryTree(preOrder, inOrder) {
+   if (preOrder === null || inOrder === null || preOrder.length === 0 || inOrder.length === 0||
+        preOrder.length !== inOrder.length) {
+            return null;
+    }
+    var root = new Node(preOrder[0]);
+    var index = inOrder.indexOf(root.value); // 获取根节点的在中序列表中位置
+    var preOrderLeft = preOrder.slice(1, index + 1); // 获取前序列表中的左子树
+    var preOrderRight = preOrder.slice(index + 1, preOrder.length); // 获取前序列表的右子树
+    var inOrderLeft = inOrder.slice(0, index); // 获取中序列表的左子树
+    var inOrderRight = inOrder.slice(index + 1, inOrder.length); // 获取中序列表的右子树
+    root.left = restoreBinaryTree(preOrderLeft, inOrderLeft);
+    root.right = restoreBinaryTree(preOrderRight, inOrderRight);
+    return root;
+}
+
+var binaryTree = restoreBinaryTree(preOrderList, inOrderList);
+
+function postOrderTraverse(root) {
+   if (root === null) {
+       return;
+   }
+   postOrderTraverse(root.left);
+   postOrderTraverse(root.right);
+   console.log(root.value);
+};
+
+postOrderTraverse(binaryTree);
+```
+
+### 后序 + 中序还原二叉树
+
+![1581779352268](/assets/1581779352268.jpg)
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+}
+
+var inOrderList = ['F', 'C', 'G', 'A', 'D', 'B', 'E'];
+var postOrderList = ['F', 'G', 'C', 'D', 'E', 'B', 'A'];
+
+function restoreBinaryTree(inOrder, postOrder) {
+    if (inOrder === null || postOrder === null || inOrder.length === 0 || postOrder.length === 0 ||
+            inOrder.length !== postOrder.length) {
+        return null;
+    }
+    var root = new Node(postOrder[postOrder.length - 1]);
+    var index = inOrder.indexOf(root.value);
+    var inOrderLeft = inOrder.slice(0, index);
+    var inOrderRight = inOrder.slice(index + 1, inOrder.length);
+    var postOrderLeft = postOrder.slice(0, index);
+    var postOrderRight = postOrder.slice(index, postOrder.length - 1);
+    root.left = restoreBinaryTree(inOrderLeft, postOrderLeft);
+    root.right = restoreBinaryTree(inOrderRight, postOrderRight);
+    return root;
+}
+
+var binaryTree = restoreBinaryTree(inOrderList, postOrderList);
+
+function preOrderTraverse(root) {
+    if (root === null) {
+        return;
+    }
+    console.log(root.value);
+    preOrderTraverse(root.left);
+    preOrderTraverse(root.right);
+}
+
+preOrderTraverse(binaryTree);
 ```
