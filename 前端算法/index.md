@@ -488,3 +488,150 @@ function preOrderTraverse(root) {
 
 preOrderTraverse(binaryTree);
 ```
+
+### 深度优先遍历
+
+深度优先遍历与前序遍历的访问次序一样
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+}
+
+var a = new Node('A');
+var b = new Node('B');
+var c = new Node('C');
+var d = new Node('D');
+var e = new Node('E');
+var f = new Node('F');
+var g = new Node('G');
+
+a.left = c;
+a.right = b;
+b.left = d;
+b.right = e;
+c.left = f;
+c.right = g;
+
+function deepSearch(root, target) {
+    if (root === null) {
+        return false;
+    }
+    if (root.value === target) {
+        return true;
+    }
+    var left = deepSearch(root.left, target);
+    var right = deepSearch(root.right, target);
+    return left || right;
+}
+
+console.log(deepSearch(a, 'A'));
+```
+
+### 广度优先遍历
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+}
+
+var a = new Node('A');
+var b = new Node('B');
+var c = new Node('C');
+var d = new Node('D');
+var e = new Node('E');
+var f = new Node('F');
+var g = new Node('G');
+
+a.left = c;
+a.right = b;
+b.left = d;
+b.right = e;
+c.left = f;
+c.right = g;
+
+function breadthSearch(rootList, target) {
+    if (rootList === null || rootList.length === 0) {
+        return false;
+    }
+    var chidList = [];
+    for (var i = 0; i < rootList.length; i++) {
+        if (rootList[i] !== null) {
+            console.log(rootList[i].value);
+            if (rootList[i].value === target) {
+                return true;
+            } else {
+                chidList.push(rootList[i].left);
+                chidList.push(rootList[i].right);
+            }
+        }
+    }
+    return breadthSearch(chidList, target);
+}
+
+console.log(breadthSearch([a], 'G'));
+```
+
+### 二叉树的比较
+
+左右子树互换后不是同一颗树
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+}
+
+var a1 = new Node('A');
+var b1 = new Node('B');
+var c1 = new Node('C');
+var d1 = new Node('D');
+var e1 = new Node('E');
+var f1 = new Node('F');
+var g1 = new Node('G');
+
+a1.left = c1;
+a1.right = b1;
+c1.left = f1;
+c1.right = g1;
+b1.left = d1;
+b1.right = e1;
+
+
+var a2 = new Node('A');
+var b2 = new Node('B');
+var c2 = new Node('C');
+var d2 = new Node('D');
+var e2 = new Node('E');
+var f2 = new Node('F');
+var g2 = new Node('G');
+
+a2.left = c2;
+a2.right = b2;
+c2.left = f2;
+c2.right = g2;
+b2.left = d2;
+b2.right = e2;
+
+function compareTree(root1, root2) {
+    if (root1 === root2) { // 同一颗树
+        return true;
+    }
+    if (root1 !== null && root2 === null || root1 === null && root2 !== null) {
+        return false;
+    }
+    if (root1.value !== root2.value) {
+        return false;
+    }
+    var leftBool = compareTree(root1.left, root2.left);
+    var rightBool = compareTree(root1.right, root2.right);
+    return leftBool && rightBool;
+}
+
+console.log(compareTree(a1, a2));
+```
