@@ -1,11 +1,11 @@
 /*
  * @Author: zhangl
- * @Date: 2020-02-17 22:10:40
+ * @Date: 2020-02-17 23:29:47
  * @LastEditors: zhangl
- * @LastEditTime: 2020-02-18 00:41:29
+ * @LastEditTime: 2020-02-17 23:41:30
  * @GitHub: https://github.com/SmithJson
- * @FilePath: /FE-Subjects/前端算法/5.二叉树的遍历/二叉树的比较.js
- * @Description: 二叉树的比较（左右子树互换后不是同一颗树）
+ * @FilePath: /FE-Subjects/前端算法/5.二叉树的遍历/二叉树的比较2.js
+ * @Description: 二叉树的比较（不区分左右子树）
  */
 function Node(value) {
     this.value = value;
@@ -28,7 +28,6 @@ c1.right = g1;
 b1.left = d1;
 b1.right = e1;
 
-
 var a2 = new Node('A');
 var b2 = new Node('B');
 var c2 = new Node('C');
@@ -37,26 +36,25 @@ var e2 = new Node('E');
 var f2 = new Node('F');
 var g2 = new Node('G');
 
-a2.left = c2;
-a2.right = b2;
+a2.right = c2;
+a2.left = b2;
 c2.left = f2;
 c2.right = g2;
-// b2.left = d2;
+b2.left = d2;
 b2.right = e2;
 
 function compareTree(root1, root2) {
-    if (root1 === root2) { // 同一颗树
+    if (root1 === root2) {
         return true;
     }
-    if (root1 !== null && root2 === null || root1 === null && root2 !== null) {
+    if (root1 === null && root2 !== null || root1 !== null && root2 === null) {
         return false;
     }
     if (root1.value !== root2.value) {
         return false;
     }
-    var leftBool = compareTree(root1.left, root2.left);
-    var rightBool = compareTree(root1.right, root2.right);
-    return leftBool && rightBool;
+    return compareTree(root1.left, root2.left) && compareTree(root1.right, root2.right) ||
+        compareTree(root1.left, root2.right) && compareTree(root1.right, root2.left);
 }
 
 console.log(compareTree(a1, a2));
