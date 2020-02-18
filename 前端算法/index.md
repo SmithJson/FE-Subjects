@@ -635,3 +635,89 @@ function compareTree(root1, root2) {
 
 console.log(compareTree(a1, a2));
 ```
+
+### 最小生成树
+
+树：有向无环图
+
+- 普利姆（Prim）算法（加点法）
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.neighbor = [];
+}
+
+var a = new Node('A');
+var b = new Node('B');
+var c = new Node('C');
+var d = new Node('D');
+var e = new Node('E');
+
+var MAX = 2 ** 53;
+
+// 边集合
+var pointSet = [];
+
+ // 边集合
+var edgeSet = [
+    [0, 4, 7, MAX, MAX], // A
+    [4, 0, 8, 6, MAX], // B
+    [7, 8, 0, 5, MAX], // C
+    [MAX, 6, 5, 0, 7], // D
+    [MAX, MAX, MAX, 7, 0], // E
+];
+
+pointSet.push(a);
+pointSet.push(b);
+pointSet.push(c);
+pointSet.push(d);
+pointSet.push(e);
+
+function getIndex(value) {
+    for (var i = 0; i < pointSet.length; i++) {
+        if (value === pointSet[i].value) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function getMinDisNode(pointSet, edgeSet, nowPointSet) {
+    var fromNode = null; // 起始节点
+    var minDisNode = null; // 结束节点
+    var minDistance = MAX;
+    for (var i = 0; i < nowPointSet.length; i++) {
+        var index = getIndex(nowPointSet[i].value);
+        for (var j = 0; j < edgeSet[index].length; j++) {
+            var currentNode = pointSet[j];
+            if (nowPointSet.indexOf(currentNode) < 0 && edgeSet[index][j] < minDistance) {
+                fromNode = nowPointSet[i];
+                minDisNode = currentNode;
+                minDistance = edgeSet[index][j];
+            }
+        }
+    }
+    fromNode.neighbor.push(minDisNode);
+    minDisNode.neighbor.push(fromNode);
+    return minDisNode;
+}
+
+function prim(pointSet, edgeSet, startNode) {
+    var nowPointSet = []; // 记录哪些节点已连接
+    nowPointSet.push(startNode);
+    while (true) {
+        var minDisNode = getMinDisNode(pointSet, edgeSet, nowPointSet);
+        nowPointSet.push(minDisNode);
+        if (pointSet.length === nowPointSet.length) {
+            break;
+        }
+    }
+}
+
+prim(pointSet, edgeSet, pointSet[2]);
+
+console.log(pointSet);
+```
+
+- 克鲁斯卡尔（kruskal）算法（加边法）
