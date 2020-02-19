@@ -16,6 +16,10 @@
 - vm.$mount：手动挂载 vue 实例
 - vm.$destroy：手动销毁 vue 实例
 - vm.$nextTick(callback)：手动更新
+- vm.$set(object, attr, value)：修改对象属性
+- vm.$delete(object, attr)：删除对象属性
+- vm.$forceUpdate()：强制 vue 实例重新渲染
+- vm.$watch('键路径', callback[newValue, oldValue])：监听 vue 属性值
 
 ## 自定义指令
 

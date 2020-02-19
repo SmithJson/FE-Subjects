@@ -1,0 +1,56 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-19 16:23:26
+ * @LastEditors: zhangl
+ * @LastEditTime: 2020-02-19 16:41:33
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/3.vue自定义指令/code/02.html
+ * @Description: $set、$delete
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$set、$delete 新增和删除属性</title>
+</head>
+<body>
+    <div id="root">
+        <button @click="handleUpdateAttr('章磊')">修改属性</button>
+        <button @click="handleAddAttr(18)">添加属性</button>
+        <button @click="handleDeleteAttr">删除属性</button>
+
+        <hr />
+        <p>{{user}}</p>
+        <p>{{user.name}}</p>
+        <p>{{user.age}}</p>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                user: {
+                    name: 'zhangl',
+                }
+            },
+            methods: {
+                handleUpdateAttr(value) {
+                    this.user.name = value;
+                    // this.$set(this.user, 'name', value);
+                },
+                handleAddAttr(value) {
+                    // this.user.age = value; // 这种方式添加新值，不会重新渲染
+                    this.$set(this.user, 'age', value);
+                    // Vue.set(this.user, 'age', value);
+                },
+                handleDeleteAttr() {
+                    // delete this.user.name; // 这种方式删除，不会重新渲染
+                    this.$delete(this.user, 'name');
+                    // Vue.delete(this.user, 'name');
+                }
+            },
+        });
+    </script>
+</body>
+</html>
