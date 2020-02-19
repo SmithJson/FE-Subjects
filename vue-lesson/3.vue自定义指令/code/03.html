@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2020-02-19 16:43:20
  * @LastEditors: zhangl
- * @LastEditTime: 2020-02-19 16:55:26
+ * @LastEditTime: 2020-02-19 18:33:54
  * @GitHub: https://github.com/SmithJson
  * @FilePath: /FE-Subjects/vue-lesson/3.vue自定义指令/code/03.html
  * @Description: $forceUpdate 强制渲染页面
@@ -15,11 +15,30 @@
     <title>$forceUpdate</title>
 </head>
 <body>
+    <div id="root">
+        {{name}}
+    </div>
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
     <script>
+
         /**
          * 页面 render 发生在 mounted 期间，
+         * 所以在这个生命周期里添加 vue 模版里的数据是不会重新渲染
         */
+
+        var vm = new Vue({
+            el: '#root',
+            created() {
+                // this.name = 'zl';
+            },
+            beforeMount() {
+                // this.name = 'zl';
+            },
+            mounted() {
+                this.name = 'zl';
+                this.$forceUpdate();
+            },
+        });
     </script>
 </body>
 </html>

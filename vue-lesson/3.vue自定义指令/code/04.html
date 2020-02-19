@@ -1,0 +1,53 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-19 18:34:38
+ * @LastEditors: zhangl
+ * @LastEditTime: 2020-02-19 18:57:48
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/vue-lesson/3.vue自定义指令/code/04.html
+ * @Description: $watch 检测 data 数据
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        {{user.name}}
+        {{user.person.age}}
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                user: {
+                    name: 'zhangl',
+                    person: {
+                        age: 18,
+                    }
+                },
+            },
+            watch: {
+                // 'user.name': function (newVal, oldVal) {
+                //     console.log('更新前：', oldVal);
+                //     console.log('更新后：', newVal);
+                // },
+                user: { // 当出现对象中的对象嵌套，正常无法监测到变化
+                    handler(newVal, oldVal) {
+                        console.log('更新前：', oldVal.person.age);
+                        console.log('更新后：', newVal.person.age);
+                    },
+                    deep: true, // 深度检查
+                },
+            },
+            beforeMount() {
+                this.user.person.age = 20;
+            }
+        });
+    </script>
+</body>
+</html>
