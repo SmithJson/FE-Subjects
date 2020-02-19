@@ -721,3 +721,108 @@ console.log(pointSet);
 ```
 
 - 克鲁斯卡尔（kruskal）算法（加边法）
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.neighbor = [];
+}
+
+var a = new Node('A');
+var b = new Node('B');
+var c = new Node('C');
+var d = new Node('D');
+var e = new Node('E');
+
+var pointSet = [];
+var edgeSet = [
+    [0, 4, 7, MAX, MAX], // A
+    [4, 0, 8, 6, MAX], // B
+    [7, 8, 0, 5, MAX], // C
+    [MAX, 6, 5, 0, 7], // D
+    [MAX, MAX, MAX, 7, 0], // E
+];
+var MAX = 2 ** 53;
+
+pointSet.push(a);
+pointSet.push(b);
+pointSet.push(c);
+pointSet.push(d);
+pointSet.push(e);
+
+function link(linkList, begin, end) {
+    var beginIn = null;
+    var endIn = null;
+    for (var i = 0; i < linkList.length; i++) {
+        if (linkList[i].indexOf(begin) > - 1) {
+            beginIn = linkList[i];
+        }
+        if (linkList[i].indexOf(end) > -1) {
+            endIn = linkList[i];
+        }
+    }
+    if (beginIn !== null && endIn === null) { // begin 在 A，end 不在 B
+        beginIn.push(end);
+    } else if (beginIn === null && endIn !== null) { // begin 不在 A，end 在 B
+        endIn.push(begin);
+    } else if (beginIn === null && endIn === null) { // begin 不在 A，end 不在 B
+        var newNode = [begin, end];
+        linkList.push(newNode);
+    } else if (beginIn !== null && endIn !== null && beginIn !== endIn) { // begin 在 A，end 在 B
+        var newNode = beginIn.concat(endIn);
+        linkList.push(newNode);
+        var removeIndex = linkList.indexOf(beginIn);
+        linkList.splice(removeIndex, 1);
+        removeIndex = linkList.indexOf(endIn);
+        linkList.splice(removeIndex, 1);
+    }
+    begin.neighbor.push(end);
+    end.neighbor.push(begin);
+}
+
+function checkLink(linkList, begin, end) {
+    var beginIn = null;
+    var endIn = null;
+    for (var i = 0; i < linkList.length; i++) {
+        if (linkList[i].indexOf(begin) > - 1) {
+            beginIn = linkList[i];
+        }
+        if (linkList[i].indexOf(end) > -1) {
+            endIn = linkList[i];
+        }
+    }
+    if (beginIn !== null && endIn !== null && beginIn === endIn) {
+        return false;
+    }
+    return true;
+}
+
+function kruskal(pointSet, edgeSet) {
+    var linkList = []; // 二维数组，保存连接的族
+    while(true) {
+        var begin = null;
+        var end = null;
+        var minDistance = MAX;
+        for (var i = 0; i < edgeSet.length; i++) {
+            for (var j = 0; j < edgeSet[i].length; j++) {
+                var tempBegin = pointSet[i];
+                var tempEnd = pointSet[j];
+                if (i !== j && edgeSet[i][j] < minDistance &&
+                    checkLink(linkList, tempBegin, tempEnd)) { // 不是同一个节点，且边是最小的，并且符合连接条件
+                        begin = tempBegin;
+                        end = tempEnd;
+                        minDistance = edgeSet[i][j];
+                }
+            }
+        }
+        link(linkList, begin, end);
+        if (linkList.length === 1 && linkList[0].length === pointSet.length) {
+            break;
+        }
+    }
+}
+
+kruskal(pointSet, edgeSet);
+
+console.log(pointSet);
+```

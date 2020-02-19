@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2020-02-18 23:48:16
  * @LastEditors: zhangl
- * @LastEditTime: 2020-02-19 01:30:57
+ * @LastEditTime: 2020-02-19 21:06:09
  * @GitHub: https://github.com/SmithJson
  * @FilePath: /FE-Subjects/前端算法/6.图/普利姆算法.js
  * @Description: 最小生成树-普利姆（Prim）算法
@@ -32,7 +32,7 @@ var edgeSet = [
     [7, 8, 0, 5, MAX], // C
     [MAX, 6, 5, 0, 7], // D
     [MAX, MAX, MAX, 7, 0], // E
-]
+];
 
 pointSet.push(a);
 pointSet.push(b);
