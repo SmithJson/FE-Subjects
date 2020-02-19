@@ -23,4 +23,14 @@
 
 ## 自定义指令
 
+Vue.directive(指令名, config)
+
+### 指令生命周期
+
+- bind
+- inserted
+- update
+- componentUpdated
+- unbind
+
 ## 过度动画
