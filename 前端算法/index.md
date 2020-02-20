@@ -826,3 +826,225 @@ kruskal(pointSet, edgeSet);
 
 console.log(pointSet);
 ```
+
+## 二叉搜索树
+
+左子树的值小于当前值，右子树的值大于当前值
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+}
+
+var arr = [];
+
+for (var i = 0; i < 10000; i++) {
+    arr.push(Math.random() * 10000 >> 1);
+}
+
+function insertNode(root, value) {
+    if (root === null) {
+        return;
+    }
+    if (root.value === value) {
+        return;
+    }
+    if (root.value < value) { // 目标值比当前节点大
+        if (root.right === null) {
+            root.right = new Node(value);
+        } else {
+            insertNode(root.right, value);
+        }
+    } else { // 目标值比当前节点小
+        if (root.left === null) {
+            root.left = new Node(value);
+        } else {
+            insertNode(root.left, value);
+        }
+    }
+}
+
+function buildSearchTree(arr) {
+    if (root === null || arr.length === 0) {
+        return;
+    }
+    var root = new Node(arr[0]);
+    for (var i = 1; i < arr.length; i++) {
+        insertNode(root, arr[i]);
+    }
+    return root;
+}
+
+var count1 = 0; // 统计使用遍历查找的次数
+var count2 = 0; // 统计通过二叉搜索树查找的次数
+
+function searchByTraverse(arr, target) {
+    for (var i = 0; i < arr.length; i++) {
+        count1++;
+        if (arr[i] === target) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function searchByTree(root, target) {
+    if (root === null) {
+        return false;
+    }
+    count2++;
+    if (root.value === target) {
+        return true;
+    }
+    if (root.value < target) {
+        return searchByTree(root.right, target);
+    } else {
+        return searchByTree(root.left, target);
+    }
+}
+
+var root = buildSearchTree(arr);
+
+console.log(searchByTraverse(arr, 1000), count1);
+console.log(searchByTree(root, 1000), count2);
+```
+
+## 二叉平衡搜索树
+
+在二叉树搜索树的基础上尽可能的减少树的深度
+
+特征：
+
+1. 根节点的左、右子树的高度差不超过1
+2. 所有的子树都符合第一条特征1
+
+### 单选
+
+从最底部查看是否平衡
+
+- 左单选：左子树深度小于右子树深度
+    1. 找到不平衡点，作为旋转节点
+    2. 找到新根节点（旋转节点的右节点）
+    3. 找到变换分支（新根节点的左分支）
+    4. 将变换分支作为旋转节点的右分支
+    5. 旋转节点作为新根节点的左节点
+    6. 返回新根节点
+- 右单选：左子树深度大于右子树深度
+    1. 找到不平衡点，作为旋转节点
+    2. 找到新根节点（旋转节点的左节点）
+    3. 找到变换分支（新根节点的右分支）
+    4. 将变换分支作为旋转节点的左分支
+    5. 旋转节点作为新根节点的右节点
+    6. 返回新根节点
+
+```javascript
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+}
+
+// var a = new Node('A');
+// var b = new Node('B');
+// var c = new Node('C');
+// var d = new Node('D');
+// var e = new Node('E');
+// var f = new Node('F');
+// var g = new Node('G');
+// var h = new Node('H');
+// var j = new Node('J');
+
+// a.left = b;
+// a.right = c;
+// b.left = d;
+// b.right = e;
+// c.left = f;
+// c.right = g;
+// d.right = h;
+// e.right = j;
+
+var node2 = new Node('2');
+var node3 = new Node('3');
+var node5 = new Node('5');
+var node6 = new Node('6');
+
+// 右单选例子
+// node6.left = node3;
+// node3.left = node2;
+// node3.right = node5;
+
+// 左单选
+node2.right = node5;
+node5.left = node3;
+node5.right = node6;
+
+function getDeep(root) {
+    if (root === null) {
+        return 0;
+    }
+    var leftHeight = getDeep(root.left);
+    var rightHeight = getDeep(root.right);
+    return Math.max(leftHeight, rightHeight) + 1;
+}
+
+function isBalance(root) {
+    if (root === null) {
+        return true;
+    }
+    var leftHeight = getDeep(root.left);
+    var rightHeight = getDeep(root.right);
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+        return false;
+    } else {
+        return isBalance(root.left) && isBalance(root.right);
+    }
+}
+
+function leftRotate(root) {
+    if (root === null) {
+        return;
+    }
+    var newRoot = root.right;
+    root.right = root.right.left;
+    newRoot.left = root;
+    return newRoot;
+ }
+
+function rightRotate(root) {
+    if (root === null) {
+        return;
+    }
+    var newRoot = root.left;
+    root.left = root.left.right;
+    newRoot.right = root;
+    return newRoot;
+}
+
+function change(root) {
+    if (isBalance(root)) {
+        return root;
+    }
+    if (root.left !== null) {
+        root.left = change(root.left);
+    }
+    if (root.right !== null) {
+        root.right = change(root.right);
+    }
+    var leftDeep = getDeep(root.left);
+    var rightDeep = getDeep(root.right);
+    if (Math.abs(leftDeep - rightDeep) < 2) {
+        return root;
+    } else if (leftDeep > rightDeep) { // 左深右浅 右单选
+        return rightRotate(root);
+    } else if (leftDeep < rightDeep) { // 左浅右深 左单选
+        return leftRotate(root);
+    }
+}
+
+// var newRoot = change(node6);
+var newRoot = change(node2);
+console.log(isBalance(newRoot));
+console.log(newRoot);
+```
