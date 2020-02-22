@@ -5,28 +5,15 @@ function Node(value) {
 }
 
 // var node2 = new Node('2');
-// var node3 = new Node('3');
 // var node5 = new Node('5');
 // var node6 = new Node('6');
-
-// node2.right = node5;
-// node5.left = node3;
-// node5.right = node6;
-
-// node6.left = node3;
-// node3.left = node2;
-// node3.right = node5;
-
-var node2 = new Node('2');
-var node5 = new Node('5');
-var node6 = new Node('6');
-var node7 = new Node('7');
-var node8 = new Node('8');
-
-node8.left = node7;
-node7.left = node6;
-node6.left = node5;
-node5.left = node2;
+// var node7 = new Node('7');
+// var node8 = new Node('8');
+//
+// node8.left = node7;
+// node7.left = node6;
+// node6.left = node5;
+// node5.left = node2;
 
 function getDeep(root) {
     if (root === null) {
@@ -100,6 +87,65 @@ function change(root) {
     }
 }
 
-console.log(isBalance(node8));
-var newRoot = change(node8);
-console.log(isBalance(newRoot));
+var arr = [];
+
+for (var i = 0; i < 10000; i++) {
+    arr.push(Math.random() * 10000 >> 1);
+}
+
+function insertNode(root, value) {
+    if (root === null) {
+        return;
+    }
+    if (root.value === value) {
+        return;
+    }
+    if (root.value < value) { // 目标值比当前节点大
+        if (root.right === null) {
+            root.right = new Node(value);
+        } else {
+            insertNode(root.right, value);
+        }
+    } else { // 目标值比当前节点小
+        if (root.left === null) {
+            root.left = new Node(value);
+        } else {
+            insertNode(root.left, value);
+        }
+    }
+}
+
+function buildSearchTree(arr) {
+    if (arr === null || arr.length === 0) {
+        return;
+    }
+    var root = new Node(arr[0]);
+    for (var i = 1; i < arr.length; i++) {
+        insertNode(root, arr[i]);
+    }
+    return root;
+}
+
+var count2 = 0; // 统计通过二叉搜索树查找的次数
+
+function searchByTree(root, target) {
+    if (root === null) {
+        return false;
+    }
+    count2++;
+    if (root.value === target) {
+        return true;
+    }
+    if (root.value < target) {
+        return searchByTree(root.right, target);
+    } else {
+        return searchByTree(root.left, target);
+    }
+}
+
+var root = buildSearchTree(arr);
+
+console.log(searchByTree(root, 1000), count2, getDeep(root));
+count2 = 0;
+var newRoot = change(root);
+console.log(searchByTree(newRoot, 1000), count2, getDeep(newRoot));
