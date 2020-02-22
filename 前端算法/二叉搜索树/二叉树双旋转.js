@@ -76,14 +76,20 @@ function change(root) {
         if (changeNodeDeep > noChangeNodeDeep) {
             root.left = leftRotate(root.left);
         }
-        return rightRotate(root);
-    } else if (leftDeep < rightDeep) { // 左旋
+        var newRoot = rightRotate(root);
+        newRoot.right = change(newRoot.right);
+        newRoot = change(newRoot);
+        return newRoot;
+    } else { // 左旋
         var changeNodeDeep = getDeep(root.right.left);
         var noChangeNodeDeep = getDeep(root.right.right);
         if (changeNodeDeep > noChangeNodeDeep) {
             root.right = rightRotate(root.right);
         }
-        return leftRotate(root);
+        var newRoot = leftRotate(root);
+        newRoot.left = change(newRoot.left);
+        newRoot = change(newRoot);
+        return newRoot;
     }
 }
 
@@ -148,4 +154,4 @@ var root = buildSearchTree(arr);
 console.log(searchByTree(root, 1000), count2, getDeep(root));
 count2 = 0;
 var newRoot = change(root);
-console.log(searchByTree(newRoot, 1000), count2, getDeep(newRoot));
+console.log(searchByTree(newRoot, 1000), count2, getDeep(newRoot), isBalance(newRoot));
