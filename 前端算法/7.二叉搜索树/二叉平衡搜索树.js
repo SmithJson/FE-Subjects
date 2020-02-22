@@ -4,7 +4,7 @@
  * @LastEditors: zhangl
  * @LastEditTime: 2020-02-21 01:35:29
  * @GitHub: https://github.com/SmithJson
- * @FilePath: /FE-Subjects/前端算法/二叉搜索树/二叉平衡搜索树.js
+ * @FilePath: /FE-Subjects/前端算法/7.二叉搜索树/二叉平衡搜索树.js
  * @Description: 二叉平衡搜索树
  */
 function Node(value) {

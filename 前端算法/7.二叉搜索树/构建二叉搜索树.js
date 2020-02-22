@@ -4,8 +4,8 @@
  * @LastEditors: zhangl
  * @LastEditTime: 2020-02-20 22:02:31
  * @GitHub: https://github.com/SmithJson
- * @FilePath: /FE-Subjects/前端算法/二叉搜索树/构建二叉搜索树.js
- * @Description: 二叉搜索树
+ * @FilePath: /FE-Subjects/前端算法/7.二叉搜索树/构建二叉搜索树.js
+ * @Description: 7.二叉搜索树
  */
 function Node(value) {
     this.value = value;
