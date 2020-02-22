@@ -1314,3 +1314,20 @@ count2 = 0;
 var newRoot = change(root);
 console.log(searchByTree(newRoot, 1000), count2, getDeep(newRoot), isBalance(newRoot));
 ```
+
+### 234 树
+
+解决了二叉平衡排序树，层级过多，以及每个只能存放一个树的问题
+
+特点：
+
+1. 子节点永远在最下层
+2. 始终保持平衡
+
+### 红黑树
+
+本质上就是二叉平衡排序树，只是对每个节点赋予了不同的含义，实现了理论上简化为而二叉树，但保留多叉，每个节点存放多个值
+
+红色代表组合起来的一个虚拟节点，在不计入计算范围
+
+![WechatIMG95](/assets/WechatIMG95.png)
