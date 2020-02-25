@@ -10,7 +10,7 @@
 * */
 console.time();
 var isPalindromeString = function (value) {
-	if (typeof value !== 'string') return ￿false;
+	if (typeof value !== 'string') return false;
 	return value.split('').reverse().join('') === value;
 };
 // bab ad
