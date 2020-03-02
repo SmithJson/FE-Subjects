@@ -1,0 +1,198 @@
+# 向后插入
+a
+# 向前插入
+i
+# 向下插入
+o
+
+# 行尾插入
+A
+# 行首插入
+I
+# 向上插入
+O
+
+# 显示行号
+set nu
+
+# 删除一个字符
+ctrl + h
+# 删除一个单词
+ctrl + w
+# 删除一行
+ctrl + u
+
+# 进入 normal 模式
+ctr + c | esc
+
+# 跳转到上次编辑的地方, 并进入插入模式
+gi
+
+# 以单词跳转, 正向
+w
+# 以单词跳转
+e
+# 以单词跳转，反向
+b
+
+# 左移动
+h
+# 下移动
+j
+# 上移动
+k
+# 右移动
+l
+
+# 进入选择模式
+v
+# 选择多列
+ctrl + v
+# 选择一行
+V
+
+# 跳转到这一行的匹配字符的开头 ; 写一个 , 上一个
+f + character
+
+# 删除一个单词
+dw delete a word
+# 删除 num 个字符
+d + num
+# 删除 num 个字符
+x + num
+
+# 替换字符
+r
+# 删除字符
+s
+# 替换字符
+c
+
+查找字符
+/ + character
+匹配下一个|上一个
+n | N
+# 检索范围 s/匹配的字符串/替换字符串/标记 
+# for example: % s/old/new/g
+:range s/pattern/replace/flag
+
+# 显示当前缓存区
+:ls
+切换到第 n 哥缓存区
+:b n
+# 切换到名叫 buffer_name 缓存区
+:b buffer_name
+
+水平切割窗口
+:sp
+垂直分割窗口
+:vs
+# 窗口间循环切换
+<ctrl + w>w
+# 切换到 左|下|上|右窗口
+<ctrl + w>h|j|k|l
+# 两个窗口位置进行调换
+<ctrl + w>L
+# 创建一个 tab 页
+:tabnew file_name
+# tabn 切换到指定的 tab 页
+:tabn num
+# 切换到下一个 tab 页
+gt
+# 切换到上一个 tab 页
+gT switch previous tab
+# 关系所有窗口里当前页
+:tabc
+# 关闭所有 tab 页（除了活动页）
+:tabo
+
+# 文本对象：次数 指令 文本
+# 指令：d(删除) c(修改)
+# 文本：w(单词) s(句子) p(段落)
+# 选择一个单词（不包括空格）visual + i + w(word)
+viw 
+# 选择一个单词（包括空格）
+vaw
+
+# 复制
+y yank
+# 粘贴
+p put
+# 剪切
+d cut
+# 复制一个单词
+yiw
+# 复制一行
+yy
+
+# " a yy：a 寄存器里存放yy 操作的内容
+" + register_name command
+# 查看寄存器里的内容
+:reg register_name
+
+# 开启系统剪切板
+:set clipboard=unnamed enable system clipboard
+# vim 内容拷贝到系统剪切板
+" + \+ 粘贴内容
+
+# macro 录制操作
+# q 加寄存器开始录制，再 q 停止录制
+q + register record operator
+# @ 加寄存器重播录制的操作
+@ register replay
+
+# 查看当前主题
+:colorscheme 
+# 查看所有主题
+:colorscheme ctrl + d
+# 更新当前主题（不在配置文件里的都是临时的）
+:colorscheme theme_name 
+
+:h option-list show option list
+
+# ctrlp.vim 插件快捷键
+# 以当前目录为根结点，查找文件
+ctrl + p file_name
+
+# vim-surround 插件快捷键
+# 替换特殊符号 将 " 替换为)
+cs "( 
+# 删除特殊符号 将" 删除
+ds " 
+# 添加特殊符号
+ys aw "
+
+# far.vim 插件快捷键
+# 批量替换：Far 要替换的内容 目标内容 范围路径
+:Far foo bar **/*.py
+# 确认替换
+:Fardo
+
+# vim-easymotion 插件快捷键
+ss character
+
+# fzf.vim 插件快捷键
+# 查找指令路径的文件
+Files path
+# 查找指定文字符串, ctrl + j|k来进行移动
+:Ag character
+
+# go 提示显示
+ctrl + x + o
+
+# tagbar 插件快捷键
+:TagbarToggle
+
+# vim-interestingwords
+, k 高亮
+, K(大写) 取消
+
+# coc-vim 插件
+:help coc-nvim
+
+:Neoformat
+
+# vim-commentary
+gc 添加和删除注释
+
+:GV 查看 git 历史记录
