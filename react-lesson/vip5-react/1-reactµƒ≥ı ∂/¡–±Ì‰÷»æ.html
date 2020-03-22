@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        // 第一种纯js创建(一般不用)
+        // [] ul li  用forEach实现
+        var names = ['张飞','关羽','赵云']
+        const ul = <ul>
+            {
+                names && names.map((name,index)=>
+                   <li key={index}>
+                        {name}
+                    </li>
+                )
+            }
+        </ul>
+        ReactDOM.render(ul,document.getElementById("app"))
+        // 
+    </script>
+</body>
+</html>

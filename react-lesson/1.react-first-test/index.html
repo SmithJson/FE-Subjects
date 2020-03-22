@@ -1,0 +1,97 @@
+<!--
+ * @Author: zhangl
+ * @Date: 2020-02-13 11:29:44
+ * @LastEditors: zhangl
+ * @LastEditTime: 2020-03-22 14:47:29
+ * @GitHub: https://github.com/SmithJson
+ * @FilePath: /FE-Subjects/react-lesson/1.react-first-test/index.html
+ * @Description: react todo list
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script type="text/babel">
+        // todo list 组件
+        class ToDoList extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    list: [
+                        '张飞',
+                        '关羽',
+                        '刘备',
+                    ],
+                };
+            }
+
+            handleAddValue = val => {
+                this.setState({
+                    list: val,
+                });
+            };
+
+            render() {
+                return (
+                    <div>
+                        <AddInput list={this.state.list} onAddValue={this.handleAddValue} />
+                        <List list={this.state.list} />
+                    </div>
+                );
+            }
+        }
+
+        // 输入组件
+        class AddInput extends React.Component {
+            constructor() {
+                super();
+            }
+
+            handleAddValue = () => {
+                const { list, onAddValue } = this.props;
+                list.unshift(this.inp.value);
+                onAddValue(list);
+                this.inp.value = '';
+            };
+
+            render() {
+                return (
+                    <div>
+                        <input ref={inp => this.inp = inp} />
+                        <button onClick={this.handleAddValue}>添加</button>
+                    </div>
+                );
+            }
+        }
+
+        // 列表组件
+        class List extends React.Component {
+            constructor() {
+                super();
+            }
+
+            render() {
+                const { list = [] } = this.props;
+                return (
+                    <div>
+                        <ul>
+                            {list.map((item, index) => <li key={index}>{item}</li>)}
+                        </ul>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<ToDoList />, document.getElementById('root'));
+    </script>
+</body>
+</html>
