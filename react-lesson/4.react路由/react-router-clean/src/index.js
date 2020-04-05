@@ -2,9 +2,9 @@
  * @Author: zhangl
  * @Date: 2020-04-01 23:33:54
  * @LastEditors: zhangl
- * @LastEditTime: 2020-04-02 12:28:11
+ * @LastEditTime: 2020-04-06 00:34:22
  * @GitHub: https://github.com/SmithJson
- * @FilePath: /4.react路由/react-router-clean/src/index.js
+ * @FilePath: /react-router-clean/src/index.js
  * @Description: Do not edit
  */
 import React from 'react';
@@ -15,10 +15,14 @@ import App from './App';
 import RefDemo from './ref-demo';
 import ForwardRefDemo from './forwardRef-demo';
 import ContentDemo from './content-demo';
+import UseStateDemo from './react-hook/useStateDemo';
+import UseContextDemo from './react-hook/useContextDemo';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-            <ContentDemo />
+            <UseContextDemo />
+            // <UseStateDemo />
+            // <ContentDemo />
             // <Router>
             //     <App/>
             // </Router> 
