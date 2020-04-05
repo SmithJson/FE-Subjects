@@ -1,13 +1,13 @@
 /*
  * @Author: zhangl
- * @Date: 2020-04-05 20:50:32
+ * @Date: 2020-04-05 18:49:45
  * @LastEditors: zhangl
- * @LastEditTime: 2020-04-05 21:12:25
+ * @LastEditTime: 2020-04-05 19:04:11
  * @GitHub: https://github.com/SmithJson
  * @FilePath: /react-counter/src/redux/reducer.js
- * @Description: Do not edit
+ * @Description: reducer
  */
-import { INCREMENT, DECREMENT } from './action-type';
+import { INCREMENT, DECREMENT } from './acton-type';
 
 export function counter(state = 0, action) {
     switch(action.type) {

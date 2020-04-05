@@ -1,20 +1,20 @@
 /*
  * @Author: zhangl
- * @Date: 2020-04-05 18:51:44
+ * @Date: 2020-04-05 20:52:40
  * @LastEditors: zhangl
- * @LastEditTime: 2020-04-05 19:08:51
+ * @LastEditTime: 2020-04-05 21:06:50
  * @GitHub: https://github.com/SmithJson
  * @FilePath: /react-counter/src/redux/store.js
- * @Description: store
+ * @Description: Do not edit
  */
-import { createStore } from 'redux';
-import { counter } from '../redux/reducer';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import { counter } from './reducer';
 
-// 第一种调试 redux
-// const common = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+const store = createStore(
+    counter, 
+    composeWithDevTools(applyMiddleware(thunk))
+);
 
-// 第二种调试 redux
-// redux-devtools-extension
-
-export default createStore(counter, composeWithDevTools());
+export default store;
