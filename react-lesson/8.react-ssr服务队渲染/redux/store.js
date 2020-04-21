@@ -2,9 +2,9 @@
  * @Author: zhangl
  * @Date: 2020-04-15 16:11:09
  * @LastEditors: zhangl
- * @LastEditTime: 2020-04-15 16:27:41
+ * @LastEditTime: 2020-04-18 15:06:40
  * @GitHub: https://github.com/SmithJson
- * @FilePath: /8.react-ssr服务队渲染/redux/store.js
+ * @FilePath: /FE-Subjects/react-lesson/8.react-ssr服务队渲染/redux/store.js
  * @Description: Do not edit
  */
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -15,4 +15,10 @@ const newReducer = combineReducers({
     index: indexReducer,
 });
 
-export default () =>  createStore(newReducer, applyMiddleware(thunk));
+export const getClientStore = () => {
+    const defaultState = window._context ? window._context : {}
+    console.log(defaultState, window._context)
+    return createStore(newReducer, defaultState, applyMiddleware(thunk));
+};
+
+export const getStore = () =>  createStore(newReducer, applyMiddleware(thunk));

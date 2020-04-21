@@ -2,19 +2,19 @@
  * @Author: zhangl
  * @Date: 2020-04-14 23:13:57
  * @LastEditors: zhangl
- * @LastEditTime: 2020-04-15 16:43:37
+ * @LastEditTime: 2020-04-18 14:32:20
  * @GitHub: https://github.com/SmithJson
- * @FilePath: /8.react-ssr服务队渲染/client/index.js
+ * @FilePath: /FE-Subjects/react-lesson/8.react-ssr服务队渲染/client/index.js
  * @Description: 客户端
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import getStore from '../redux/store';
+import { getClientStore } from '../redux/store';
 import routers from '../routers';
 
-const store = getStore();
+const store = getClientStore();
 const App = () => {
     return (
         <Provider store={store}>

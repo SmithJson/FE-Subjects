@@ -2,9 +2,9 @@
  * @Author: zhangl
  * @Date: 2020-04-14 23:13:52
  * @LastEditors: zhangl
- * @LastEditTime: 2020-04-15 17:08:25
+ * @LastEditTime: 2020-04-18 14:41:40
  * @GitHub: https://github.com/SmithJson
- * @FilePath: /8.react-ssr服务队渲染/container/index.js
+ * @FilePath: /FE-Subjects/react-lesson/8.react-ssr服务队渲染/container/index.js
  * @Description: Do not edit
  */
 import React, { useState } from 'react';
@@ -20,7 +20,7 @@ const Index = props => {
             <button onClick={() => setCount(count + 1)}>添加</button>
             <button onClick={props.getIndexList}>加载列表</button>
             <ul>
-                {(props.list || []).map(item => <li key={item.id}>{item.title}</li>)}
+                {props.list.map(item => <li key={item.id}>{item.title}</li>)}
             </ul>
         </div>
     );

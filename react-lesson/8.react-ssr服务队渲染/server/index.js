@@ -2,9 +2,9 @@
  * @Author: zhangl
  * @Date: 2020-04-14 23:13:46
  * @LastEditors: zhangl
- * @LastEditTime: 2020-04-15 17:36:54
+ * @LastEditTime: 2020-04-21 13:35:28
  * @GitHub: https://github.com/SmithJson
- * @FilePath: /8.react-ssr服务队渲染/server/index.js
+ * @FilePath: /FE-Subjects/react-lesson/8.react-ssr服务队渲染/server/index.js
  * @Description: 服务端
  */
 import React from 'react';
@@ -14,7 +14,7 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { matchRoutes } from 'react-router-config';
 import express from 'express';
-import getStore from '../redux/store';
+import { getStore } from '../redux/store';
 import routers from '../routers';
 
 const app = express();
@@ -62,6 +62,9 @@ app.get('*', (req, res) => {
             <body>
                 <h1>React SSR Test</h1>
                 <div id="root">${content}</div>
+                <script>
+                    window._context = ${JSON.stringify(store.getState())}
+                </script>
                 <script src='/main.js'></script>
             </body>
         </html>
