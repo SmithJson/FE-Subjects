@@ -196,3 +196,6 @@ ctrl + x + o
 gc 添加和删除注释
 
 :GV 查看 git 历史记录
+
+# 批量修改' " ( {   vim-surround
+VISUAL + shift + ' => $cs[old][new]

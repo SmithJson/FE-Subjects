@@ -1,6 +1,7 @@
 @import "./normalize.less";
 @import "./colors.less";
 @import "./loading.less";
+@import "./and.less";
 
 .clearfix {
 	&::after {
@@ -12,19 +13,21 @@
 }
 
 .container {
+	overflow: hidden;
+
 	.nav-left-wrapper {
-		background: @colorR;
-		color: @colorL;
 		height: calc(100vh);
 	}
 
 	.main-wrapper {
 		height: calc(100vh);
 		background-color: @colorL;
-		overflow: auto;
+		overflow-y: scroll;
+		&::-webkit-scrollbar {
+			display: none;
+		}
 
 		.content {
-			margin-top: 105px;
 			position: relative;
 			padding: 15px;
 		}
