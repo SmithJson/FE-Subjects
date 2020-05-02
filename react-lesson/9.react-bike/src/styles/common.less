@@ -3,12 +3,37 @@
 @import "./loading.less";
 @import "./and.less";
 
+// 解决父元素高度塌陷
 .clearfix {
 	&::after {
 		content: " ";
 		clear: both;
 		display: block;
 		visibility: hidden;
+	}
+}
+
+// 文本省略
+.text-ellipsis(@line: 1) {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: @line;
+	overflow: hidden;
+}
+
+// 绘制小箭头
+.angle(@direction: top, @size: 10px) {
+	&::before {
+		content: "";
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, 100%);
+		display: block;
+		width: 0;
+		height: 0;
+		border: @size solid transparent;
+		border-@{direction}: @size solid @colorI;
 	}
 }
 

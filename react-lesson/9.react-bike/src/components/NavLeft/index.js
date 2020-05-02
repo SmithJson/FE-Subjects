@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2020-04-26 23:42:28
  * @LastEditors: zhangl
- * @LastEditTime: 2020-04-30 00:02:41
+ * @LastEditTime: 2020-05-02 17:05:54
  * @GitHub: https://github.com/SmithJson
  * @FilePath: /9.react-bike/src/components/NavLeft/index.js
  * @Description: NavLeft
@@ -84,8 +84,8 @@ export default class NavLeft extends Component {
 				</div>
 				<div className="menu-wrapper">
 					<div className="style-change-button">
-						<Switch onChange={this.handleChangeMenuStyle} />
-						<span>&nbsp; 修改主题</span>
+						<Switch onChange={this.handleChangeMenuStyle}/>
+						<span>修改主题</span>
 					</div>
 					<Menu
 						onClick={this.handleChangeMenuItem}
