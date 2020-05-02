@@ -2,11 +2,12 @@
  * @Author: zhangl
  * @Date: 2020-05-02 22:35:41
  * @LastEditors: zhangl
- * @LastEditTime: 2020-05-02 23:32:22
+ * @LastEditTime: 2020-05-02 23:43:51
  * @FilePath: /9.react-bike/src/tools/base.js
  * @Description: 基础工具
  */
 import { TIME_REGEX } from '../config';
+
 /**
  * 格式化时间
  * @param {Date} date

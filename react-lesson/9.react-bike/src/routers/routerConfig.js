@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2020-04-29 18:05:49
  * @LastEditors: zhangl
- * @LastEditTime: 2020-04-29 23:13:23
+ * @LastEditTime: 2020-05-03 01:26:20
  * @FilePath: /9.react-bike/src/routers/routerConfig.js
  * @Description: menu 路由
  */
@@ -22,62 +22,41 @@ export const menuConfig = [
 		component: loadablePageComponent('/home'),
 		auth: true, // 是否登录访问
 		show: true, // 是否有权访问
+		extract: true,
 		icon: <HomeOutlined />,
 	},
 	{
 		title: 'UI',
 		key: '/ui',
+		auth: true,
+		show: true,
+		extract: true,
+		icon: <HomeOutlined />,
 		children: [
-			{
-				title: '按钮',
-				key: '/ui/buttons',
-				component: loadablePageComponent('/home'),
-				auth: true,
-				extract: true
-			},
 			{
 				title: '弹框',
 				key: '/ui/modals',
-				component: loadablePageComponent('/home'),
+				component: loadablePageComponent('/ui/modals'),
 				auth: true,
+				show: true,
+				extract: true,
 			},
 			{
 				title: 'Loading',
 				key: '/ui/loadings',
 				component: loadablePageComponent('/home'),
 				auth: true,
-			},
-			{
-				title: '通知提醒',
-				key: '/ui/notification',
-				component: loadablePageComponent('/home'),
-				auth: true,
-			},
-			{
-				title: '全局Message',
-				key: '/ui/messages',
-				component: loadablePageComponent('/permission'),
-			},
-			{
-				title: 'Tab页签',
-				key: '/ui/tabs',
-				component: loadablePageComponent('/permission'),
-			},
-			{
-				title: '图片画廊',
-				key: '/ui/gallery',
-				component: loadablePageComponent('/permission'),
-			},
-			{
-				title: '轮播图',
-				key: '/ui/carousel',
-				component: loadablePageComponent('/permission'),
+				show: true,
+				extract: true,
 			}
 		]
 	},
 	{
 		key: '/form',
 		title: '表单',
+		icon: <HomeOutlined />,
+		auth: true,
+		show: true,
 		children: [
 			{
 				key: '/form/login',
@@ -85,6 +64,7 @@ export const menuConfig = [
 				component: loadablePageComponent('/home'),
 				auth: true,
 				show: true,
+				extract: true,
 			},
 			{
 				key: '/form/register',
@@ -92,24 +72,30 @@ export const menuConfig = [
 				component: loadablePageComponent('/home'),
 				auth: true,
 				show: true,
+				extract: true,
 			},
 		],
 	},
 	{
 		title: '表格',
 		key: '/table',
+		icon: <HomeOutlined />,
 		children: [
 			{
 				title: '基础表格',
 				key: '/table/basic',
 				component: loadablePageComponent('/home'),
 				auth: true,
+				show: true,
+				extract: true,
 			},
 			{
 				title: '高级表格',
 				key: '/table/high',
 				component: loadablePageComponent('/home'),
 				auth: true,
+				show: true,
+				extract: true,
 			}
 		]
 	},
@@ -117,30 +103,27 @@ export const menuConfig = [
 		title: '城市管理',
 		key: '/city',
 		component: loadablePageComponent('/home'),
+		icon: <HomeOutlined />,
 		auth: true,
+		show: true,
+		extract: true,
 	},
 	{
 		title: '订单管理',
 		key: '/order',
 		component: loadablePageComponent('/home'),
+		icon: <HomeOutlined />,
 		auth: true,
-	},
-	{
-		title: '员工管理',
-		key: '/user',
-		component: loadablePageComponent('/permission'),
-	},
-	{
-		title: '车辆地图',
-		key: '/bikeMap',
-		component: loadablePageComponent('/permission'),
+		show: true,
+		extract: true,
 	},
 	{
 		key: '/permission',
 		title: '权限设置',
 		component: loadablePageComponent('/permission'),
+		icon: <ContactsOutlined />,
 		auth: true,
 		show: true,
-		icon: <ContactsOutlined />
+		extract: true,
 	},
 ];
