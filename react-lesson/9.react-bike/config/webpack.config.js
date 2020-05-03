@@ -1,4 +1,4 @@
-'use strict';
+
 
 const fs = require('fs');
 const path = require('path');
@@ -593,7 +593,7 @@ module.exports = function (webpackEnv) {
 			// Otherwise React will be compiled in the very slow development mode.
 			new webpack.DefinePlugin({
 				...env.stringified,
-				PROJECT_NAME: JSON.stringify(projectJSON.name),
+				// PROJECT_NAME: JSON.stringify(projectJSON.name),
 			}),
 			// This is necessary to emit hot updates (currently CSS only):
 			isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),

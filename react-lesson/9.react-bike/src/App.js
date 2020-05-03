@@ -2,9 +2,9 @@
  * @Author: zhangl
  * @Date: 1985-10-26 16:15:00
  * @LastEditors: zhangl
- * @LastEditTime: 2020-04-29 23:15:37
+ * @LastEditTime: 2020-05-03 11:41:34
  * @FilePath: /9.react-bike/src/App.js
- * @Description: App ??
+ * @Description: App 容器组件
  */
 import React, { Component } from 'react';
 

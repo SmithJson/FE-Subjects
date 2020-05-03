@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2020-04-26 23:42:28
  * @LastEditors: zhangl
- * @LastEditTime: 2020-05-02 17:05:54
+ * @LastEditTime: 2020-05-03 11:57:55
  * @GitHub: https://github.com/SmithJson
  * @FilePath: /9.react-bike/src/components/NavLeft/index.js
  * @Description: NavLeft
@@ -12,6 +12,7 @@ import { Menu, Switch } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { LOGO_PNG } from '../../images';
 import { menuConfig as config } from '../../routers/routerConfig';
+import project from '../../config/project.json';
 import './index.less';
 
 const { SubMenu } = Menu;
@@ -22,7 +23,7 @@ export default class NavLeft extends Component {
 		openKeys: [],
 	};
 
-	// ?? SubMenu ???
+	// ?? subMenu ? keys
 	rootSubMenuKeys = [];
 
 	createMenuByRouteConfig = config => config.map(route => {
@@ -78,14 +79,13 @@ export default class NavLeft extends Component {
 				<div className="logo-wrapper">
 					<img src={LOGO_PNG} alt={LOGO_PNG} className="logo" />
 					<div className="system-name">
-						{/* eslint-disable */}
-						{PROJECT_NAME}
+						{project.name}
 					</div>
 				</div>
 				<div className="menu-wrapper">
 					<div className="style-change-button">
-						<Switch onChange={this.handleChangeMenuStyle}/>
-						<span>修改主题</span>
+						<Switch onChange={this.handleChangeMenuStyle} />
+						<span>主题修改</span>
 					</div>
 					<Menu
 						onClick={this.handleChangeMenuItem}

@@ -2,7 +2,7 @@
  * @Author: zhangl
  * @Date: 2020-05-02 17:13:37
  * @LastEditors: zhangl
- * @LastEditTime: 2020-05-02 22:41:27
+ * @LastEditTime: 2020-05-03 11:34:28
  * @FilePath: /9.react-bike/src/tools/http.js
  * @Description: 接口请求工具
  */
@@ -19,9 +19,9 @@ class Http {
 
 	static jsonP(url, param) {
 		return new Promise((resolve, reject) => {
-			jsonp(url, { param },  res => {
+			jsonp(url, { param },  (err, res) => {
 				if (res.error === 0) resolve(res.results);
-				else reject(res);
+				else reject(err);
 			});
 		});
 	};
