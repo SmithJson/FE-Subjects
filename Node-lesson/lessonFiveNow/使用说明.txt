@@ -1,0 +1,34 @@
+ruanmouTest 是员工管理系统的数据库， 目前只用到了2个个表 ，manage  staffs 
+
+1. 需要先在数据里里导入 这个数据库
+2. myapp2是一个小型的员工管理系统 功能包括
+
+登陆  -- 已讲
+注册
+表单验证 --  ES5已讲
+倒计时
+弹框封装 -- ES5 已讲
+axios的简单封装  -- 讲了部分
+滑块验证，仅做了效果
+classList的pollfill的编写 ，--ES5 已讲
+
+员工列表
+员工添加
+员工修改
+员工删除
+
+静态部分在public文件夹
+接口部分在routes/users.js
+
+3. 如何启动项目？
+   -1. 导入数据库ruanmouTest
+   -2. cd 进入到myapp2  ,npm install 安装所有的包 
+   -3. 运行npm start启动， 注意这里是 通过nodemon实时运行的， 需要全局安装nodemon ，
+    如果不想安装， 可以把package.json里的nodemon 改成node运行，
+   -4. 运行成功后，通过http://localhost:3000访问页面
+http://localhost:3000/login    登陆
+http://localhost:3000/register    注册
+http://localhost:3000/about   关于我们
+http://localhost:3000/staffs    员工列表
+
+4. 你们可以再此基础上再进行拓展， 可以把运用webscoket把员工总数实时进行显示，作为学习
